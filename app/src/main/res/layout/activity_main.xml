@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/background">
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/play_button"
+        android:id="@+id/btnTraining"
+        android:layout_centerInParent="true"></ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+
+
+            <Button
+                android:id="@+id/btnExercise"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:shadowColor="@color/colorPrimary"
+                android:text="Exercise"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/colorPrimary"></Button>
+
+            <Button
+                android:id="@+id/btnSetting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:shadowColor="@color/colorPrimary"
+                android:text="Setting"
+                android:textColor="@color/white"></Button>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:shadowColor="@color/colorPrimary"
+            android:text="Set Your Calendar"
+            android:textColor="@color/white"></Button>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
