@@ -1,7 +1,7 @@
  # FitnessCare
 
 Việc lên lịch tập thể dục của mọi người hiện đang thường được thực hiện bằng tay.  
-Mọi người thường phải tự chọn ngày cũng như các bài tập cho từng nhóm cơ,  
+Mọi người thường phải tự chọn ngày cũng như các bài tập cho từng nhóm cơ,   
 sau đó ghi ra hoặc lưu trữ lại một nơi nào đó để có thể dễ dàng quan sát theo tuần hoặc tháng.  
 Quá trình lên lịch thường mất rất nhiều thời gian.
 
