@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -35,6 +36,7 @@ dependencies {
 
     //SQLite
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
+    implementation 'com.google.firebase:firebase-auth:20.0.3'
 
 
     testImplementation 'junit:junit:4.+'

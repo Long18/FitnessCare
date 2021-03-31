@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "81115416209",
+    "firebase_url": "https://fitnesscare-a0baa-default-rtdb.firebaseio.com",
+    "project_id": "fitnesscare-a0baa",
+    "storage_bucket": "fitnesscare-a0baa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81115416209:android:2fcd78be63bde807a1a130",
+        "android_client_info": {
+          "package_name": "com.william.calender"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81115416209-s39ed4lekaglk2da57toer7q6hhig73u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0L9pas4cyL9OcMU1_tfid9lgbet-ZSbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81115416209-s39ed4lekaglk2da57toer7q6hhig73u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81115416209:android:bc1dd698b11e8608a1a130",
+        "android_client_info": {
+          "package_name": "com.william.fitnesscare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81115416209-s39ed4lekaglk2da57toer7q6hhig73u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0L9pas4cyL9OcMU1_tfid9lgbet-ZSbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81115416209-s39ed4lekaglk2da57toer7q6hhig73u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
