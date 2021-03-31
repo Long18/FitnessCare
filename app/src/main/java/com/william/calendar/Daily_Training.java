@@ -68,8 +68,8 @@ public class Daily_Training extends AppCompatActivity {
                 if (btnStart.getText().toString().toLowerCase().equals("start")){
                     showGetReady();
                     btnStart.setText("done");
-                }
-                else if(btnStart.getText().toString().toLowerCase().equals("done")){
+
+                }else if(btnStart.getText().toString().toLowerCase().equals("done")){
 
                     if(calendarDB.getSettingMode() == 0)
                         exercisesEasyModeCountDown.cancel();
@@ -77,7 +77,6 @@ public class Daily_Training extends AppCompatActivity {
                         exercisesMediumModeCountDown.cancel();
                     else if(calendarDB.getSettingMode() == 2)
                         exercisesHardModeCountDown.cancel();
-
 
 
                     restTimeCountDown.cancel();
@@ -88,10 +87,9 @@ public class Daily_Training extends AppCompatActivity {
                         ex_id++;
                         progressBar.setProgress(ex_id);
                         txtTimer.setText("");
-                    }
-                    else showFinished();
-                }
-                else
+                    }else showFinished();
+
+                }else
                     if(calendarDB.getSettingMode() == 0)
                         exercisesEasyModeCountDown.cancel();
                     else if(calendarDB.getSettingMode() == 1)
@@ -103,8 +101,7 @@ public class Daily_Training extends AppCompatActivity {
 
                     if (ex_id < list.size())
                         setExerciseInformation(ex_id);
-                    else
-                        showFinished();
+                    else showFinished();
             }
         });
 

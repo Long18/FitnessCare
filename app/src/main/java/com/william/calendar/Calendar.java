@@ -27,7 +27,7 @@ public class Calendar extends AppCompatActivity {
 
         calendarDB = new CalendarDB(this);
 
-        materialCalendarView = (MaterialCalendarView)findViewById(R.id.calendar);
+        materialCalendarView = (MaterialCalendarView)findViewById(R.id.calendar_view);
         List<String> workoutDay = calendarDB.getWorkoutDays();
         HashSet<CalendarDay> convertedList = new HashSet<>();
         for (String value:workoutDay)

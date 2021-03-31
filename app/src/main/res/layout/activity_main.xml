@@ -66,7 +66,7 @@
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/colorPrimary"
             android:shadowColor="@color/colorPrimary"
-            android:text="Set Your Calendar"
+            android:text="See Your Result"
             android:textColor="@color/white"></Button>
 
     </LinearLayout>

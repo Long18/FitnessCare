@@ -22,7 +22,7 @@ public class WorkoutDone implements DayViewDecorator {
 
     @Override
     public boolean shouldDecorate(CalendarDay day) {
-        return false;
+        return list.contains(day);
     }
 
     @Override
