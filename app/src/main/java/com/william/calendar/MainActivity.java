@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.william.calendar.Login.LoginActivity;
+
 public class MainActivity extends AppCompatActivity {
 
-    Button btnExercise,btnSetting,btnCalendar;
+    Button btnExercise,btnSetting,btnCalendar, btnlogout;
     ImageView btnTraining;
 
 
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         btnSetting = (Button)findViewById(R.id.btnSetting);
         btnTraining = (ImageView)findViewById(R.id.btnTraining);
         btnCalendar = (Button)findViewById(R.id.btnCalendar);
+        btnlogout = (Button)findViewById(R.id.btnLogout);
 
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut(); //Logout
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+            }
+        });
+
     }
+
+
 
 }

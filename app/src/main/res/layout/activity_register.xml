@@ -51,7 +51,7 @@
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <EditText
-                            android:id="@+id/editTextName"
+                            android:id="@+id/txtName"
                             style="@style/modifiedEditText"
                             android:hint="Name"
                             android:inputType="textPersonName"
@@ -62,7 +62,7 @@
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <EditText
-                            android:id="@+id/editTextEmail"
+                            android:id="@+id/txtEmail"
                             style="@style/modifiedEditText"
                             android:hint="@string/login_email_hint"
                             android:inputType="textEmailAddress"
@@ -73,7 +73,7 @@
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <EditText
-                            android:id="@+id/editTextMobile"
+                            android:id="@+id/txtPhone"
                             style="@style/modifiedEditText"
                             android:hint="Mobile Number"
                             android:inputType="phone"
@@ -84,14 +84,14 @@
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <EditText
-                            android:id="@+id/editTextPassword"
+                            android:id="@+id/txtPassword"
                             style="@style/modifiedEditText"
                             android:hint="@string/login_password_hint"
                             android:inputType="textPassword"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
                     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                        android:id="@+id/cirRegisterButton"
+                        android:id="@+id/btnRegister"
                         style="@style/loginButton"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/loginViewsMargin"
@@ -101,6 +101,7 @@
                         app:spinning_bar_padding="6dp"
                         app:spinning_bar_width="4dp" />
                     <TextView
+                        android:id="@+id/Loginbtn"
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         android:onClick="onLoginClick"

@@ -41,7 +41,7 @@
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
                 <EditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/txtEmail"
                     style="@style/modifiedEditText"
                     android:hint="@string/login_email_hint"
                     android:inputType="textEmailAddress"
@@ -52,13 +52,14 @@
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
                 <EditText
-                    android:id="@+id/editTextPassword"
+                    android:id="@+id/txtPassword"
                     style="@style/modifiedEditText"
                     android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
+                android:id="@+id/txtresetpassword"
                 style="@style/viewParent"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
@@ -68,7 +69,6 @@
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                 android:id="@+id/btnLogin"
                 style="@style/loginButton"
-                android:onClick="LoginClick"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:text="Đăng nhập"
@@ -79,7 +79,7 @@
             <TextView
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:onClick="onLoginClick"
+                android:onClick="Registerchange"
                 android:text="Chưa có tài khoản? Đăng ký ngay!!"
                 android:textAlignment="center"
                 android:textColor="@color/themeColor"
@@ -141,6 +141,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="11dp"
         android:layout_marginBottom="30dp"
-        android:onClick="onLoginClick"
+        android:onClick="Registerchange"
         android:src="@drawable/ic_add_img" />
 </RelativeLayout>
