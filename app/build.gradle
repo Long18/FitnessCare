@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.william.calender"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -48,4 +48,8 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.github.prolificinteractive:material-calendarview:v1.4.3'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.1'
+
+    //Theme
+    implementation 'br.com.simplepass:loading-button-android:1.14.0'
+    implementation 'com.google.android.material:material:1.0.0'
 }
