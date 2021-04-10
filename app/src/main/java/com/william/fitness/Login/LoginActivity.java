@@ -1,4 +1,4 @@
-package com.william.calendar.Login;
+package com.william.fitness.Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,9 +21,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.william.calendar.Daily_Training;
-import com.william.calendar.MainActivity;
-import com.william.calendar.R;
+import com.william.fitness.MainActivity;
+import com.william.fitness.R;
 
 public class LoginActivity extends AppCompatActivity {
     EditText mEmail, mPassword;

@@ -1,4 +1,4 @@
-package com.william.calendar;
+package com.william.fitness;
 
 
 import android.os.Bundle;
@@ -6,15 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.william.calendar.Adapter.RecyclerViewAdapter;
-import com.william.calendar.Model.Exercise;
+import com.william.fitness.Adapter.RecyclerViewAdapter;
+import com.william.fitness.Model.Exercise;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListExercise extends AppCompatActivity {
 
-    private List<Exercise> exerciseList = new ArrayList<>();
+    private final List<Exercise> exerciseList = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
@@ -28,7 +28,7 @@ public class ListExercise extends AppCompatActivity {
 
         initData();
 
-        recyclerView = (RecyclerView)findViewById(R.id.list_ex);
+        recyclerView = findViewById(R.id.list_ex);
         adapter = new RecyclerViewAdapter(exerciseList,this);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

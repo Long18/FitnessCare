@@ -1,4 +1,4 @@
-package com.william.calendar.Custome;
+package com.william.fitness.Custome;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
-import com.william.calendar.Calendar;
 
 import java.util.HashSet;
 

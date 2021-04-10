@@ -1,4 +1,4 @@
-package com.william.calendar;
+package com.william.fitness;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -17,7 +17,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.william.calendar.Database.CalendarDB;
+import com.william.fitness.Database.CalendarDB;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -38,16 +38,16 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         //Init View
-        btnSave = (Button)findViewById(R.id.btnSave);
+        btnSave = findViewById(R.id.btnSave);
 
-        rdbGroup = (RadioGroup)findViewById(R.id.rdbGroup);
-        rdbEasy = (RadioButton)findViewById(R.id.rdbEasy);
-        rdbMedium = (RadioButton)findViewById(R.id.rdbMedium);
-        rdbHard = (RadioButton)findViewById(R.id.rdbHard);
+        rdbGroup = findViewById(R.id.rdbGroup);
+        rdbEasy = findViewById(R.id.rdbEasy);
+        rdbMedium = findViewById(R.id.rdbMedium);
+        rdbHard = findViewById(R.id.rdbHard);
 
-        switchAlarm = (ToggleButton)findViewById(R.id.switchAlarm);
+        switchAlarm = findViewById(R.id.switchAlarm);
 
-        timePicker = (TimePicker)findViewById(R.id.timePicker);
+        timePicker = findViewById(R.id.timePicker);
 
         calendarDB = new CalendarDB(this);
 

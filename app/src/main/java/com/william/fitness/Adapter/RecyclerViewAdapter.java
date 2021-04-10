@@ -1,4 +1,4 @@
-package com.william.calendar.Adapter;
+package com.william.fitness.Adapter;
 
 
 import android.content.Context;
@@ -8,17 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.william.calendar.Interface.ItemClickListener;
-import com.william.calendar.Model.Exercise;
-import com.william.calendar.R;
-import com.william.calendar.ViewExercise;
+import com.william.fitness.Interface.ItemClickListener;
+import com.william.fitness.Model.Exercise;
+import com.william.fitness.R;
+import com.william.fitness.ViewExercise;
 
 import java.util.List;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
-    private List<Exercise> exerciseList;
-    private Context context;
+    private final List<Exercise> exerciseList;
+    private final Context context;
 
     public RecyclerViewAdapter(List<Exercise> exerciseList, Context context) {
         this.exerciseList = exerciseList;

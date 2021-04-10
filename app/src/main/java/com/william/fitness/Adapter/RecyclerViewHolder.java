@@ -1,12 +1,12 @@
-package com.william.calendar.Adapter;
+package com.william.fitness.Adapter;
 
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.william.calendar.Interface.ItemClickListener;
-import com.william.calendar.R;
+import com.william.fitness.Interface.ItemClickListener;
+import com.william.fitness.R;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     public ImageView image;
@@ -16,8 +16,8 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
 
     public RecyclerViewHolder(View itemView){
         super(itemView);
-        image = (ImageView)itemView.findViewById(R.id.ex_img);
-        text = (TextView)itemView.findViewById(R.id.ex_name);
+        image = itemView.findViewById(R.id.ex_img);
+        text = itemView.findViewById(R.id.ex_name);
 
         itemView.setOnClickListener(this);
     }

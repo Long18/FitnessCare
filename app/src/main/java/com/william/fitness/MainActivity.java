@@ -1,4 +1,4 @@
-package com.william.calendar;
+package com.william.fitness;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.william.calendar.Login.LoginActivity;
+import com.william.fitness.Login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,11 +22,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        btnExercise = (Button)findViewById(R.id.btnExercise);
-        btnSetting = (Button)findViewById(R.id.btnSetting);
-        btnTraining = (ImageView)findViewById(R.id.btnTraining);
-        btnCalendar = (Button)findViewById(R.id.btnCalendar);
-        btnlogout = (Button)findViewById(R.id.btnLogout);
+        btnExercise = findViewById(R.id.btnExercise);
+        btnSetting = findViewById(R.id.btnSetting);
+        btnTraining = findViewById(R.id.btnTraining);
+        btnCalendar = findViewById(R.id.btnCalendar);
+        btnlogout = findViewById(R.id.btnLogout);
 
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override

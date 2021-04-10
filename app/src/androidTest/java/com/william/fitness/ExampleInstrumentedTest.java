@@ -1,4 +1,4 @@
-package com.william.calendar;
+package com.william.fitness;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

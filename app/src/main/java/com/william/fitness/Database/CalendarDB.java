@@ -1,4 +1,4 @@
-package com.william.calendar.Database;
+package com.william.fitness.Database;
 
 import android.content.Context;
 import android.database.Cursor;

@@ -1,12 +1,12 @@
-package com.william.calendar;
+package com.william.fitness;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.william.calendar.Custome.WorkoutDone;
-import com.william.calendar.Database.CalendarDB;
+import com.william.fitness.Custome.WorkoutDone;
+import com.william.fitness.Database.CalendarDB;
 
 
 import java.util.Date;
@@ -27,7 +27,7 @@ public class Calendar extends AppCompatActivity {
 
         calendarDB = new CalendarDB(this);
 
-        materialCalendarView = (MaterialCalendarView)findViewById(R.id.calendar_view);
+        materialCalendarView = findViewById(R.id.calendar_view);
         List<String> workoutDay = calendarDB.getWorkoutDays();
         HashSet<CalendarDay> convertedList = new HashSet<>();
         for (String value:workoutDay)

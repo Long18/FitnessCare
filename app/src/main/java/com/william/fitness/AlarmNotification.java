@@ -1,4 +1,4 @@
-package com.william.calendar;
+package com.william.fitness;
 
 import android.app.Notification;
 import android.app.NotificationManager;

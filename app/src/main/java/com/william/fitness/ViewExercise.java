@@ -1,4 +1,4 @@
-package com.william.calendar;
+package com.william.fitness;
 
 
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.william.calendar.Database.CalendarDB;
-import com.william.calendar.Utils.Common;
+import com.william.fitness.Database.CalendarDB;
+import com.william.fitness.Utils.Common;
 
 public class ViewExercise extends AppCompatActivity {
 
@@ -34,11 +34,11 @@ public class ViewExercise extends AppCompatActivity {
 
         calendarDB = new CalendarDB(this);
 
-        timer = (TextView)findViewById(R.id.timer);
-        title = (TextView)findViewById(R.id.title);
-        detai_image = (ImageView)findViewById(R.id.detail_image);
+        timer = findViewById(R.id.timer);
+        title = findViewById(R.id.title);
+        detai_image = findViewById(R.id.detail_image);
 
-        btnStart = (Button)findViewById(R.id.btnStart);
+        btnStart = findViewById(R.id.btnStart);
         btnStart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

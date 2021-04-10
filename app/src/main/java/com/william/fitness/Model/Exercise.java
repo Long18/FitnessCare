@@ -1,4 +1,4 @@
-package com.william.calendar.Model;
+package com.william.fitness.Model;
 
 public class Exercise {
     private int image_id;

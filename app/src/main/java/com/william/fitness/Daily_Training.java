@@ -1,4 +1,4 @@
-package com.william.calendar;
+package com.william.fitness;
 
 import android.os.CountDownTimer;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,9 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.william.calendar.Database.CalendarDB;
-import com.william.calendar.Model.Exercise;
-import com.william.calendar.Utils.Common;
+import com.william.fitness.Database.CalendarDB;
+import com.william.fitness.Model.Exercise;
+import com.william.fitness.Utils.Common;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,16 +45,16 @@ public class Daily_Training extends AppCompatActivity {
 
 
         
-        btnStart = (Button)findViewById(R.id.btnStart);
+        btnStart = findViewById(R.id.btnStart);
 
-        ex_image = (ImageView)findViewById(R.id.detail_image);
+        ex_image = findViewById(R.id.detail_image);
 
-        txtCountDown = (TextView)findViewById(R.id.txtCountdown);
-        txtGetReady = (TextView)findViewById(R.id.txtGetReady);
-        txtTimer = (TextView)findViewById(R.id.timer);
-        ex_name = (TextView)findViewById(R.id.titlename);
+        txtCountDown = findViewById(R.id.txtCountdown);
+        txtGetReady = findViewById(R.id.txtGetReady);
+        txtTimer = findViewById(R.id.timer);
+        ex_name = findViewById(R.id.titlename);
 
-        layoutGetReady = (LinearLayout)findViewById(R.id.layout_get_ready);
+        layoutGetReady = findViewById(R.id.layout_get_ready);
 
         progressBar = (MaterialProgressBar)findViewById(R.id.progressBar);
 

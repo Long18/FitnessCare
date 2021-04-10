@@ -1,4 +1,4 @@
-package com.william.calendar.Utils;
+package com.william.fitness.Utils;
 
 public class Common {
 
