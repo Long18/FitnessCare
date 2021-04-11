@@ -84,7 +84,7 @@
             <TextView
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:onClick="Registerchange"
+                android:onClick="Register"
                 android:text="Chưa có tài khoản? Đăng ký ngay!!"
                 android:textAlignment="center"
                 android:textColor="@color/themeColor"
@@ -146,7 +146,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="11dp"
         android:layout_marginBottom="30dp"
-        android:onClick="Registerchange"
+        android:onClick="Register"
         android:src="@drawable/ic_add_img" />
 
     <ProgressBar

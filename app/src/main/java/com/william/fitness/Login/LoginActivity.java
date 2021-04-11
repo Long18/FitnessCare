@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    public void Registerchange(View View){
+    public void Register(View View){
         startActivity(new Intent(this,RegisterActivity.class));
         overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
     }
