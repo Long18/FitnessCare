@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     FirebaseAuth fAuth;
     TextView resetPassword;
+    ProgressBar progressBar;
 
 
 
@@ -45,9 +47,10 @@ public class LoginActivity extends AppCompatActivity {
 
         mEmail = findViewById(R.id.txtEmail);
         mPassword = findViewById(R.id.txtPassword);
+        progressBar = findViewById(R.id.progressBar);
         fAuth = FirebaseAuth.getInstance();
         btnLogin = findViewById(R.id.btnLogin);
-        resetPassword = findViewById(R.id.txtresetpassword);
+        resetPassword = findViewById(R.id.txtresetpass);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(password.length() < 6){
                     mPassword.setError("Mật khẩu phải trên 6 ký tự");
                 }
-
+                progressBar.setVisibility(View.VISIBLE);
 
                 //Authenticate the account
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -80,50 +83,12 @@ public class LoginActivity extends AppCompatActivity {
                         }else{
                             Toast.makeText(LoginActivity.this, "Đăng nhập thất bại!" +
                                     task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
             }
         });
-
-        resetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText resetPassword = new EditText(view.getContext());
-                AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view.getContext());
-                passwordResetDialog.setTitle("Lấy lại mật khẩu?");
-                passwordResetDialog.setMessage("Nhập địa chỉ email để lấy lại mật khẩu");
-                passwordResetDialog.setView(resetPassword);
-
-                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String email = resetPassword.getText().toString();
-                        fAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                    Toast.makeText(LoginActivity.this,
-                                            "Đã gửi đường dẫn đặt lại mật khẩu tại email của bạn!",Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(LoginActivity.this,
-                                        "Không gửi được link: "+e.getMessage(),Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
-                passwordResetDialog.setPositiveButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-            }
-        });
-
-
 
 
     }
@@ -132,7 +97,41 @@ public class LoginActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
     }
 
+    public void ResetPass(View view) {
+        EditText resetPassword = new EditText(view.getContext());
+        AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view.getContext());
+        passwordResetDialog.setTitle("Lấy lại mật khẩu?");
+        passwordResetDialog.setMessage("Nhập địa chỉ email để lấy lại mật khẩu");
+        passwordResetDialog.setView(resetPassword);
 
+        passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String email = resetPassword.getText().toString();
+                fAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(LoginActivity.this,
+                                "Đã gửi đường dẫn đặt lại mật khẩu tại email của bạn!",Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginActivity.this,
+                                "Không gửi được link: "+e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+        passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        passwordResetDialog.create().show();
+    }
 
 
 }

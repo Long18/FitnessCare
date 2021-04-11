@@ -29,12 +29,14 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:text="Fitness Care" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/ic_register_hero" />
+
             </RelativeLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputEmail"
@@ -58,14 +60,17 @@
                     android:inputType="textPassword"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
-                android:id="@+id/txtresetpassword"
+                android:id="@+id/txtresetpass"
                 style="@style/viewParent"
+                android:onClick="ResetPass"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
                 android:text="Quên mật khẩu?"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="@dimen/newsMoreTextSize" />x
+                android:textSize="@dimen/newsMoreTextSize" />
+
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                 android:id="@+id/btnLogin"
                 style="@style/loginButton"
@@ -143,4 +148,13 @@
         android:layout_marginBottom="30dp"
         android:onClick="Registerchange"
         android:src="@drawable/ic_add_img" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
 </RelativeLayout>
