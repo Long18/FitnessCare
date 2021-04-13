@@ -8,6 +8,18 @@
     tools:context=".MainActivity"
     android:background="@drawable/background">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomnvgbar"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/white"
+        android:elevation="16dp"
+        android:foregroundGravity="center"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu"/>
+
+
     <Button
         android:layout_alignParentRight="true"
         android:id="@+id/btnLogout"
@@ -15,71 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="4dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:shadowColor="@color/colorPrimary"
+        android:backgroundTint="#FFFFFF"
+        android:shadowColor="@color/colorPrimaryDark"
         android:text="Logout"
         android:textColor="@color/white"></Button>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/play_button"
-        android:id="@+id/btnTraining"
-        android:layout_centerInParent="true"></ImageView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
-
-
-            <Button
-                android:id="@+id/btnExercise"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:shadowColor="@color/colorPrimary"
-                android:text="Exercise"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/colorPrimary"></Button>
-
-            <Button
-                android:id="@+id/btnSetting"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
-                android:shadowColor="@color/colorPrimary"
-                android:text="Setting"
-                android:textColor="@color/white"></Button>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnCalendar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:shadowColor="@color/colorPrimary"
-            android:text="See Your Result"
-            android:textColor="@color/white"></Button>
-
-    </LinearLayout>
 
 
 </RelativeLayout>

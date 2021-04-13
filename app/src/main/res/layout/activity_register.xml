@@ -48,44 +48,44 @@
                     android:orientation="vertical">
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputName"
-                        style="@style/parent"
+                        style="@style/parentlogin"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <EditText
                             android:id="@+id/txtName"
-                            style="@style/modifiedEditText"
+                            style="@style/modifiedEditTextlogin"
                             android:hint="Name"
                             android:inputType="textPersonName"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputEmail"
-                        style="@style/parent"
+                        style="@style/parentlogin"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <EditText
                             android:id="@+id/txtEmail"
-                            style="@style/modifiedEditText"
+                            style="@style/modifiedEditTextlogin"
                             android:hint="@string/login_email_hint"
                             android:inputType="textEmailAddress"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputMobile"
-                        style="@style/parent"
+                        style="@style/parentlogin"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <EditText
                             android:id="@+id/txtPhone"
-                            style="@style/modifiedEditText"
+                            style="@style/modifiedEditTextlogin"
                             android:hint="Mobile Number"
                             android:inputType="phone"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputPassword"
-                        style="@style/parent"
+                        style="@style/parentlogin"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <EditText
                             android:id="@+id/txtPassword"
-                            style="@style/modifiedEditText"
+                            style="@style/modifiedEditTextlogin"
                             android:hint="@string/login_password_hint"
                             android:inputType="textPassword"
                             android:maxLines="1" />
@@ -102,7 +102,7 @@
                         app:spinning_bar_width="4dp" />
                     <TextView
                         android:id="@+id/Loginbtn"
-                        style="@style/parent"
+                        style="@style/parentlogin"
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         android:onClick="onLoginClick"
                         android:text="Bạn đã có tài khoản?"

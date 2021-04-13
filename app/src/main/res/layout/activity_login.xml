@@ -40,22 +40,22 @@
             </RelativeLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputEmail"
-                style="@style/parent"
+                style="@style/parentlogin"
                 android:layout_marginTop="@dimen/loginViewsMargin">
                 <EditText
                     android:id="@+id/txtEmail"
-                    style="@style/modifiedEditText"
+                    style="@style/modifiedEditTextlogin"
                     android:hint="@string/login_email_hint"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"
-                style="@style/parent"
+                style="@style/parentlogin"
                 android:layout_marginTop="@dimen/loginViewsMargin">
                 <EditText
                     android:id="@+id/txtPassword"
-                    style="@style/modifiedEditText"
+                    style="@style/modifiedEditTextlogin"
                     android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
                     android:maxLines="1" />
@@ -68,7 +68,7 @@
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
                 android:text="Quên mật khẩu?"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/colorAccent"
                 android:textSize="@dimen/newsMoreTextSize" />
 
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
@@ -82,7 +82,7 @@
                 app:spinning_bar_padding="6dp"
                 app:spinning_bar_width="4dp" />
             <TextView
-                style="@style/parent"
+                style="@style/parentlogin"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:onClick="Register"
                 android:text="Chưa có tài khoản? Đăng ký ngay!!"

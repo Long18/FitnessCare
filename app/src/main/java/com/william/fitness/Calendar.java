@@ -1,8 +1,13 @@
 package com.william.fitness;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.william.fitness.Custome.WorkoutDone;
@@ -33,5 +38,39 @@ public class Calendar extends AppCompatActivity {
         for (String value:workoutDay)
             convertedList.add(CalendarDay.from(new Date(Long.parseLong(value))));
         materialCalendarView.addDecorator(new WorkoutDone(convertedList));
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnvgbar);
+
+        // Select menu on navigation bar
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.ic_home:
+                        Intent home = new Intent(Calendar.this, MainActivity.class);
+                        startActivity(home);
+                        break;
+                    case R.id.ic_Calendar:
+                        Intent calendar = new Intent(Calendar.this, Calendar.class);
+                        startActivity(calendar);
+                        break;
+                    case R.id.ic_add:
+                        Intent add = new Intent(Calendar.this, Daily_Training.class);
+                        startActivity(add);
+                        break;
+                    case R.id.ic_recent:
+                        Intent recent = new Intent(Calendar.this, ListExercise.class);
+                        startActivity(recent);
+                        break;
+                    case R.id.ic_User:
+                        Intent user = new Intent(Calendar.this, Settings.class);
+                        startActivity(user);
+                        break;
+                }
+                return false;
+            }
+        });
+
+
     }
 }

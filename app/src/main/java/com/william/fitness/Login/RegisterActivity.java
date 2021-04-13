@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
@@ -81,12 +82,15 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
                 if(password.length() < 6){
-                    mPassword.setError("Mật khẩu phải trên 6 ký tự");
+                    mPassword.setError("Mật khẩu phải trên 6 ký tự.");
+                }
+                if(mPhone.length() < 10){
+                    mPassword.setError("Số điện thoại phải trên 10 số.");
                 }
 
 
                 //Condition firebase register
-                fAuth.createUserWithEmailAndPassword(email,password)
+                /*fAuth.createUserWithEmailAndPassword(email,password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -114,7 +118,20 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             }
                         });
+*/
 
+                fAuth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(RegisterActivity.this, e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

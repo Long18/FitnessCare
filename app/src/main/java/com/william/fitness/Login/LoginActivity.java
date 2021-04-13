@@ -73,7 +73,24 @@ public class LoginActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
 
                 //Authenticate the account
-                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>(){
+                    @Override
+                    public void onSuccess(AuthResult authResult){
+                        Toast.makeText(LoginActivity.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener(){
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+               /* fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
@@ -86,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                             progressBar.setVisibility(View.GONE);
                         }
                     }
-                });
+                });*/
             }
         });
 
@@ -133,5 +150,12 @@ public class LoginActivity extends AppCompatActivity {
         passwordResetDialog.create().show();
     }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
+    }
 }

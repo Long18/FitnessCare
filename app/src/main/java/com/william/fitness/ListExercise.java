@@ -1,11 +1,16 @@
 package com.william.fitness;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.william.fitness.Adapter.RecyclerViewAdapter;
 import com.william.fitness.Model.Exercise;
 
@@ -33,6 +38,38 @@ public class ListExercise extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnvgbar);
+
+        // Select menu on navigation bar
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.ic_home:
+                        Intent home = new Intent(ListExercise.this, MainActivity.class);
+                        startActivity(home);
+                        break;
+                    case R.id.ic_Calendar:
+                        Intent calendar = new Intent(ListExercise.this, Calendar.class);
+                        startActivity(calendar);
+                        break;
+                    case R.id.ic_add:
+                        Intent add = new Intent(ListExercise.this, Daily_Training.class);
+                        startActivity(add);
+                        break;
+                    case R.id.ic_recent:
+                        Intent recent = new Intent(ListExercise.this, ListExercise.class);
+                        startActivity(recent);
+                        break;
+                    case R.id.ic_User:
+                        Intent user = new Intent(ListExercise.this, Settings.class);
+                        startActivity(user);
+                        break;
+                }
+                return false;
+            }
+        });
 
     }
 

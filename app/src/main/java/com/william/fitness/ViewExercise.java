@@ -1,15 +1,21 @@
 package com.william.fitness;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.william.fitness.Database.CalendarDB;
 import com.william.fitness.Utils.Common;
 
@@ -31,6 +37,9 @@ public class ViewExercise extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_exercise);
+
+
+
 
         calendarDB = new CalendarDB(this);
 
@@ -85,5 +94,7 @@ public class ViewExercise extends AppCompatActivity {
             detai_image.setImageResource(image_id);
             title.setText(name);
         }
+
+
     }
 }

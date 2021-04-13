@@ -1,8 +1,12 @@
 package com.william.fitness;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.william.fitness.Database.CalendarDB;
 import com.william.fitness.Model.Exercise;
 import com.william.fitness.Utils.Common;
@@ -38,7 +43,40 @@ public class Daily_Training extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily__training);
-        
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnvgbar);
+
+        // Select menu on navigation bar
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.ic_home:
+                        Intent home = new Intent(Daily_Training.this, MainActivity.class);
+                        startActivity(home);
+                        break;
+                    case R.id.ic_Calendar:
+                        Intent calendar = new Intent(Daily_Training.this, com.william.fitness.Calendar.class);
+                        startActivity(calendar);
+                        break;
+                    case R.id.ic_add:
+                        Intent add = new Intent(Daily_Training.this, Daily_Training.class);
+                        startActivity(add);
+                        break;
+                    case R.id.ic_recent:
+                        Intent recent = new Intent(Daily_Training.this, ListExercise.class);
+                        startActivity(recent);
+                        break;
+                    case R.id.ic_User:
+                        Intent user = new Intent(Daily_Training.this, Settings.class);
+                        startActivity(user);
+                        break;
+                }
+                return false;
+            }
+        });
+
+
         initData();
 
         calendarDB = new CalendarDB(this);
