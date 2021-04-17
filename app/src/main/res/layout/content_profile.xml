@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.william.fitness.ProfileActivity"
-    tools:showIn="@layout/activity_profile">
+    tools:showIn="@layout/fragment_profile">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
-                android:text="developer"
+                android:text="Thành Long"
                 android:layout_toRightOf="@id/nameImageView"
                 style="@style/profileDetailsMiniText" />
 
@@ -54,7 +54,7 @@
                 style="@style/profileDetailsTextMain"/>
 
             <TextView
-                android:text="+91-8129999999"
+                android:text="0918399443"
                 android:layout_toRightOf="@id/mobileImageView"
                 style="@style/profileDetailsMiniText" />
 
@@ -73,7 +73,7 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
-                android:text="developer@appsnipp.com"
+                android:text="us.thanhlong18@gmail.com"
                 android:layout_toRightOf="@id/emailImageView"
                 style="@style/profileDetailsMiniText" />
 
@@ -92,7 +92,7 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
-                android:text="Avenue 2nd Street NW SY."
+                android:text="Biên Hoà, Đồng Nai."
                 android:layout_toRightOf="@id/addressImageView"
                 style="@style/profileDetailsMiniText" />
 
@@ -106,12 +106,12 @@
                 style="@style/profileDetailsImage" />
 
             <TextView
-                android:text="D.O.B"
+                android:text="Birth Day"
                 android:layout_toRightOf="@id/dobImageView"
                 style="@style/profileDetailsTextMain" />
 
             <TextView
-                android:text="12-05-1990"
+                android:text="18-06-2000"
                 android:layout_toRightOf="@id/dobImageView"
                 style="@style/profileDetailsMiniText" />
 

@@ -18,17 +18,8 @@
         android:theme="@style/Theme.Fab_Bottom_app_bar">
 
         <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".Calendar" />
 
-        <receiver android:name=".AlarmNotification" />
-
-        <activity android:name=".Daily_Training" />
-        <activity android:name=".Settings" />
-        <activity android:name=".ListExercise" />
-        <activity android:name=".ViewExercise" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Login.RegisterActivity" />
-        <activity android:name=".Login.LoginActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

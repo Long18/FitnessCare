@@ -1,33 +1,31 @@
 package com.william.fitness.Login;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.william.fitness.MainActivity;
 import com.william.fitness.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class Login extends Fragment {
     EditText mEmail, mPassword;
     Button btnLogin;
     FirebaseAuth fAuth;
@@ -36,15 +34,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
-    @Override
+//region Close Activity form ( Change to Fragment )
+/*    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.fragment_login);
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.fragment_login);
 
 
         mEmail = findViewById(R.id.txtEmail);
@@ -92,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-               /* fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+               *//* fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
@@ -105,15 +103,69 @@ public class LoginActivity extends AppCompatActivity {
                             progressBar.setVisibility(View.GONE);
                         }
                     }
-                });*/
+                });*//*
             }
         });
+    }*/
+//endregion
 
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_login,container,false);
+
+
+        mEmail = view.findViewById(R.id.txtEmail);
+        mPassword = view.findViewById(R.id.txtPassword);
+        progressBar = view.findViewById(R.id.progressBar);
+        fAuth = FirebaseAuth.getInstance();
+        btnLogin = view.findViewById(R.id.btnLogin);
+        resetPassword = view.findViewById(R.id.txtresetpass);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = mEmail.getText().toString().trim();
+                String password = mPassword.getText().toString().trim();
+
+                //Condition register
+                if (TextUtils.isEmpty(email)) {
+                    mEmail.setError("Email không được để trống!");
+                    return;
+                }
+                if (TextUtils.isEmpty(password)) {
+                    mPassword.setError("Mật khẩu không được để trống!");
+                    return;
+                }
+                if (password.length() < 6) {
+                    mPassword.setError("Mật khẩu phải trên 6 ký tự");
+                }
+                progressBar.setVisibility(View.VISIBLE);
+
+                //Authenticate the account
+
+                fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(view.getContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(view.getContext().getApplicationContext(), MainActivity.class));
+                        getActivity().finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+        return view;
     }
+
     public void Register(View View){
-        startActivity(new Intent(this,RegisterActivity.class));
-        overridePendingTransition(R.anim.top_to_bottom,R.anim.stay);
+        startActivity(new Intent(this.getContext(), Register.class));
+        getActivity().overridePendingTransition(R.anim.top_to_bottom,R.anim.stay);
     }
 
     public void ResetPass(View view) {
@@ -130,13 +182,13 @@ public class LoginActivity extends AppCompatActivity {
                 fAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(LoginActivity.this,
+                        Toast.makeText(getActivity(),
                                 "Đã gửi đường dẫn đặt lại mật khẩu tại email của bạn!",Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(LoginActivity.this,
+                        Toast.makeText(getActivity(),
                                 "Không gửi được link: "+e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -153,11 +205,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
+            startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
+            getActivity().finish();
         }
     }
 }

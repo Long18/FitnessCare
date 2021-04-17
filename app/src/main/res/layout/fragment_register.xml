@@ -8,7 +8,7 @@
     android:background="@color/register_bk_color"
     android:focusableInTouchMode="true"
     android:gravity="center"
-    tools:context=".Login.RegisterActivity">
+    tools:context=".Login.Register">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,14 +26,14 @@
                     style="@style/viewParent.headerText.NoMode"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="Đăng ký tại đây! \nBắt đầu tập luyện "
+                    android:text="Register! \nLet's Begin "
                     android:textColor="@color/whiteTextColor" />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_login_hero" />
+                    android:src="@drawable/icon_run" />
             </RelativeLayout>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -95,7 +95,7 @@
                         style="@style/loginButton"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/loginViewsMargin"
-                        android:text="Đăng Ký"
+                        android:text="Register"
                         app:initialCornerAngle="27dp"
                         app:spinning_bar_color="#FFF"
                         app:spinning_bar_padding="6dp"
@@ -105,7 +105,7 @@
                         style="@style/parentlogin"
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         android:onClick="onLoginClick"
-                        android:text="Bạn đã có tài khoản?"
+                        android:text="Already have account?"
                         android:textAlignment="center"
                         android:textColor="@color/themeColor"
                         android:textSize="17sp"
@@ -128,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
-                    android:text="Các phương pháp khác"
+                    android:text="Other Methods"
                     android:textAlignment="center"
                     android:textColor="@color/whiteTextColor"
                     android:textSize="12sp" />
@@ -156,21 +156,14 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <View
-        android:layout_width="11dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_side_bg" />
+
     <ImageView
+        android:layout_above="@+id/view"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="11dp"
-        android:layout_marginBottom="30dp"
-        android:adjustViewBounds="false"
+        android:layout_marginTop="-44dp"
+        android:rotation="90"
         android:onClick="onLoginClick"
         android:src="@drawable/ic_back_img" />
 </RelativeLayout>

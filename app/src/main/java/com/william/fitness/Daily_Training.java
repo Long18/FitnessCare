@@ -4,10 +4,15 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,7 +30,7 @@ import java.util.List;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-public class Daily_Training extends AppCompatActivity {
+public class Daily_Training extends Fragment {
 
     Button btnStart;
     ImageView ex_image;
@@ -39,7 +44,7 @@ public class Daily_Training extends AppCompatActivity {
 
     CalendarDB calendarDB;
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily__training);
@@ -144,6 +149,79 @@ public class Daily_Training extends AppCompatActivity {
         });
 
     }
+*/
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_daily__training,container,false);
+        initData();
+        calendarDB = new CalendarDB(getActivity());
+
+
+
+        btnStart = view.findViewById(R.id.btnStart);
+
+        ex_image = view.findViewById(R.id.detail_image);
+
+        txtCountDown = view.findViewById(R.id.txtCountdown);
+        txtGetReady = view.findViewById(R.id.txtGetReady);
+        txtTimer = view.findViewById(R.id.timer);
+        ex_name = view.findViewById(R.id.titlename);
+
+        layoutGetReady = view.findViewById(R.id.layout_get_ready);
+
+        progressBar = (MaterialProgressBar) view.findViewById(R.id.progressBar);
+
+        //Set data
+        progressBar.setMax(list.size());
+        setExerciseInformation(ex_id);
+
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (btnStart.getText().toString().toLowerCase().equals("start")){
+                    showGetReady();
+                    btnStart.setText("done");
+
+                }else if(btnStart.getText().toString().toLowerCase().equals("done")){
+
+                    if(calendarDB.getSettingMode() == 0)
+                        exercisesEasyModeCountDown.cancel();
+                    else if(calendarDB.getSettingMode() == 1)
+                        exercisesMediumModeCountDown.cancel();
+                    else if(calendarDB.getSettingMode() == 2)
+                        exercisesHardModeCountDown.cancel();
+
+
+                    restTimeCountDown.cancel();
+
+
+                    if (ex_id < list.size()){
+                        showRestTime();
+                        ex_id++;
+                        progressBar.setProgress(ex_id);
+                        txtTimer.setText("");
+                    }else showFinished();
+
+                }else
+                if(calendarDB.getSettingMode() == 0)
+                    exercisesEasyModeCountDown.cancel();
+                else if(calendarDB.getSettingMode() == 1)
+                    exercisesMediumModeCountDown.cancel();
+                else if(calendarDB.getSettingMode() == 2)
+                    exercisesHardModeCountDown.cancel();
+
+                restTimeCountDown.cancel();
+
+                if (ex_id < list.size())
+                    setExerciseInformation(ex_id);
+                else showFinished();
+            }
+        });
+        return view;
+    }
+
 
     private void showRestTime() {
         ex_image.setVisibility(View.INVISIBLE);

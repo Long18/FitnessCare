@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,22 +16,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.william.fitness.MainActivity;
 import com.william.fitness.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class RegisterActivity extends AppCompatActivity {
+public class Register extends AppCompatActivity {
     public static final String TAG = "TAG";
     EditText mFullName, mEmail, mPassword, mPhone;
     Button btnRegister;
@@ -45,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.fragment_register);
         changeStatusBarColor();
 
         mFullName = findViewById(R.id.txtName);
@@ -129,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(RegisterActivity.this, e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this, e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -146,7 +138,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
     public void onLoginClick(View view){
-        startActivity(new Intent(this,LoginActivity.class));
+        startActivity(new Intent(this, Login.class));
         overridePendingTransition(R.anim.top_to_bottom,R.anim.bottom_to_top);
     }
 }

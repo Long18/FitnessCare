@@ -3,10 +3,15 @@ package com.william.fitness;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +22,7 @@ import com.william.fitness.Model.Exercise;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListExercise extends AppCompatActivity {
+public class ListExercise extends Fragment {
 
     private final List<Exercise> exerciseList = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
@@ -26,7 +31,7 @@ public class ListExercise extends AppCompatActivity {
 
 
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_exercises);
@@ -71,6 +76,19 @@ public class ListExercise extends AppCompatActivity {
             }
         });
 
+    }*/
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_list_exercises,container,false);
+        initData();
+        recyclerView = view.findViewById(R.id.list_ex);
+        adapter = new RecyclerViewAdapter(exerciseList,getActivity());
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        return view;
     }
 
     private void initData() {
