@@ -35,6 +35,7 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
+                android:id="@+id/txtName"
                 android:text="Thành Long"
                 android:layout_toRightOf="@id/nameImageView"
                 style="@style/profileDetailsMiniText" />
@@ -54,6 +55,7 @@
                 style="@style/profileDetailsTextMain"/>
 
             <TextView
+                android:id="@+id/txtPhone"
                 android:text="0918399443"
                 android:layout_toRightOf="@id/mobileImageView"
                 style="@style/profileDetailsMiniText" />
@@ -73,6 +75,7 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
+                android:id="@+id/txtEmail"
                 android:text="us.thanhlong18@gmail.com"
                 android:layout_toRightOf="@id/emailImageView"
                 style="@style/profileDetailsMiniText" />
@@ -92,6 +95,7 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
+                android:id="@+id/txtAddress"
                 android:text="Biên Hoà, Đồng Nai."
                 android:layout_toRightOf="@id/addressImageView"
                 style="@style/profileDetailsMiniText" />
@@ -111,11 +115,34 @@
                 style="@style/profileDetailsTextMain" />
 
             <TextView
+                android:id="@+id/txtBirth"
                 android:text="18-06-2000"
                 android:layout_toRightOf="@id/dobImageView"
                 style="@style/profileDetailsMiniText" />
 
         </RelativeLayout>
+
+        <View style="@style/profileDetailViews" />
+
+
+        <!--<RelativeLayout style="@style/profileDetailsLayout">
+            <ImageView
+                android:id="@+id/acb"
+                android:src="@drawable/ic_dob"
+                style="@style/profileDetailsImage" />
+
+            <TextView
+                android:text="Birth Day"
+                android:layout_toRightOf="@id/acb"
+                style="@style/profileDetailsTextMain" />
+
+            <TextView
+                android:id="@+id/txtabc"
+                android:text="18-06-2000"
+                android:layout_toRightOf="@id/acb"
+                style="@style/profileDetailsMiniText" />
+
+        </RelativeLayout>-->
 
         <View style="@style/profileDetailViews" />
 

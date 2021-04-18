@@ -20,24 +20,28 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.william.fitness.MainActivity;
+import com.william.fitness.Model.User;
 import com.william.fitness.R;
 
 public class Register extends AppCompatActivity {
     public static final String TAG = "TAG";
-    EditText mFullName, mEmail, mPassword, mPhone;
+    EditText mFullName, mEmail, mPassword, mPhone, mAddress,mBirth;
     Button btnRegister;
     TextView btnLogin;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
-    String userID;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_register);
+        setContentView(R.layout.activity_register);
         changeStatusBarColor();
 
         mFullName = findViewById(R.id.txtName);
@@ -63,26 +67,28 @@ public class Register extends AppCompatActivity {
                 String password = mPassword.getText().toString().trim();
                 String fName = mFullName.getText().toString().trim();
                 String phone = mPhone.getText().toString().trim();
+                String address = "";
+                String birthday = "";
 
                 //Condition register
-                if(TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email không được để trống!");
                     return;
                 }
-                if (TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     mPassword.setError("Mật khẩu không được để trống!");
                     return;
                 }
-                if(password.length() < 6){
+                if (password.length() < 6) {
                     mPassword.setError("Mật khẩu phải trên 6 ký tự.");
                 }
-                if(mPhone.length() < 10){
+                if (mPhone.length() < 10) {
                     mPassword.setError("Số điện thoại phải trên 10 số.");
                 }
 
 
                 //Condition firebase register
-                /*fAuth.createUserWithEmailAndPassword(email,password)
+               /* fAuth.createUserWithEmailAndPassword(email,password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -110,7 +116,7 @@ public class Register extends AppCompatActivity {
                                 }
                             }
                         });
-*/
+
 
                 fAuth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
@@ -125,10 +131,34 @@ public class Register extends AppCompatActivity {
                     }
                 });
             }
+        });*/
+
+                rootNode = FirebaseDatabase.getInstance();
+                reference = rootNode.getReference().child("Account");
+                //get all the values
+                String key = reference.push().getKey();
+
+
+                com.william.fitness.Model.User user = new User(fName, phone, email, password,address,birthday);
+                reference.child(email).setValue(user);
+
+                fAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
 
-
     }
+
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -140,5 +170,6 @@ public class Register extends AppCompatActivity {
     public void onLoginClick(View view){
         startActivity(new Intent(this, Login.class));
         overridePendingTransition(R.anim.top_to_bottom,R.anim.bottom_to_top);
+        finish();
     }
 }

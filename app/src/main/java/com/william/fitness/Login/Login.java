@@ -1,48 +1,56 @@
 package com.william.fitness.Login;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.william.fitness.MainActivity;
+import com.william.fitness.ProfileUser;
 import com.william.fitness.R;
 
-public class Login extends Fragment {
+public class Login extends AppCompatActivity {
     EditText mEmail, mPassword;
     Button btnLogin;
     FirebaseAuth fAuth;
     TextView resetPassword;
     ProgressBar progressBar;
+    DatabaseReference reference;
 
 
 
 //region Close Activity form ( Change to Fragment )
-/*    @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_login);
+        setContentView(R.layout.activity_login);
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        setContentView(R.layout.fragment_login);
+        setContentView(R.layout.activity_login);
 
 
         mEmail = findViewById(R.id.txtEmail);
@@ -51,6 +59,7 @@ public class Login extends Fragment {
         fAuth = FirebaseAuth.getInstance();
         btnLogin = findViewById(R.id.btnLogin);
         resetPassword = findViewById(R.id.txtresetpass);
+        reference = FirebaseDatabase.getInstance().getReference().child("Account");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,43 +82,26 @@ public class Login extends Fragment {
                 progressBar.setVisibility(View.VISIBLE);
 
                 //Authenticate the account
-
-                fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>(){
-                    @Override
-                    public void onSuccess(AuthResult authResult){
-                        Toast.makeText(LoginActivity.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener(){
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-
-               *//* fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this,
-                                    "Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }else{
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thất bại!" +
-                                    task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Đăng nhập thất bại!" +
+                             task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
-                });*//*
+                });
+                isUser();
             }
         });
-    }*/
+    }
 //endregion
 
-
+/*
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -161,11 +153,11 @@ public class Login extends Fragment {
             }
         });
         return view;
-    }
+    }*/
 
     public void Register(View View){
-        startActivity(new Intent(this.getContext(), Register.class));
-        getActivity().overridePendingTransition(R.anim.top_to_bottom,R.anim.stay);
+        startActivity(new Intent(Login.this, Register.class));
+        overridePendingTransition(R.anim.top_to_bottom,R.anim.stay);
     }
 
     public void ResetPass(View view) {
@@ -182,13 +174,13 @@ public class Login extends Fragment {
                 fAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getActivity(),
+                        Toast.makeText(Login.this,
                                 "Đã gửi đường dẫn đặt lại mật khẩu tại email của bạn!",Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(),
+                        Toast.makeText(Login.this,
                                 "Không gửi được link: "+e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -208,8 +200,61 @@ public class Login extends Fragment {
     public void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
-            getActivity().finish();
+            startActivity(new Intent(Login.this.getApplicationContext(), MainActivity.class));
+            isUser();
+            finish();
         }
+    }
+
+    private void isUser(){
+
+        String emailUser = mEmail.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
+
+        Query checkUser = reference.orderByChild("email").equalTo(emailUser);
+
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+
+                    String passwordDB = dataSnapshot.child(emailUser).child("password").getValue().toString();
+
+                    if(passwordDB.equals(password)){
+
+                        String nameDB = dataSnapshot.child(emailUser).child("name").getValue(String.class);
+                        String birthdayDB = dataSnapshot.child(emailUser).child("birth").getValue(String.class);
+                        String emailDB = dataSnapshot.child(emailUser).child("email").getValue(String.class);
+                        String phoneDB = dataSnapshot.child(emailUser).child("phone").getValue(String.class);
+                        String addressDB = dataSnapshot.child(emailUser).child("address").getValue(String.class);
+
+                        Intent intent = new Intent(getApplicationContext(), ProfileUser.class);
+
+                        intent.putExtra("name",nameDB);
+                        intent.putExtra("birth",birthdayDB);
+                        intent.putExtra("email",emailDB);
+                        intent.putExtra("phone",phoneDB);
+                        intent.putExtra("address",addressDB);
+
+                        startActivity(intent);
+
+                    }
+                    else {
+                        mPassword.setError("Wrong Password");
+                        mPassword.requestFocus();
+                    }
+                }
+                else {
+                    mEmail.setError("No user exit");
+                    mEmail.requestFocus();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }
