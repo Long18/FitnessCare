@@ -20,8 +20,9 @@ public class Home extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home,container,false);
-        btnLogout = view.findViewById(R.id.btnLogout);
+        View view = inflater.inflate(R.layout.fragment_main,container,false);
+
+        /*btnLogout = view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,7 +30,7 @@ public class Home extends Fragment {
                 startActivity(new Intent(getActivity(), Login.class));
                 getActivity().finish();
             }
-        });
+        });*/
         return view;
     }
 }

@@ -23,4 +23,11 @@
     <string name="btnNext">Next</string>
     <string name="btnGetStarted">Lets Get Started</string>
 
+    <!-- Muscle Groups  -->
+    <string name="Chest">Ngực</string>
+    <string name="Back">Lưng</string>
+    <string name="Arms">Tay</string>
+    <string name="Legs">Chân</string>
+    <string name="But">Mông</string>
+
 </resources>
