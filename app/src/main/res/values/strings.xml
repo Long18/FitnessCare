@@ -1,5 +1,26 @@
 <resources>
+    <string name="app_name">Fitness Care</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="application_name">Fitness Care</string>
+
+    <!-- Strings for Tutorial Screen -->
+
+    <!-- Titles -->
+    <string name="first_slide_title">Tăng cường sức khoẻ </string>
+    <string name="second_slide_title">Năng động mỗi ngày </string>
+    <string name="third_slide_title">Vì một tương lai tốt đẹp </string>
+    <string name="fourth_slide_title">Tham gia cùng chúng tôi </string>
+
+    <!-- Descriptions -->
+    <string name="first_slide_desc">Tôi tin rằng món quà lớn nhất mà bạn có thể trao cho gia đình mình và thế giới là chính mình khỏe khoắn </string>
+    <string name="second_slide_desc">Chăm sóc sức khỏe ngày hôm nay cho tôi hy vọng tươi sáng hơn vào ngày mai. </string>
+    <string name="third_slide_desc">Những người nghĩ rằng họ không có thời gian để tập thể dục thì sớm muộn gì, họ cũng phải dành thời gian cho bệnh tật </string>
+    <string name="fourth_slide_desc">Tham gia cùng chúng tôi </string>
+
+    <!-- Button -->
+    <string name="btnSkip">Skip</string>
+    <string name="btnNext">Next</string>
+    <string name="btnGetStarted">Lets Get Started</string>
+
 </resources>

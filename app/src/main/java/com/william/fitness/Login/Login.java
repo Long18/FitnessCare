@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,8 +35,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.william.fitness.MainActivity;
-import com.william.fitness.ProfileUser;
+import com.william.fitness.ProfileActivity;
 import com.william.fitness.R;
+
+import java.util.concurrent.TimeUnit;
 
 public class Login extends AppCompatActivity {
     EditText mEmail, mPassword;
@@ -59,7 +67,7 @@ public class Login extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         btnLogin = findViewById(R.id.btnLogin);
         resetPassword = findViewById(R.id.txtresetpass);
-        reference = FirebaseDatabase.getInstance().getReference().child("Account");
+        reference = FirebaseDatabase.getInstance().getReference("Account");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,20 +80,25 @@ public class Login extends AppCompatActivity {
                     mEmail.setError("Email không được để trống!");
                     return;
                 }
-                if (TextUtils.isEmpty(password)){
+                else if (TextUtils.isEmpty(password)){
                     mPassword.setError("Mật khẩu không được để trống!");
                     return;
                 }
-                if(password.length() < 6){
+                else if(password.length() < 6){
                     mPassword.setError("Mật khẩu phải trên 6 ký tự");
                 }
+                else {
+                    isUser();
+                }
                 progressBar.setVisibility(View.VISIBLE);
+
 
                 //Authenticate the account
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            isUser();
                             Toast.makeText(Login.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }else{
@@ -95,65 +108,12 @@ public class Login extends AppCompatActivity {
                         }
                     }
                 });
-                isUser();
+
             }
         });
     }
 //endregion
 
-/*
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login,container,false);
-
-
-        mEmail = view.findViewById(R.id.txtEmail);
-        mPassword = view.findViewById(R.id.txtPassword);
-        progressBar = view.findViewById(R.id.progressBar);
-        fAuth = FirebaseAuth.getInstance();
-        btnLogin = view.findViewById(R.id.btnLogin);
-        resetPassword = view.findViewById(R.id.txtresetpass);
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
-
-                //Condition register
-                if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email không được để trống!");
-                    return;
-                }
-                if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Mật khẩu không được để trống!");
-                    return;
-                }
-                if (password.length() < 6) {
-                    mPassword.setError("Mật khẩu phải trên 6 ký tự");
-                }
-                progressBar.setVisibility(View.VISIBLE);
-
-                //Authenticate the account
-
-                fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(view.getContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(view.getContext().getApplicationContext(), MainActivity.class));
-                        getActivity().finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-        return view;
-    }*/
 
     public void Register(View View){
         startActivity(new Intent(Login.this, Register.class));
@@ -200,56 +160,60 @@ public class Login extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(Login.this.getApplicationContext(), MainActivity.class));
             isUser();
+            startActivity(new Intent(Login.this.getApplicationContext(), MainActivity.class));
             finish();
         }
     }
 
     private void isUser(){
 
-        String emailUser = mEmail.getText().toString().trim();
+        String emailLogin = mEmail.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
+        //reference.orderByChild("phone").orderByChild("email");
 
-        Query checkUser = reference.orderByChild("email").equalTo(emailUser);
+        Query checkUser = reference.orderByChild("phone").equalTo(emailLogin);
 
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
 
-                    String passwordDB = dataSnapshot.child(emailUser).child("password").getValue().toString();
+//                    String passwordDB = dataSnapshot.child(emailLogin).child("password").getValue(String.class);
 
-                    if(passwordDB.equals(password)){
+                    /*if(passwordDB.equals(password)){*/
 
-                        String nameDB = dataSnapshot.child(emailUser).child("name").getValue(String.class);
-                        String birthdayDB = dataSnapshot.child(emailUser).child("birth").getValue(String.class);
-                        String emailDB = dataSnapshot.child(emailUser).child("email").getValue(String.class);
-                        String phoneDB = dataSnapshot.child(emailUser).child("phone").getValue(String.class);
-                        String addressDB = dataSnapshot.child(emailUser).child("address").getValue(String.class);
+                        String nameDB = dataSnapshot.child(emailLogin).child("name").getValue(String.class);
+                        String birthdayDB = dataSnapshot.child(emailLogin).child("birth").getValue(String.class);
+                        String emailDB = dataSnapshot.child(emailLogin).child("email").getValue(String.class);
+                        String phoneDB = dataSnapshot.child(emailLogin).child("phone").getValue(String.class);
+                        String addressDB = dataSnapshot.child(emailLogin).child("address").getValue(String.class);
 
-                        Intent intent = new Intent(getApplicationContext(), ProfileUser.class);
+//                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+//
+//                        intent.putExtra("name",nameDB);
+//                        intent.putExtra("birth",birthdayDB);
+//                        intent.putExtra("email",emailDB);
+//                        intent.putExtra("phone",phoneDB);
+//                        intent.putExtra("address",addressDB);
+//
+//
+//                        startActivity(intent);
+                            MainActivity.name = nameDB;
+                            MainActivity.birth = birthdayDB;
+                            MainActivity.email = emailDB;
+                            MainActivity.number = phoneDB;
+                            MainActivity.address = addressDB;
+                            finish();
 
-                        intent.putExtra("name",nameDB);
-                        intent.putExtra("birth",birthdayDB);
-                        intent.putExtra("email",emailDB);
-                        intent.putExtra("phone",phoneDB);
-                        intent.putExtra("address",addressDB);
-
-                        startActivity(intent);
-
-                    }
-                    else {
+                    /*else {
                         mPassword.setError("Wrong Password");
                         mPassword.requestFocus();
-                    }
+                    }*/
                 }
                 else {
-                    mEmail.setError("No user exit");
-                    mEmail.requestFocus();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -257,4 +221,7 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
+
+   
 }

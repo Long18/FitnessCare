@@ -28,7 +28,6 @@ public class ProfileUser extends Fragment {
     TextView btnHome, txtName, txtNumber,txtAddress,txtBirth, txtEmail, txtNameUser,txtEmailUser;
     String name, number,email,address,birth;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,7 +42,9 @@ public class ProfileUser extends Fragment {
         txtNameUser = view.findViewById(R.id.txtNameUser);
         txtEmailUser = view.findViewById(R.id.txtEmailUser);
 
-        showAllUserData();
+        txtName.setText(MainActivity.name);
+
+        //showAllUserData();
 
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +52,6 @@ public class ProfileUser extends Fragment {
                 startActivity(new Intent(getActivity(),Login.class));
             }
         });
-
 
         return view;
     }

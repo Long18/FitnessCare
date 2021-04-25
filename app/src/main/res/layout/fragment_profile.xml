@@ -47,7 +47,7 @@
                     android:id="@+id/txtNameUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thành Long"
+                    android:text="Username"
                     android:textSize="28dp"
                     android:textStyle="bold"/>
 
@@ -55,7 +55,7 @@
                     android:id="@+id/txtEmailUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="us.thanhlong18@gmail.com"
+                    android:text="...@gmail.com"
                     android:textSize="12dp"
                     android:textStyle="bold"/>
 

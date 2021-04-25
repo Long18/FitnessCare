@@ -34,7 +34,6 @@ public class Register extends AppCompatActivity {
     TextView btnLogin;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
-    FirebaseDatabase rootNode;
     DatabaseReference reference;
 
 
@@ -133,14 +132,13 @@ public class Register extends AppCompatActivity {
             }
         });*/
 
-                rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference().child("Account");
+
+                reference = FirebaseDatabase.getInstance().getReference().child("Account");
                 //get all the values
-                String key = reference.push().getKey();
 
+                User user = new User(email, fName, phone, password,address,birthday);
+                reference.child(phone).setValue(user);
 
-                com.william.fitness.Model.User user = new User(fName, phone, email, password,address,birthday);
-                reference.child(email).setValue(user);
 
                 fAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
@@ -148,12 +146,14 @@ public class Register extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
                     }
+
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
             }
         });
 

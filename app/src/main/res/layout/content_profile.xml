@@ -36,7 +36,7 @@
 
             <TextView
                 android:id="@+id/txtName"
-                android:text="Thành Long"
+                android:text="Username"
                 android:layout_toRightOf="@id/nameImageView"
                 style="@style/profileDetailsMiniText" />
 
@@ -56,7 +56,7 @@
 
             <TextView
                 android:id="@+id/txtPhone"
-                android:text="0918399443"
+                android:text="+84-xxx-xxx-xx"
                 android:layout_toRightOf="@id/mobileImageView"
                 style="@style/profileDetailsMiniText" />
 
@@ -76,7 +76,7 @@
 
             <TextView
                 android:id="@+id/txtEmail"
-                android:text="us.thanhlong18@gmail.com"
+                android:text="...@gmail.com"
                 android:layout_toRightOf="@id/emailImageView"
                 style="@style/profileDetailsMiniText" />
 
@@ -96,7 +96,7 @@
 
             <TextView
                 android:id="@+id/txtAddress"
-                android:text="Biên Hoà, Đồng Nai."
+                android:text="Địa chỉ"
                 android:layout_toRightOf="@id/addressImageView"
                 style="@style/profileDetailsMiniText" />
 
@@ -116,7 +116,7 @@
 
             <TextView
                 android:id="@+id/txtBirth"
-                android:text="18-06-2000"
+                android:text="xx-xx-xxxx"
                 android:layout_toRightOf="@id/dobImageView"
                 style="@style/profileDetailsMiniText" />
 

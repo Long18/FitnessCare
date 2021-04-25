@@ -23,7 +23,7 @@ public class  MainActivity extends AppCompatActivity {
     Button btnlogout;
     ViewPager viewPager;
     BottomNavigationView bottomNavigationView;
-
+    public static String name, number,email,address,birth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
