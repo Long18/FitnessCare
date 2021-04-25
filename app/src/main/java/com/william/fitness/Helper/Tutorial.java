@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -24,9 +25,10 @@ public class Tutorial extends AppCompatActivity {
 
     SliderAdapter sliderAdapter;
     TextView[] dots;
-    Button letsGetStarted;
+    Button btnStarted;
     Animation animation;
     int currentPos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class Tutorial extends AppCompatActivity {
         //Hooks
         viewPager = findViewById(R.id.slider);
         dotsLayout = findViewById(R.id.dots);
-        letsGetStarted = findViewById(R.id.btn_get_started);
+        btnStarted = findViewById(R.id.btn_get_started);
 
         //Call adapter
         sliderAdapter = new SliderAdapter(this);
@@ -47,7 +49,7 @@ public class Tutorial extends AppCompatActivity {
         DotsLayout(0);
         viewPager.addOnPageChangeListener(changeListener);
 
-        letsGetStarted.setOnClickListener(new View.OnClickListener() {
+        btnStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Tutorial.this, MainActivity.class);
@@ -94,15 +96,15 @@ public class Tutorial extends AppCompatActivity {
             currentPos = position;
 
             if (position == 0) {
-                letsGetStarted.setVisibility(View.INVISIBLE);
+                btnStarted.setVisibility(View.INVISIBLE);
             } else if (position == 1) {
-                letsGetStarted.setVisibility(View.INVISIBLE);
+                btnStarted.setVisibility(View.INVISIBLE);
             } else if (position == 2) {
-                letsGetStarted.setVisibility(View.INVISIBLE);
+                btnStarted.setVisibility(View.INVISIBLE);
             } else {
                 animation = AnimationUtils.loadAnimation(Tutorial.this, R.anim.bottom_anim);
-                letsGetStarted.setAnimation(animation);
-                letsGetStarted.setVisibility(View.VISIBLE);
+                btnStarted.setAnimation(animation);
+                btnStarted.setVisibility(View.VISIBLE);
             }
         }
 

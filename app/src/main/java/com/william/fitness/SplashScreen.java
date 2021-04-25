@@ -3,6 +3,7 @@ package com.william.fitness;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -20,6 +21,7 @@ public class SplashScreen extends AppCompatActivity {
     TextView powered_line;
 
     Animation sideAnim, bottomAnim;
+    SharedPreferences tutorialScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class SplashScreen extends AppCompatActivity {
         powered_line = findViewById(R.id.powered_line);
 
         //Animations
-        sideAnim = AnimationUtils.loadAnimation(this,R.anim.slide_in_right);
+        sideAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_anim);
         bottomAnim = AnimationUtils.loadAnimation(this,R.anim.top_to_bottom);
 
         //Set Animations to objects
@@ -42,9 +44,24 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent intent = new Intent(getApplicationContext(), Tutorial.class);
-                startActivity(intent);
-                finish();
+                tutorialScreen = getSharedPreferences("tutorialScreen",MODE_PRIVATE);
+                boolean isFirstTime = tutorialScreen.getBoolean("firstTime",true);
+
+                if (isFirstTime){
+                    SharedPreferences.Editor editor = tutorialScreen.edit();
+                    editor.putBoolean("firstTime",false);
+                    editor.commit();
+
+                    Intent intent = new Intent(getApplicationContext(), Tutorial.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
 
             }
         },SPLASH_TIME);
