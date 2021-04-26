@@ -34,7 +34,7 @@ public class Home extends Fragment {
         return view;
     }
 
-    private void featuredRecycler() {s
+    private void featuredRecycler() {
 
         featuredRecycler.setHasFixedSize(true);
         featuredRecycler.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext() ,LinearLayoutManager.HORIZONTAL, false ));
