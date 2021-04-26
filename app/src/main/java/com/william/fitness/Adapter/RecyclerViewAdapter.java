@@ -42,7 +42,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
             @Override
             public void onClick(View view, int position) {
                 //Call to new Activity
-
                 Intent intent = new Intent(context, ViewExercise.class);
                 intent.putExtra("image_id",exerciseList.get(position).getImage_id());
                 intent.putExtra("name",exerciseList.get(position).getName());

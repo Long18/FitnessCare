@@ -46,10 +46,6 @@ public class Login extends AppCompatActivity {
     FirebaseAuth fAuth;
     TextView resetPassword;
     ProgressBar progressBar;
-    DatabaseReference reference;
-
-
-
 //region Close Activity form ( Change to Fragment )
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +56,12 @@ public class Login extends AppCompatActivity {
         }
         setContentView(R.layout.activity_login);
 
-
         mEmail = findViewById(R.id.txtEmail);
         mPassword = findViewById(R.id.txtPassword);
         progressBar = findViewById(R.id.progressBar);
         fAuth = FirebaseAuth.getInstance();
         btnLogin = findViewById(R.id.btnLogin);
         resetPassword = findViewById(R.id.txtresetpass);
-        reference = FirebaseDatabase.getInstance().getReference("Account");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,20 +88,21 @@ public class Login extends AppCompatActivity {
 
 
                 //Authenticate the account
-                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            isUser();
-                            Toast.makeText(Login.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        }else{
-                            Toast.makeText(Login.this, "Đăng nhập thất bại!" +
-                             task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
-                        }
-                    }
-                });
+//                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if(task.isSuccessful()){
+//                            isUser();
+//                            Toast.makeText(Login.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
+//                            //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                            finish();
+//                        }else{
+//                            Toast.makeText(Login.this, "Đăng nhập thất bại!" +
+//                             task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+//                            progressBar.setVisibility(View.GONE);
+//                        }
+//                    }
+//                });
 
             }
         });
@@ -159,15 +154,15 @@ public class Login extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            isUser();
-            startActivity(new Intent(Login.this.getApplicationContext(), MainActivity.class));
-            finish();
-        }
+//        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+//            isUser();
+//            startActivity(new Intent(Login.this.getApplicationContext(), MainActivity.class));
+//            finish();
+//        }
     }
 
     private void isUser(){
-
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Account");
         String emailLogin = mEmail.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
         //reference.orderByChild("phone").orderByChild("email");
@@ -178,11 +173,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-
-//                    String passwordDB = dataSnapshot.child(emailLogin).child("password").getValue(String.class);
-
-                    /*if(passwordDB.equals(password)){*/
-
+                    String passwordDB = dataSnapshot.child(emailLogin).child("password").getValue(String.class);
+                    if(passwordDB.equals(password)) {
                         String nameDB = dataSnapshot.child(emailLogin).child("name").getValue(String.class);
                         String birthdayDB = dataSnapshot.child(emailLogin).child("birth").getValue(String.class);
                         String emailDB = dataSnapshot.child(emailLogin).child("email").getValue(String.class);
@@ -199,19 +191,18 @@ public class Login extends AppCompatActivity {
 //
 //
 //                        startActivity(intent);
-                            MainActivity.name = nameDB;
-                            MainActivity.birth = birthdayDB;
-                            MainActivity.email = emailDB;
-                            MainActivity.number = phoneDB;
-                            MainActivity.address = addressDB;
-                            finish();
+                        MainActivity.name = nameDB;
+                        MainActivity.birth = birthdayDB;
+                        MainActivity.email = emailDB;
+                        MainActivity.number = phoneDB;
+                        MainActivity.address = addressDB;
+                        Toast.makeText(Login.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
+                        finish();
 
-                    /*else {
+                    }else {
                         mPassword.setError("Wrong Password");
                         mPassword.requestFocus();
-                    }*/
-                }
-                else {
+                    }
                 }
             }
             @Override

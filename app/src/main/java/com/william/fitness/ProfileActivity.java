@@ -20,7 +20,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        btnHome = findViewById(R.id.btnHome);
+       // btnHome = findViewById(R.id.btnHome);
         txtName = findViewById(R.id.txtName);
         txtNumber = findViewById(R.id.txtPhone);
         txtAddress = findViewById(R.id.txtAddress);
@@ -31,13 +31,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Login.class));
-                finish();
-            }
-        });
 
     }
     private void showAllUserData() {

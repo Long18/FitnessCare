@@ -52,28 +52,32 @@ public class ProfileUser extends Fragment {
                 startActivity(new Intent(getActivity(),Login.class));
             }
         });
-
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        showAllUserData();
+    }
+
     private void showAllUserData() {
-        Intent intent = getActivity().getIntent();
+//        Intent intent = getIntent();
+//
+//        name = intent.getStringExtra("name");
+//        number = intent.getStringExtra("phone");
+//        email = intent.getStringExtra("email");
+//        address = intent.getStringExtra("address");
+//        birth = intent.getStringExtra("birthday");
 
-        name = intent.getStringExtra("name");
-        number = intent.getStringExtra("phone");
-        email = intent.getStringExtra("email");
-        address = intent.getStringExtra("address");
-        birth = intent.getStringExtra("birthday");
+        txtName.setText(MainActivity.name);
+        txtNumber.setText(MainActivity.number);
+        txtEmail.setText(MainActivity.email);
+        txtAddress.setText(MainActivity.address);
+        txtBirth.setText(MainActivity.birth);
 
-        txtName.setText(name);
-        txtNumber.setText(number);
-        txtEmail.setText(email);
-        txtAddress.setText(address);
-        txtBirth.setText(birth);
-
-        txtNameUser.setText(name);
-        txtEmailUser.setText(email);
-
+        txtNameUser.setText(MainActivity.name);
+        txtEmailUser.setText(MainActivity.email);
     }
 
 }
