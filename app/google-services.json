@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:81115416209:android:2fcd78be63bde807a1a130",
         "android_client_info": {
-          "package_name": "com.william.calender"
+          "package_name": "com.william.Fitness"
         }
       },
       "oauth_client": [
@@ -39,7 +39,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:81115416209:android:bc1dd698b11e8608a1a130",
         "android_client_info": {
-          "package_name": "com.william.fitnesscare"
+          "package_name": "com.william.Fitness"
         }
       },
       "oauth_client": [
