@@ -2,14 +2,17 @@ package com.william.Fitness;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.william.Fitness.Adapter.ViewMenuAdapter;
 
 public class  MainActivity extends AppCompatActivity {
@@ -18,6 +21,9 @@ public class  MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     BottomNavigationView bottomNavigationView;
     public static String name, number,email,address,birth;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,9 @@ public class  MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
+
 
 
     }

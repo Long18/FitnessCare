@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.william.Fitness.Adapter.HomeAdapter.FeaturedTutorial;
 import com.william.Fitness.R;
 
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     @Override
     public FeaturedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.featured_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.featured_card,parent,false);
         FeaturedViewHolder featuredViewHolder = new FeaturedViewHolder(view);
         return featuredViewHolder;
     }
@@ -65,3 +64,5 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     }
 
 }
+
+

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="HOME" />\
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search"
+            android:title="SEARCH" />
+        <item
+            android:id="@+id/nav_categories"
+            android:icon="@drawable/ic_category"
+            android:title="CATEGORIES" />
+        <item
+            android:id="@+id/nav_something"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="SOMETHING" />
+    </group>
+
+
+    <item android:title="Profile">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_login"
+                    android:icon="@drawable/ic_login"
+                    android:title="LOGIN" />\
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_profile_user"
+                    android:title="PROFILE" />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_logout"
+                    android:title="LOGOUT" />
+            </group>
+
+        </menu>
+
+    </item>
+
+    <item android:title="Categories">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_chest"
+                    android:icon="@drawable/ic_chest"
+                    android:title="@string/Chest" />\
+                <item
+                    android:id="@+id/nav_arms"
+                    android:icon="@drawable/ic_arms"
+                    android:title="@string/Arms" />
+                <item
+                    android:id="@+id/nav_back"
+                    android:icon="@drawable/ic_back"
+                    android:title="@string/Back" />
+                <item
+                    android:id="@+id/nav_legs"
+                    android:icon="@drawable/ic_legs"
+                    android:title="@string/Legs" />
+                <item
+                    android:id="@+id/nav_but"
+                    android:icon="@drawable/ic_but"
+                    android:title="@string/But" />
+
+
+            </group>
+
+        </menu>
+
+    </item>
+
+    <item android:title="Share">
+
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_share"
+                    android:title="SHARE" />\
+                <item
+                    android:id="@+id/nav_rate"
+                    android:icon="@drawable/ic_rate"
+                    android:title="RATE US" />
+
+            </group>
+
+        </menu>
+
+    </item>
+
+</menu>

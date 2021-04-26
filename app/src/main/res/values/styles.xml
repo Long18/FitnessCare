@@ -137,4 +137,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/colorAccent</item>
     </style>
+
+
+    <!--Menu Style-->
+    <style name="navigationTheme">
+        <!--Color text,icon when click-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--Color background when click-->
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
+
+
 </resources>

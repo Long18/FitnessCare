@@ -1,5 +1,7 @@
 package com.william.Fitness.Adapter.HomeAdapter;
 
+import android.graphics.drawable.Drawable;
+
 public class FeaturedTutorial {
 
     int image;
@@ -10,6 +12,7 @@ public class FeaturedTutorial {
         this.title = title;
         this.description = description;
     }
+
 
     public int getImage() {
         return image;
@@ -34,4 +37,6 @@ public class FeaturedTutorial {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 }
