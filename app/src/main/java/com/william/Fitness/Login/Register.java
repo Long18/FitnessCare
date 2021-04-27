@@ -3,16 +3,20 @@ package com.william.Fitness.Login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,30 +40,37 @@ public class Register extends AppCompatActivity {
     FirebaseFirestore fStore;
     DatabaseReference reference;
 
+    ImageView btnBack, image;
+    Button next;
+    TextView title,login;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_register);
         changeStatusBarColor();
+
+        btnBack = findViewById(R.id.btn_back_pressed);
+        next = findViewById(R.id.btn_next);
+        login = findViewById(R.id.Loginbtn);
+        image = findViewById(R.id.image_view);
+        title = findViewById(R.id.title_res);
 
         mFullName = findViewById(R.id.txtName);
         mEmail = findViewById(R.id.txtEmail);
         mPassword = findViewById(R.id.txtPassword);
         mPhone = findViewById(R.id.txtPhone);
-        btnRegister = findViewById(R.id.btnRegister);
         btnLogin = findViewById(R.id.Loginbtn);
 
-        fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
-
-//        if(fAuth.getCurrentUser() != null){
-//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//            finish();
-//        }
+        //fAuth = FirebaseAuth.getInstance();
+        //fStore = FirebaseFirestore.getInstance();
 
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+
+
+        /*btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = mEmail.getText().toString().trim();
@@ -87,7 +98,7 @@ public class Register extends AppCompatActivity {
 
 
                 //Condition firebase register
-               /* fAuth.createUserWithEmailAndPassword(email,password)
+               *//* fAuth.createUserWithEmailAndPassword(email,password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -130,7 +141,7 @@ public class Register extends AppCompatActivity {
                     }
                 });
             }
-        });*/
+        });*//*
 
 
                 reference = FirebaseDatabase.getInstance().getReference().child("Account");
@@ -155,7 +166,7 @@ public class Register extends AppCompatActivity {
                 });
 
             }
-        });
+        });*/
 
     }
 
@@ -171,5 +182,11 @@ public class Register extends AppCompatActivity {
         startActivity(new Intent(this, Login.class));
         overridePendingTransition(R.anim.top_to_bottom,R.anim.bottom_to_top);
         finish();
+    }
+
+    public void callNextSignupScreen(View view){
+        Intent intent = new Intent(getApplicationContext(),Register_part_two.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
     }
 }

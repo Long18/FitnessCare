@@ -24,6 +24,7 @@ import com.william.Fitness.Adapter.HomeAdapter.CategoriesAdapter;
 import com.william.Fitness.Adapter.HomeAdapter.FeaturedAdapter;
 import com.william.Fitness.Adapter.HomeAdapter.FeaturedTutorial;
 import com.william.Fitness.Adapter.HomeAdapter.MostViewedAdapter;
+import com.william.Fitness.Login.WelcomeStartUpScreen;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -171,6 +172,8 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
 
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

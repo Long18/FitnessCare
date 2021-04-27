@@ -8,7 +8,22 @@
     android:background="@color/login_bk_color"
     android:focusableInTouchMode="true"
     android:gravity="center"
+    android:transitionName="transition_login"
     tools:context=".Login.Login">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/btn_arrow_back_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/ic_arrow_back" />
+    </LinearLayout>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,114 +31,161 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:paddingTop="20dp">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     style="@style/viewParent.headerText.NoMode"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:fontFamily="@font/brandon_grotesque_regular_italic"
                     android:text="Fitness Care" />
 
                 <ImageView
                     android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
                     android:src="@drawable/icon_app" />
 
             </RelativeLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputEmail"
                 style="@style/parentlogin"
-                android:layout_marginTop="@dimen/loginViewsMargin">
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                app:startIconDrawable="@drawable/ic_user">
+
                 <EditText
                     android:id="@+id/txtEmail"
                     style="@style/modifiedEditTextlogin"
+                    android:fontFamily="@font/brandon_grotesque_regular_italic"
                     android:hint="@string/login_email_hint"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"
                 style="@style/parentlogin"
-                android:layout_marginTop="@dimen/loginViewsMargin">
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/ic_lock">
+
                 <EditText
                     android:id="@+id/txtPassword"
                     style="@style/modifiedEditTextlogin"
+                    android:fontFamily="@font/brandon_grotesque_regular_italic"
                     android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/txtresetpass"
-                style="@style/viewParent"
-                android:onClick="ResetPass"
-                android:layout_gravity="end"
-                android:layout_marginTop="10dp"
-                android:text="Forgot password?"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/newsMoreTextSize" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:buttonTint="@color/black"
+                    android:fontFamily="@font/brandon_grotesque_regular_italic"
+                    android:text="@string/remember_me"
+                    android:textColor="@color/black" />
+
+
+                <TextView
+                    android:id="@+id/txtresetpass"
+                    style="@style/viewParent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/brandon_grotesque_regular_italic"
+                    android:onClick="ResetPass"
+                    android:text="Forgot password?"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
 
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                 android:id="@+id/btnLogin"
                 style="@style/loginButton"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
+                android:fontFamily="@font/brandon_grotesque_regular_italic"
                 android:text="Login"
                 app:initialCornerAngle="27dp"
                 app:spinning_bar_color="#FFF"
                 app:spinning_bar_padding="6dp"
                 app:spinning_bar_width="4dp" />
+
             <TextView
+
                 style="@style/parentlogin"
                 android:layout_marginTop="@dimen/loginViewsMargin"
+                android:fontFamily="@font/brandon_grotesque_regular_italic"
                 android:onClick="Register"
                 android:text="New user? Register Now"
                 android:textAlignment="center"
                 android:textColor="@color/themeColor"
                 android:textSize="17sp"
                 android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:weightSum="12">
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="3"
                     android:background="@color/colorPrimaryDark" />
+
                 <TextView
                     style="@style/viewParent.headerText.NoMode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
+                    android:fontFamily="@font/brandon_grotesque_regular_italic"
                     android:text="Other Methods"
                     android:textAlignment="center"
                     android:textSize="12sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="3"
                     android:background="@color/colorPrimaryDark" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_facebook" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -132,21 +194,22 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="11dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="20dp"
-        android:background="@drawable/ic_side_bg"
-        android:id="@+id/view"/>
+        android:background="@drawable/ic_side_bg" />
 
     <ImageView
-        android:layout_above="@+id/view"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/view"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="-44dp"
         android:onClick="Register"
         android:rotation="90"

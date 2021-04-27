@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -34,10 +35,10 @@ public class Login extends AppCompatActivity {
     FirebaseAuth fAuth;
     TextView resetPassword;
     ProgressBar progressBar;
-//region Close Activity form ( Change to Fragment )
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -47,7 +48,7 @@ public class Login extends AppCompatActivity {
         mEmail = findViewById(R.id.txtEmail);
         mPassword = findViewById(R.id.txtPassword);
         progressBar = findViewById(R.id.progressBar);
-        fAuth = FirebaseAuth.getInstance();
+        //fAuth = FirebaseAuth.getInstance();
         btnLogin = findViewById(R.id.btnLogin);
         resetPassword = findViewById(R.id.txtresetpass);
 
@@ -75,22 +76,6 @@ public class Login extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
 
 
-                //Authenticate the account
-//                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(task.isSuccessful()){
-//                            isUser();
-//                            Toast.makeText(Login.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-//                            //startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                            finish();
-//                        }else{
-//                            Toast.makeText(Login.this, "Đăng nhập thất bại!" +
-//                             task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-//                            progressBar.setVisibility(View.GONE);
-//                        }
-//                    }
-//                });
 
             }
         });
@@ -142,11 +127,7 @@ public class Login extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-//        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-//            isUser();
-//            startActivity(new Intent(Login.this.getApplicationContext(), MainActivity.class));
-//            finish();
-//        }
+
     }
 
     private void isUser(){
@@ -169,16 +150,6 @@ public class Login extends AppCompatActivity {
                         String phoneDB = dataSnapshot.child(emailLogin).child("phone").getValue(String.class);
                         String addressDB = dataSnapshot.child(emailLogin).child("address").getValue(String.class);
 
-//                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-//
-//                        intent.putExtra("name",nameDB);
-//                        intent.putExtra("birth",birthdayDB);
-//                        intent.putExtra("email",emailDB);
-//                        intent.putExtra("phone",phoneDB);
-//                        intent.putExtra("address",addressDB);
-//
-//
-//                        startActivity(intent);
                         MainActivity.name = nameDB;
                         MainActivity.birth = birthdayDB;
                         MainActivity.email = emailDB;

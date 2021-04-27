@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.william.Fitness">
     <!-- permission -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,8 +16,12 @@
         android:label="@string/application_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Fab_Bottom_app_bar">
-        <activity android:name=".AllCategories"></activity>
+        android:theme="@style/Theme.Fab_Bottom_app_bar"
+        tools:node="replace">
+        <activity android:name=".Login.Register_part_three"></activity>
+        <activity android:name=".Login.Register_part_two" />
+        <activity android:name=".Login.WelcomeStartUpScreen" />
+        <activity android:name=".AllCategories" />
         <activity android:name=".Helper.FeaturedTutorial" />
         <activity android:name=".SplashScreen">
             <intent-filter>

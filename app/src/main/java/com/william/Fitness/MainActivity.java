@@ -6,14 +6,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.william.Fitness.Adapter.ViewMenuAdapter;
+import com.william.Fitness.Login.WelcomeStartUpScreen;
 
 public class  MainActivity extends AppCompatActivity {
 
@@ -28,6 +32,7 @@ public class  MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         btnlogout = findViewById(R.id.btnLogout);
         //btnProfile = findViewById(R.id.);
@@ -105,6 +110,10 @@ public class  MainActivity extends AppCompatActivity {
         });
     }
 
+    public void btnWelcome(View view){
 
+        startActivity(new Intent(getApplicationContext(), WelcomeStartUpScreen.class));
+
+    }
 
 }

@@ -30,4 +30,17 @@
     <string name="Legs">Chân</string>
     <string name="But">Mông</string>
 
+    <!-- TODO: Strings for Welcome Startup Screen -->
+
+    <!-- General String -->
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create \nAccount</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="how_we_work">Tìm hiểu thêm?</string>
+    <string name="welcome_header">Fitness Care</string>
+    <string name="welcome_tag_line">Cải thiện cuộc sống của bạn mỗi ngày.</string>
+
+
 </resources>
