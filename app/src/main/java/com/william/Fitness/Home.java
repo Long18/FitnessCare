@@ -1,5 +1,6 @@
 package com.william.Fitness;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -57,8 +58,6 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         drawerLayout = (DrawerLayout) view.findViewById(R.id.draw_layout);
         navigationView = (NavigationView) view.findViewById(R.id.ngv_view);
-
-
 
 
         navigationDraw();
@@ -175,6 +174,15 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.nav_categories:
+                startActivity(new Intent(getActivity().getApplicationContext(), AllCategories.class));
+                break;
+
+        }
+
         return true;
     }
 }

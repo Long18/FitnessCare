@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar">
-        <activity android:name=".Helper.FeaturedTutorial"></activity>
+        <activity android:name=".AllCategories"></activity>
+        <activity android:name=".Helper.FeaturedTutorial" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +28,7 @@
         <activity android:name=".Login.Login" />
         <activity android:name=".Login.Register" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
