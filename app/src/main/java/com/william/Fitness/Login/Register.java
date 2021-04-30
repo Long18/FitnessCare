@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +34,7 @@ import com.william.Fitness.R;
 
 public class Register extends AppCompatActivity {
     public static final String TAG = "TAG";
-    EditText mFullName, mEmail, mPassword, mPhone, mAddress,mBirth;
+    EditText mFullName, mEmail, mPassword, mPhone, mAddress, mBirth;
     Button btnRegister;
     TextView btnLogin;
     FirebaseAuth fAuth;
@@ -42,13 +43,15 @@ public class Register extends AppCompatActivity {
 
     ImageView btnBack, image;
     Button next;
-    TextView title,login;
+    TextView title, login;
+
+    TextInputLayout fullName, username, email, password;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_register);
         changeStatusBarColor();
 
@@ -63,6 +66,11 @@ public class Register extends AppCompatActivity {
         mPassword = findViewById(R.id.txtPassword);
         mPhone = findViewById(R.id.txtPhone);
         btnLogin = findViewById(R.id.Loginbtn);
+
+        fullName = findViewById(R.id.textInputName);
+        username = findViewById(R.id.textInputUserName);
+        email = findViewById(R.id.textInputEmail);
+        password = findViewById(R.id.textInputPassword);
 
         //fAuth = FirebaseAuth.getInstance();
         //fStore = FirebaseFirestore.getInstance();
@@ -178,14 +186,20 @@ public class Register extends AppCompatActivity {
             window.setStatusBarColor(getResources().getColor(R.color.register_bk_color));
         }
     }
-    public void onLoginClick(View view){
+
+    public void onLoginClick(View view) {
         startActivity(new Intent(this, Login.class));
-        overridePendingTransition(R.anim.top_to_bottom,R.anim.bottom_to_top);
+        overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
         finish();
     }
 
-    public void callNextSignupScreen(View view){
-        Intent intent = new Intent(getApplicationContext(),Register_part_two.class);
+    public void callNextSignupScreen(View view) {
+
+        if(!validateFullName() | !validateUsername() | !validateEmail() | !validatePassword()){
+            return;
+        }
+
+        Intent intent = new Intent(getApplicationContext(), Register_part_two.class);
 
         Pair[] pairs = new Pair[5];
         pairs[0] = new Pair<View, String>(findViewById(R.id.btnNext), "transition_next_btn");
@@ -194,11 +208,88 @@ public class Register extends AppCompatActivity {
         pairs[3] = new Pair<View, String>(findViewById(R.id.btn_arrow_back_register), "transition_back_btn");
         pairs[4] = new Pair<View, String>(findViewById(R.id.Loginbtn), "transition_login_btn");
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Register.this,pairs);
-        startActivity(intent,options.toBundle());
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Register.this, pairs);
+        startActivity(intent, options.toBundle());
 
 
         /*startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right,R.anim.stay);*/
+    }
+
+    private boolean validateFullName() {
+        String val = fullName.getEditText().getText().toString().trim();
+
+        if (val.isEmpty()) {
+            fullName.setError("Họ và tên không được để trống");
+            return false;
+        } else {
+            fullName.setError(null);
+            fullName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validateUsername() {
+        String val = username.getEditText().getText().toString().trim();
+        String checkspaces = "\\A\\w{1,20}\\z";
+        //Giới hạn kí tự/ khoảng trắng từ 1-20
+
+        if (val.isEmpty()) {
+            username.setError("Username không được để trống");
+            return false;
+        } else if (val.length() > 20) {
+            username.setError("Username quá dài");
+            return false;
+        } else if (val.matches(checkspaces)) {
+            username.setError("Username không được có khoảng trắng");
+            return false;
+        } else {
+            username.setError(null);
+            username.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validateEmail() {
+        String val = email.getEditText().getText().toString().trim();
+        String checkEmail = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
+        //Giới hạn kí tự dành cho email
+
+        if (val.isEmpty()) {
+            email.setError("Email không được để trống");
+            return false;
+        } else if (val.matches(checkEmail)) {
+            email.setError("Email không được có khoảng trắng");
+            return false;
+        } else {
+            email.setError(null);
+            email.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        String val = password.getEditText().getText().toString().trim();
+        String checkPassword = "^" +
+                //"(?=.*[0-9])" +         //Phải có ít nhất 1 số
+                //"(?=.*[a-z])" +         //Phải có ít nhất 1 từ viết thường
+                //"(?=.*[A-Z])" +         //Phải có ít nhất 1 từ viết hoa
+                "(?=.*[a-zA-Z])" +      //Tất cả các từ
+                "(?=.*[@#$%^&+=])" +    //Phải có ít nhất 1 kí tự
+                "(?=S+$)" +             //Không được có khoảng trắng
+                ".{4,}" +               //Phải có ít nhất 6 kí tự
+                "$";
+
+        if (val.isEmpty()) {
+            password.setError("Mật khẩu không được để trống");
+            return false;
+        } else if (!val.matches(checkPassword)) {
+            password.setError("Mật khẩu phải có ít nhất 6 kí tự!");
+            return false;
+        } else {
+            password.setError(null);
+            password.setErrorEnabled(false);
+            return true;
+        }
     }
 }

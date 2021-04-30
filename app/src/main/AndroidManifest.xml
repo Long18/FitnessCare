@@ -18,7 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar"
         tools:node="replace">
-        <activity android:name=".Login.Register_part_three"></activity>
+        <activity android:name=".Login.ForgetSuccess"></activity>
+        <activity android:name=".Login.NewPassword" />
+        <activity android:name=".Login.Selection" />
+        <activity android:name=".Login.ForgetPassword" />
+        <activity android:name=".Login.Verify_OTP" />
+        <activity android:name=".Login.Register_part_three" />
         <activity android:name=".Login.Register_part_two" />
         <activity android:name=".Login.WelcomeStartUpScreen" />
         <activity android:name=".AllCategories" />

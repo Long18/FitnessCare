@@ -20,38 +20,43 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:src="@drawable/ic_arrow_back"
-            android:transitionName="transition_back_btn"/>
+            android:transitionName="transition_back_btn" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="vertical"
             android:padding="20dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:id="@+id/title_res"
-                    android:fontFamily="@font/brandon_grotesque_regular_italic"
                     style="@style/viewParent.headerText.NoMode"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
+                    android:fontFamily="@font/brandon_grotesque_regular_italic"
                     android:text="Register! \nLet's Begin "
                     android:textColor="@color/whiteTextColor"
-                    android:transitionName="transition_res_title"/>
+                    android:transitionName="transition_res_title" />
+
                 <RatingBar
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:progressTint="#FB0606"
-                    android:rating="3.5"
-                    android:layout_alignParentBottom="true"/>
+                    android:rating="3.5" />
+
                 <ImageView
                     android:id="@+id/image_view"
                     android:layout_width="200dp"
@@ -59,14 +64,16 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/icon_run"
-                    android:transitionName="transition_image"/>
+                    android:transitionName="transition_image" />
             </RelativeLayout>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:cardBackgroundColor="@color/whiteTextColor"
                 app:cardCornerRadius="10dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -76,120 +83,128 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Choose Gender"
-                        android:textSize="18sp"/>
+                        android:text="Chọn giới tính"
+                        android:textSize="18sp" />
 
                     <RadioGroup
+                        android:id="@+id/radio_group"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/radioButton3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Male" />
+                            android:text="Nam" />
 
                         <RadioButton
                             android:id="@+id/radioButton2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Female" />
+                            android:text="Nữ" />
 
                         <RadioButton
                             android:id="@+id/radioButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Other" />
+                            android:text="Khác" />
                     </RadioGroup>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:background="@color/black"
                         android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"/>
+                        android:layout_marginBottom="20dp"
+                        android:background="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Select Your Age"
-                        android:textSize="18sp"/>
+                        android:text="Chọn tuổi"
+                        android:textSize="18sp" />
 
                     <DatePicker
+                        android:id="@+id/age_picker"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:datePickerMode="spinner"
                         android:calendarViewShown="false"
-                        android:spinnersShown="true"/>
+                        android:datePickerMode="spinner"
+                        android:spinnersShown="true" />
 
 
                     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                        android:fontFamily="@font/brandon_grotesque_regular_italic"
                         android:id="@+id/btnNext"
                         style="@style/loginButton"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/loginViewsMargin"
-                        android:text="Next"
                         android:onClick="callScreenThree"
+                        android:text="Next"
+                        android:transitionName="transition_next_btn"
                         app:initialCornerAngle="27dp"
                         app:spinning_bar_color="#FFF"
                         app:spinning_bar_padding="6dp"
-                        app:spinning_bar_width="4dp"
-                        android:transitionName="transition_next_btn"/>
+                        app:spinning_bar_width="4dp" />
+
                     <TextView
-                        android:fontFamily="@font/brandon_grotesque_regular_italic"
                         android:id="@+id/Loginbtn"
                         style="@style/parentlogin"
                         android:layout_marginTop="@dimen/loginViewsMargin"
-                        android:onClick="onLoginClick"
                         android:gravity="center"
+                        android:onClick="onLoginClick"
                         android:text="Already have account?"
                         android:textAlignment="center"
                         android:textColor="@color/themeColor"
                         android:textSize="17sp"
                         android:textStyle="bold"
-                        android:transitionName="transition_login_btn"/>
+                        android:transitionName="transition_login_btn" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:weightSum="12">
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="3"
                     android:background="@color/whiteTextColor" />
+
                 <TextView
-                    android:fontFamily="@font/brandon_grotesque_regular_italic"
                     style="@style/viewParent.headerText.NoMode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
+                    android:fontFamily="@font/brandon_grotesque_regular_italic"
                     android:text="Other Methods"
                     android:textAlignment="center"
                     android:textColor="@color/whiteTextColor"
                     android:textSize="12sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="3"
                     android:background="@color/whiteTextColor" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 android:gravity="center">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_facebook" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -200,12 +215,12 @@
     </ScrollView>
 
     <ImageView
-        android:layout_above="@+id/view"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/view"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="-44dp"
-        android:rotation="90"
         android:onClick="onLoginClick"
+        android:rotation="90"
         android:src="@drawable/ic_back_img" />
 </RelativeLayout>

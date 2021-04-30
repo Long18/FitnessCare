@@ -130,7 +130,6 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                        android:fontFamily="@font/brandon_grotesque_regular_italic"
                         android:id="@+id/btnNext"
                         style="@style/loginButton"
                         android:layout_gravity="center_horizontal"

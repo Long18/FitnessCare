@@ -17,6 +17,7 @@
 
     <color name="colorAccent">#0C4492</color>
     <color name="themeColor">#0C4492</color>
+    <color name="transparent">#00000000</color>
 
     <!--colors for profile-->
     <color name="profilePrimaryDark">#0C4492</color>

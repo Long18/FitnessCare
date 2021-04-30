@@ -38,9 +38,25 @@
     <string name="create_account">Create \nAccount</string>
     <string name="remember_me">Remember Me</string>
     <string name="forget_password">Forget Password</string>
+    <string name="password_update">Cập nhật mật khẩu</string>
+    <string name="password_update_success">Cập nhật mật khẩu thành công</string>
     <string name="how_we_work">Tìm hiểu thêm?</string>
     <string name="welcome_header">Fitness Care</string>
     <string name="welcome_tag_line">Cải thiện cuộc sống của bạn mỗi ngày.</string>
 
+    <!-- OTP Screen -->
+    <string name="otp_code">Code</string>
+    <string name="otp_verification">Xác thực</string>
+    <string name="otp_description">Nhập mã số bạn vừa nhận được</string>
+
+    <!-- Forget Password Screen -->
+    <string name="forget_password_detail">Nhập email của bạn vào đây</string>
+
+
+    <!-- Selection Screen -->
+    <string name="selection">Chọn phương thức</string>
+    <string name="selection_detail">Bạn hãy lựa chọn phương thức để lấy lại mật khẩu.</string>
+    <string name="selection_mobile">Sử dụng số điện thoại:</string>
+    <string name="selection_email">Sử dụng địa chỉ email:</string>
 
 </resources>
