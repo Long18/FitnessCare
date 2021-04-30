@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
@@ -28,7 +29,8 @@ import java.util.concurrent.TimeUnit;
 public class Verify_OTP extends AppCompatActivity {
     PinView pinView;
     String codeSystem;
-    FirebaseAuth firebaseAuth;
+    String fullName, phoneNo, email, username, password, date, gender,ToDO;
+    TextView otpDescriptionText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,23 +39,36 @@ public class Verify_OTP extends AppCompatActivity {
 
         //Hooks
         pinView = findViewById(R.id.pin_view);
+        otpDescriptionText = findViewById(R.id.otp_desc);
 
 
-        String phoneLocation = getIntent().getStringExtra("phoneLocation");
+        fullName = getIntent().getStringExtra("fullName");
+        email = getIntent().getStringExtra("email");
+        username = getIntent().getStringExtra("username");
+        password = getIntent().getStringExtra("password");
+        date = getIntent().getStringExtra("date");
+        gender = getIntent().getStringExtra("gender");
+        phoneNo = getIntent().getStringExtra("phoneNo");
+        ToDO = getIntent().getStringExtra("ToDO");
 
-        sendCode(phoneLocation);
+        otpDescriptionText.setText("Nhập mã số bạn vừa nhận được qua số điện thoại: "+phoneNo);
+
+        sendCode(phoneNo);
 
     }
 
-    private void sendCode(String phoneLocation) {
+    private void sendCode(String phoneNo) {
+
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneLocation,        // Phone number to verify
+                phoneNo,        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 (Activity) TaskExecutors.MAIN_THREAD,// Activity (for callback binding)
                 mCallbacks);
-    }
 
+
+
+    }
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 @Override
@@ -84,7 +99,8 @@ public class Verify_OTP extends AppCompatActivity {
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        firebaseAuth  = FirebaseAuth.getInstance();
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

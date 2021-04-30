@@ -25,7 +25,7 @@ public class Register_part_three extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_register_part_three);
 
         //Hooks
@@ -36,14 +36,14 @@ public class Register_part_three extends AppCompatActivity {
     }
 
 
-    public void onLoginClick(View view){
+    public void onLoginClick(View view) {
         startActivity(new Intent(this, Login.class));
-        overridePendingTransition(R.anim.top_to_bottom,R.anim.bottom_to_top);
+        overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
         finish();
     }
 
-    public void btnSignUp(View view){
-        if(!validatePhoneNumber()){
+    public void btnSignUp(View view) {
+        if (!validatePhoneNumber()) {
             return;
         }
 
@@ -55,7 +55,13 @@ public class Register_part_three extends AppCompatActivity {
         String gender = getIntent().getStringExtra("gender");
 
         String getPhoneNumber = phoneNumber.getEditText().getText().toString().trim();// Get Phone Num
-        String phoneLocation = "+"+countryCodePicker.getFullNumber()+getPhoneNumber;
+
+        if (getPhoneNumber.charAt(0) == '0') {
+            getPhoneNumber = getPhoneNumber.substring(1);
+        }
+
+        final String phoneNo = "+" + countryCodePicker.getFullNumber() + getPhoneNumber;
+
 
         Intent intent = new Intent(getApplicationContext(), Verify_OTP.class);
 
@@ -65,10 +71,11 @@ public class Register_part_three extends AppCompatActivity {
         intent.putExtra("password", password);
         intent.putExtra("date", date);
         intent.putExtra("gender", gender);
-        intent.putExtra("phoneLocation", phoneLocation);
+        intent.putExtra("phoneNo", phoneNo);
+        intent.putExtra("ToDO", "createNewUser");
 
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.stay);
     }
 
     private boolean validatePhoneNumber() {
