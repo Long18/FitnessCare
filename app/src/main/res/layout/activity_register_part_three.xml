@@ -113,6 +113,7 @@
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         android:fontFamily="@font/brandon_grotesque_regular_italic"
                         android:text="Sign Up"
+                        android:onClick="btnSignUp"
                         android:transitionName="transition_next_btn"
                         app:initialCornerAngle="27dp"
                         app:spinning_bar_color="#FFF"

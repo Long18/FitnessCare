@@ -55,6 +55,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         changeStatusBarColor();
 
+        //Hooks
         btnBack = findViewById(R.id.btn_back_pressed);
         next = findViewById(R.id.btn_next);
         login = findViewById(R.id.Loginbtn);
