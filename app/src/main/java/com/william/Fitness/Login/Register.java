@@ -241,10 +241,12 @@ public class Register extends AppCompatActivity {
         } else if (val.length() > 20) {
             username.setError("Username quá dài");
             return false;
-        } else if (val.matches(checkspaces)) {
+        }
+        /*else if (val.matches(checkspaces)) {
             username.setError("Username không được có khoảng trắng");
             return false;
-        } else {
+        }*/
+        else {
             username.setError(null);
             username.setErrorEnabled(false);
             return true;
@@ -259,10 +261,12 @@ public class Register extends AppCompatActivity {
         if (val.isEmpty()) {
             email.setError("Email không được để trống");
             return false;
-        } else if (val.matches(checkEmail)) {
+        }
+        /*else if (val.matches(checkEmail)) {
             email.setError("Email không được có khoảng trắng");
             return false;
-        } else {
+        } */
+        else {
             email.setError(null);
             email.setErrorEnabled(false);
             return true;
@@ -276,7 +280,7 @@ public class Register extends AppCompatActivity {
                 //"(?=.*[a-z])" +         //Phải có ít nhất 1 từ viết thường
                 //"(?=.*[A-Z])" +         //Phải có ít nhất 1 từ viết hoa
                 "(?=.*[a-zA-Z])" +      //Tất cả các từ
-                "(?=.*[@#$%^&+=])" +    //Phải có ít nhất 1 kí tự
+                //"(?=.*[@#$%^&+=])" +    //Phải có ít nhất 1 kí tự
                 "(?=S+$)" +             //Không được có khoảng trắng
                 ".{4,}" +               //Phải có ít nhất 6 kí tự
                 "$";
@@ -284,10 +288,12 @@ public class Register extends AppCompatActivity {
         if (val.isEmpty()) {
             password.setError("Mật khẩu không được để trống");
             return false;
-        } else if (!val.matches(checkPassword)) {
+        }
+        /*else if (!val.matches(checkPassword)) {
             password.setError("Mật khẩu phải có ít nhất 6 kí tự!");
             return false;
-        } else {
+        }*/
+        else {
             password.setError(null);
             password.setErrorEnabled(false);
             return true;

@@ -10,13 +10,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.hbb20.CountryCodePicker;
 import com.william.Fitness.R;
 
 public class Register_part_three extends AppCompatActivity {
     TextInputLayout phoneNumber;
+    ScrollView scrollView;
+    CountryCodePicker countryCodePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,8 @@ public class Register_part_three extends AppCompatActivity {
 
         //Hooks
         phoneNumber = findViewById(R.id.textInputMobile);
+        countryCodePicker = findViewById(R.id.phone_numer);
+
 
     }
 
@@ -36,12 +42,33 @@ public class Register_part_three extends AppCompatActivity {
         finish();
     }
 
-    public void btnSignUp(){
+    public void btnSignUp(View view){
         if(!validatePhoneNumber()){
             return;
         }
 
+        String fullName = getIntent().getStringExtra("fullName");
+        String email = getIntent().getStringExtra("email");
+        String username = getIntent().getStringExtra("username");
+        String password = getIntent().getStringExtra("password");
+        String date = getIntent().getStringExtra("date");
+        String gender = getIntent().getStringExtra("gender");
 
+        String getPhoneNumber = phoneNumber.getEditText().getText().toString().trim();// Get Phone Num
+        String phoneLocation = "+"+countryCodePicker.getFullNumber()+getPhoneNumber;
+
+        Intent intent = new Intent(getApplicationContext(), Verify_OTP.class);
+
+        intent.putExtra("fullName", fullName);
+        intent.putExtra("email", email);
+        intent.putExtra("username", username);
+        intent.putExtra("password", password);
+        intent.putExtra("date", date);
+        intent.putExtra("gender", gender);
+        intent.putExtra("phoneLocation", phoneLocation);
+
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
     }
 
     private boolean validatePhoneNumber() {
@@ -50,10 +77,12 @@ public class Register_part_three extends AppCompatActivity {
         if (val.isEmpty()) {
             phoneNumber.setError("Số điện thoại không được để trống!");
             return false;
-        } else if (!val.matches(checkspaces)) {
+        }
+        /*else if (!val.matches(checkspaces)) {
             phoneNumber.setError("Số điện thoại không được phép có khoảng trắng!");
             return false;
-        } else {
+        }*/
+        else {
             phoneNumber.setError(null);
             phoneNumber.setErrorEnabled(false);
             return true;

@@ -57,6 +57,7 @@
             android:includeFontPadding="false"/>
 
         <com.chaos.view.PinView
+            android:id="@+id/pin_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:itemCount="6"
@@ -75,9 +76,10 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Verify Code"
             android:layout_marginTop="30dp"
-            android:textColor="@color/black"/>
+            android:text="Verify Code"
+            android:onClick="callNextScreen"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 

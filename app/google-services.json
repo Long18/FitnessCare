@@ -1,63 +1,41 @@
 {
   "project_info": {
-    "project_number": "81115416209",
-    "firebase_url": "https://fitnesscare-a0baa-default-rtdb.firebaseio.com",
-    "project_id": "fitnesscare-a0baa",
-    "storage_bucket": "fitnesscare-a0baa.appspot.com"
+    "project_number": "1093994997660",
+    "project_id": "fitness-care-4a83a",
+    "storage_bucket": "fitness-care-4a83a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:81115416209:android:2fcd78be63bde807a1a130",
+        "mobilesdk_app_id": "1:1093994997660:android:538f6dbb576138aabc8a59",
         "android_client_info": {
           "package_name": "com.william.Fitness"
         }
       },
       "oauth_client": [
         {
-          "client_id": "81115416209-s39ed4lekaglk2da57toer7q6hhig73u.apps.googleusercontent.com",
+          "client_id": "1093994997660-7tuksd52rmqkk37mgvku4rpfi5v1vls3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.william.Fitness",
+            "certificate_hash": "753aabee489dd1e63b2d7f77fe2749bfd39dad4e"
+          }
+        },
+        {
+          "client_id": "1093994997660-0k98s38mlumargavsisldfkvmgsbr3h4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC0L9pas4cyL9OcMU1_tfid9lgbet-ZSbU"
+          "current_key": "AIzaSyA-gM4kMzWqr84gLipkfyCAV6bNioFuWaM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "81115416209-s39ed4lekaglk2da57toer7q6hhig73u.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:81115416209:android:bc1dd698b11e8608a1a130",
-        "android_client_info": {
-          "package_name": "com.william.Fitness"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "81115416209-s39ed4lekaglk2da57toer7q6hhig73u.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC0L9pas4cyL9OcMU1_tfid9lgbet-ZSbU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "81115416209-s39ed4lekaglk2da57toer7q6hhig73u.apps.googleusercontent.com",
+              "client_id": "1093994997660-0k98s38mlumargavsisldfkvmgsbr3h4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
