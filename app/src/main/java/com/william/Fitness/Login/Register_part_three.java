@@ -19,7 +19,6 @@ import com.william.Fitness.R;
 
 public class Register_part_three extends AppCompatActivity {
     TextInputLayout phoneNumber;
-    ScrollView scrollView;
     CountryCodePicker countryCodePicker;
 
     @Override
@@ -31,7 +30,6 @@ public class Register_part_three extends AppCompatActivity {
         //Hooks
         phoneNumber = findViewById(R.id.textInputMobile);
         countryCodePicker = findViewById(R.id.phone_numer);
-
 
     }
 
@@ -54,13 +52,13 @@ public class Register_part_three extends AppCompatActivity {
         String date = getIntent().getStringExtra("date");
         String gender = getIntent().getStringExtra("gender");
 
-        String getPhoneNumber = phoneNumber.getEditText().getText().toString().trim();// Get Phone Num
+        String getUserPhoneNumber = phoneNumber.getEditText().getText().toString().trim();// Get Phone Num
 
-        if (getPhoneNumber.charAt(0) == '0') {
-            getPhoneNumber = getPhoneNumber.substring(1);
+        if (getUserPhoneNumber.charAt(0) == '0') {
+            getUserPhoneNumber = getUserPhoneNumber.substring(1);
         }
 
-        final String phoneNo = "+" + countryCodePicker.getFullNumber() + getPhoneNumber;
+        final String phoneNo = "+" + countryCodePicker.getFullNumber() + getUserPhoneNumber;
 
 
         Intent intent = new Intent(getApplicationContext(), Verify_OTP.class);

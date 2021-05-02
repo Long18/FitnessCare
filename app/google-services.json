@@ -1,20 +1,21 @@
 {
   "project_info": {
-    "project_number": "1093994997660",
-    "project_id": "fitness-care-4a83a",
-    "storage_bucket": "fitness-care-4a83a.appspot.com"
+    "project_number": "1069151273076",
+    "firebase_url": "https://fitness-d2522-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "fitness-d2522",
+    "storage_bucket": "fitness-d2522.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1093994997660:android:538f6dbb576138aabc8a59",
+        "mobilesdk_app_id": "1:1069151273076:android:1aac67ada3076cc12e5121",
         "android_client_info": {
           "package_name": "com.william.Fitness"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1093994997660-7tuksd52rmqkk37mgvku4rpfi5v1vls3.apps.googleusercontent.com",
+          "client_id": "1069151273076-qi4r8f7pphv2bm1go94bqaca8vm1m82d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.william.Fitness",
@@ -22,20 +23,20 @@
           }
         },
         {
-          "client_id": "1093994997660-0k98s38mlumargavsisldfkvmgsbr3h4.apps.googleusercontent.com",
+          "client_id": "1069151273076-d2j5f7bgihm4tibk58j20jbhf947ab8i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA-gM4kMzWqr84gLipkfyCAV6bNioFuWaM"
+          "current_key": "AIzaSyDnWu0UOkZ3yjmGoypZUajYcG7JgEFVih0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1093994997660-0k98s38mlumargavsisldfkvmgsbr3h4.apps.googleusercontent.com",
+              "client_id": "1069151273076-d2j5f7bgihm4tibk58j20jbhf947ab8i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

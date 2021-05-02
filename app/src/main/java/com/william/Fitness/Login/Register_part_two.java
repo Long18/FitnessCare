@@ -44,6 +44,8 @@ public class Register_part_two extends AppCompatActivity {
         radioGroup = findViewById(R.id.radio_group);
         datePicker = findViewById(R.id.age_picker);
 
+
+
     }
 
 
@@ -52,6 +54,11 @@ public class Register_part_two extends AppCompatActivity {
         if (!validateGender() | !validateAge()){
             return;
         }
+
+        String fullName = getIntent().getStringExtra("fullName");
+        String email = getIntent().getStringExtra("email");
+        String username = getIntent().getStringExtra("username");
+        String password = getIntent().getStringExtra("password");
 
         selectedGender = findViewById(radioGroup.getCheckedRadioButtonId());
         String gender = selectedGender.getText().toString();
@@ -63,6 +70,13 @@ public class Register_part_two extends AppCompatActivity {
         String date = day+"/"+month+"/"+year;
 
         Intent intent = new Intent(getApplicationContext(), Register_part_three.class);
+
+        intent.putExtra("fullName", fullName);
+        intent.putExtra("username", username);
+        intent.putExtra("email", email);
+        intent.putExtra("password", password);
+        intent.putExtra("date", date);
+        intent.putExtra("gender", gender);
 
         Pair[] pairs = new Pair[5];
         pairs[0] = new Pair<View, String>(findViewById(R.id.btnNext), "transition_next_btn");

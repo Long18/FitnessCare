@@ -34,8 +34,6 @@ import com.william.Fitness.R;
 
 public class Register extends AppCompatActivity {
     public static final String TAG = "TAG";
-    EditText mFullName, mEmail, mPassword, mPhone, mAddress, mBirth;
-    Button btnRegister;
     TextView btnLogin;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -45,7 +43,7 @@ public class Register extends AppCompatActivity {
     Button next;
     TextView title, login;
 
-    TextInputLayout fullName, username, email, password;
+    TextInputLayout mFullName, mUsername, mEmail, mPassword;
 
 
     @Override
@@ -62,120 +60,12 @@ public class Register extends AppCompatActivity {
         image = findViewById(R.id.image_view);
         title = findViewById(R.id.title_res);
 
-        mFullName = findViewById(R.id.txtName);
-        mEmail = findViewById(R.id.txtEmail);
-        mPassword = findViewById(R.id.txtPassword);
-        mPhone = findViewById(R.id.txtPhone);
-        btnLogin = findViewById(R.id.Loginbtn);
 
-        fullName = findViewById(R.id.textInputName);
-        username = findViewById(R.id.textInputUserName);
-        email = findViewById(R.id.textInputEmail);
-        password = findViewById(R.id.textInputPassword);
+        mFullName = findViewById(R.id.textInputName);
+        mUsername = findViewById(R.id.textInputUserName);
+        mEmail = findViewById(R.id.textInputEmail);
+        mPassword = findViewById(R.id.textInputPassword);
 
-        //fAuth = FirebaseAuth.getInstance();
-        //fStore = FirebaseFirestore.getInstance();
-
-
-
-
-        /*btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
-                String fName = mFullName.getText().toString().trim();
-                String phone = mPhone.getText().toString().trim();
-                String address = "";
-                String birthday = "";
-
-                //Condition register
-                if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email không được để trống!");
-                    return;
-                }
-                if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Mật khẩu không được để trống!");
-                    return;
-                }
-                if (password.length() < 6) {
-                    mPassword.setError("Mật khẩu phải trên 6 ký tự.");
-                }
-                if (mPhone.length() < 10) {
-                    mPassword.setError("Số điện thoại phải trên 10 số.");
-                }
-
-
-                //Condition firebase register
-               *//* fAuth.createUserWithEmailAndPassword(email,password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(RegisterActivity.this,
-                                            "Đăng ký thành công.",Toast.LENGTH_SHORT).show();
-
-                                    //Add user to database
-                                    userID = fAuth.getCurrentUser().getUid();
-                                    DocumentReference documentReference = fStore.collection("Users").document(userID);
-                                    Map<String,Object> user = new HashMap<>();
-                                    user.put("fName", mFullName);
-                                    user.put("phone", phone);
-                                    user.put("email", email);
-                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d(TAG, "Add user Success, ID user is: " + userID);
-                                        }
-                                    });
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                }else{
-                                    Toast.makeText(RegisterActivity.this, "Error!!" +
-                                            task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-
-
-                fAuth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Register.this, e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });*//*
-
-
-                reference = FirebaseDatabase.getInstance().getReference().child("Account");
-                //get all the values
-
-                User user = new User(email, fName, phone, password,address,birthday);
-                reference.child(phone).setValue(user);
-
-
-                fAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        finish();
-                    }
-
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
-        });*/
 
     }
 
@@ -196,11 +86,22 @@ public class Register extends AppCompatActivity {
 
     public void callNextSignupScreen(View view) {
 
-        if(!validateFullName() | !validateUsername() | !validateEmail() | !validatePassword()){
+        if (!validateFullName() | !validateUsername() | !validateEmail() | !validatePassword()) {
             return;
         }
 
+        String fullName = mFullName.getEditText().getText().toString().trim();
+        String username = mUsername.getEditText().getText().toString().trim();
+        String email = mEmail.getEditText().getText().toString().trim();
+        String password = mPassword.getEditText().getText().toString().trim();
+
+
         Intent intent = new Intent(getApplicationContext(), Register_part_two.class);
+
+        intent.putExtra("fullName", fullName);
+        intent.putExtra("username", username);
+        intent.putExtra("email", email);
+        intent.putExtra("password", password);
 
         Pair[] pairs = new Pair[5];
         pairs[0] = new Pair<View, String>(findViewById(R.id.btnNext), "transition_next_btn");
@@ -209,8 +110,10 @@ public class Register extends AppCompatActivity {
         pairs[3] = new Pair<View, String>(findViewById(R.id.btn_arrow_back_register), "transition_back_btn");
         pairs[4] = new Pair<View, String>(findViewById(R.id.Loginbtn), "transition_login_btn");
 
+
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Register.this, pairs);
         startActivity(intent, options.toBundle());
+
 
 
         /*startActivity(intent);
@@ -218,28 +121,28 @@ public class Register extends AppCompatActivity {
     }
 
     private boolean validateFullName() {
-        String val = fullName.getEditText().getText().toString().trim();
+        String val = mFullName.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
-            fullName.setError("Họ và tên không được để trống");
+            mFullName.setError("Họ và tên không được để trống");
             return false;
         } else {
-            fullName.setError(null);
-            fullName.setErrorEnabled(false);
+            mFullName.setError(null);
+            mFullName.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validateUsername() {
-        String val = username.getEditText().getText().toString().trim();
+        String val = mUsername.getEditText().getText().toString().trim();
         String checkspaces = "\\A\\w{1,20}\\z";
         //Giới hạn kí tự/ khoảng trắng từ 1-20
 
         if (val.isEmpty()) {
-            username.setError("Username không được để trống");
+            mUsername.setError("Username không được để trống");
             return false;
         } else if (val.length() > 20) {
-            username.setError("Username quá dài");
+            mUsername.setError("Username quá dài");
             return false;
         }
         /*else if (val.matches(checkspaces)) {
@@ -247,34 +150,34 @@ public class Register extends AppCompatActivity {
             return false;
         }*/
         else {
-            username.setError(null);
-            username.setErrorEnabled(false);
+            mUsername.setError(null);
+            mUsername.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validateEmail() {
-        String val = email.getEditText().getText().toString().trim();
+        String val = mEmail.getEditText().getText().toString().trim();
         String checkEmail = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
         //Giới hạn kí tự dành cho email
 
         if (val.isEmpty()) {
-            email.setError("Email không được để trống");
+            mEmail.setError("Email không được để trống");
             return false;
         }
         /*else if (val.matches(checkEmail)) {
-            email.setError("Email không được có khoảng trắng");
+            mEmail.setError("Email không được có khoảng trắng");
             return false;
         } */
         else {
-            email.setError(null);
-            email.setErrorEnabled(false);
+            mEmail.setError(null);
+            mEmail.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validatePassword() {
-        String val = password.getEditText().getText().toString().trim();
+        String val = mPassword.getEditText().getText().toString().trim();
         String checkPassword = "^" +
                 //"(?=.*[0-9])" +         //Phải có ít nhất 1 số
                 //"(?=.*[a-z])" +         //Phải có ít nhất 1 từ viết thường
@@ -286,16 +189,16 @@ public class Register extends AppCompatActivity {
                 "$";
 
         if (val.isEmpty()) {
-            password.setError("Mật khẩu không được để trống");
+            mPassword.setError("Mật khẩu không được để trống");
             return false;
         }
         /*else if (!val.matches(checkPassword)) {
-            password.setError("Mật khẩu phải có ít nhất 6 kí tự!");
+            mPassword.setError("Mật khẩu phải có ít nhất 6 kí tự!");
             return false;
         }*/
         else {
-            password.setError(null);
-            password.setErrorEnabled(false);
+            mPassword.setError(null);
+            mPassword.setErrorEnabled(false);
             return true;
         }
     }

@@ -96,11 +96,12 @@
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         app:startIconDrawable="@drawable/ic_phone_res">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:fontFamily="@font/brandon_grotesque_regular_italic"
                             android:id="@+id/txtPhone"
                             style="@style/modifiedEditTextlogin"
                             android:hint="Mobile Number"
+                            android:textSize="18sp"
                             android:inputType="phone"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>

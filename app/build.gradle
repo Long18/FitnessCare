@@ -36,11 +36,11 @@ dependencies {
 
     //Database
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
-    implementation 'com.google.firebase:firebase-auth:20.0.4'
-    implementation 'com.google.firebase:firebase-firestore:22.1.2'
-    implementation 'com.google.firebase:firebase-database:19.7.0'
-    implementation 'com.google.firebase:firebase-bom:27.1.0'
     implementation 'androidx.browser:browser:1.2.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.4'
+    implementation 'com.google.firebase:firebase-database:19.7.0'
+    implementation 'com.google.firebase:firebase-firestore:22.1.2'
+    implementation 'com.google.firebase:firebase-storage:19.2.2'
 
 
     testImplementation 'junit:junit:4.13.2'
@@ -63,5 +63,3 @@ dependencies {
 
 
 }
-
-apply plugin: 'com.google.gms.google-services'

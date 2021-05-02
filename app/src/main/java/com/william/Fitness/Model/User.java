@@ -2,29 +2,38 @@ package com.william.Fitness.Model;
 
 public class User {
 
-    public User( String email,String name, String phone, String password, String address, String birthday) {
+    private String fullname;
+    private String username;
+    private String email;
+    private String phoneNo;
+    private String password;
+    private String date;
+    private String gender;
+
+    public User(String fullname, String username, String email, String phoneNo, String password, String date, String gender) {
+        this.fullname = fullname;
+        this.username = username;
         this.email = email;
-        this.name = name;
-        this.phone = phone;
+        this.phoneNo = phoneNo;
         this.password = password;
-        this.address = address;
-        this.birthday = birthday;
+        this.date = date;
+        this.gender = gender;
     }
 
-    public String getName() {
-        return name;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -35,6 +44,14 @@ public class User {
         this.email = email;
     }
 
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -43,27 +60,19 @@ public class User {
         this.password = password;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDate() {
+        return date;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getGender() {
+        return gender;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
-
-    private String email;
-    private String name;
-    private String phone;
-    private String password;
-    private String address;
-    private String birthday;
-
 }
