@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +30,13 @@ import java.util.concurrent.TimeUnit;
 
 public class Verify_OTP extends AppCompatActivity {
     PinView pinView;
-    String codeSystem;
     String fullName, phoneNo, email, username, password, date, gender, ToDO;
     TextView otpDescriptionText;
+    Button btnSendCode;
+    String codeSystem;
+
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,11 @@ public class Verify_OTP extends AppCompatActivity {
         //Hooks
         pinView = findViewById(R.id.pin_view);
         otpDescriptionText = findViewById(R.id.otp_desc);
+        btnSendCode = findViewById(R.id.btnSendCode);
+
+        FirebaseApp.initializeApp(this);
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Users");
 
 
         fullName = getIntent().getStringExtra("fullName");
@@ -53,14 +63,37 @@ public class Verify_OTP extends AppCompatActivity {
 
         otpDescriptionText.setText("Nhập mã số bạn vừa nhận được qua số điện thoại: " + phoneNo);
 
-        //sendCode(phoneNo);
-        storeNewUserDate();
+        sendCode(phoneNo);
+        inputUser();
+
+        btnSendCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(Verify_OTP.this,fullName + "\n"+
+                        email +"\n"+
+                        username +"\n"+
+                        password +"\n"+
+                        date +"\n"+
+                        gender +"\n"+
+                        phoneNo +"\n"+
+                        ToDO , Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
+    public void inputUser(){
+
+        User addNewUser = new User(fullName, username, email, phoneNo, password, date, gender);
+
+        reference.child(phoneNo).setValue(addNewUser);
     }
 
 
     private void sendCode(String phoneNumber) {
-        FirebaseApp.initializeApp(Verify_OTP.this);
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber,60,TimeUnit.SECONDS,Verify_OTP.this,mCallbacks);
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber,60, TimeUnit.SECONDS,this,mCallbacks);
     }
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
@@ -75,7 +108,6 @@ public class Verify_OTP extends AppCompatActivity {
                 public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                     String code = phoneAuthCredential.getSmsCode();
                     if (code != null) {
-                        pinView.setText(code);
                         verifyCode(code);
                     }
                 }
@@ -86,23 +118,12 @@ public class Verify_OTP extends AppCompatActivity {
                 }
             };
 
-    private void verifyCode(String code) {
-        /*PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeSystem, code);
-        signInWithPhoneAuthCredential(credential);*/
-
-        Toast.makeText(Verify_OTP.this,fullName + "\n"+
-                email +"\n"+
-                username +"\n"+
-                password +"\n"+
-                date +"\n"+
-                gender +"\n"+
-                phoneNo +"\n"+
-                ToDO , Toast.LENGTH_SHORT).show();
-
+    public void verifyCode(String code) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeSystem, code);
+        signInWithPhoneAuthCredential(credential);
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        FirebaseApp.initializeApp(Verify_OTP.this);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -110,7 +131,6 @@ public class Verify_OTP extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            storeNewUserDate();
                             Toast.makeText(Verify_OTP.this, "Xác thực thành công!", Toast.LENGTH_SHORT).show();
 
                         } else {
@@ -121,20 +141,6 @@ public class Verify_OTP extends AppCompatActivity {
                     }
                 });
     }
-
-    private void storeNewUserDate() {
-
-        FirebaseApp.initializeApp(Verify_OTP.this);
-        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-        DatabaseReference reference = rootNode.getReference("Users");
-
-        User addNewUser = new User(fullName, username, email, phoneNo, password, date, gender);
-
-        reference.child(phoneNo).setValue(addNewUser);
-
-
-    }
-
 
     public void callNextScreen(View view) {
         String code = pinView.getText().toString();

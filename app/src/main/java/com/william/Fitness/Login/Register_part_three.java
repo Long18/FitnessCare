@@ -1,5 +1,6 @@
 package com.william.Fitness.Login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
@@ -12,14 +13,35 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
+import com.william.Fitness.Model.User;
 import com.william.Fitness.R;
+
+import java.util.concurrent.TimeUnit;
 
 public class Register_part_three extends AppCompatActivity {
     TextInputLayout phoneNumber;
     CountryCodePicker countryCodePicker;
+
+
+    String codeSystem;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +52,10 @@ public class Register_part_three extends AppCompatActivity {
         //Hooks
         phoneNumber = findViewById(R.id.textInputMobile);
         countryCodePicker = findViewById(R.id.phone_numer);
+
+
+
+
 
     }
 
@@ -61,6 +87,15 @@ public class Register_part_three extends AppCompatActivity {
         final String phoneNo = "+" + countryCodePicker.getFullNumber() + getUserPhoneNumber;
 
 
+        Toast.makeText(this,fullName + "\n"+
+                email +"\n"+
+                username +"\n"+
+                password +"\n"+
+                date +"\n"+
+                gender +"\n"+
+                phoneNo +"\n"
+                 , Toast.LENGTH_SHORT).show();
+
         Intent intent = new Intent(getApplicationContext(), Verify_OTP.class);
 
         intent.putExtra("fullName", fullName);
@@ -75,6 +110,9 @@ public class Register_part_three extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.stay);
     }
+
+
+
 
     private boolean validatePhoneNumber() {
         String val = phoneNumber.getEditText().getText().toString().trim();
@@ -93,4 +131,5 @@ public class Register_part_three extends AppCompatActivity {
             return true;
         }
     }
+
 }

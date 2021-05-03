@@ -76,11 +76,11 @@
             app:itemRadius="8dp"/>
 
         <Button
+            android:id="@+id/btnSendCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Verify Code"
-            android:onClick="callNextScreen"
             android:textColor="@color/black" />
 
     </LinearLayout>

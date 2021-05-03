@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -67,7 +68,9 @@ public class Register extends AppCompatActivity {
         mPassword = findViewById(R.id.textInputPassword);
 
 
+
     }
+
 
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -89,6 +92,7 @@ public class Register extends AppCompatActivity {
         if (!validateFullName() | !validateUsername() | !validateEmail() | !validatePassword()) {
             return;
         }
+
 
         String fullName = mFullName.getEditText().getText().toString().trim();
         String username = mUsername.getEditText().getText().toString().trim();

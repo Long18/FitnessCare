@@ -2,17 +2,17 @@ package com.william.Fitness.Model;
 
 public class User {
 
-    private String fullname;
-    private String username;
+    private String fullName;
+    private String userName;
     private String email;
     private String phoneNo;
     private String password;
     private String date;
     private String gender;
 
-    public User(String fullname, String username, String email, String phoneNo, String password, String date, String gender) {
-        this.fullname = fullname;
-        this.username = username;
+    public User(String fullName, String userName, String email, String phoneNo, String password, String date, String gender) {
+        this.fullName = fullName;
+        this.userName = userName;
         this.email = email;
         this.phoneNo = phoneNo;
         this.password = password;
@@ -20,20 +20,20 @@ public class User {
         this.gender = gender;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
