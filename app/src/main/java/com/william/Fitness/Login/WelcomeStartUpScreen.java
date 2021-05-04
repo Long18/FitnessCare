@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.william.Fitness.Database.CheckInternet;
 import com.william.Fitness.R;
 
 public class WelcomeStartUpScreen extends AppCompatActivity {
@@ -72,7 +73,8 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
 
     public void callLoginScreen(View view) {
 
-        if (!isNotConnected(this)){
+        CheckInternet checkInternet = new CheckInternet();
+        if (!checkInternet.isNotConnected(this)){
             showDialog();
             return;
         }
@@ -87,22 +89,12 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
 
     }
 
-    private boolean isNotConnected(WelcomeStartUpScreen welcomeStartUpScreen) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) welcomeStartUpScreen.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        NetworkInfo dataConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
-        if ((wifiConn!=null && wifiConn.isConnected() || dataConn != null && dataConn.isConnected())) {
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     public void callSigupScreen(View view){
 
-        if (!isNotConnected(this)){
+        CheckInternet checkInternet = new CheckInternet();
+        if (!checkInternet.isNotConnected(this)){
             showDialog();
             return;
         }

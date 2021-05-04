@@ -120,6 +120,13 @@ public class Verify_OTP extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
+                            if (ToDO.equals("updateData")){
+                                updateUser();
+                            }else {
+
+                                inputUser();
+                            }
+
                             Toast.makeText(Verify_OTP.this, "Xác thực thành công!", Toast.LENGTH_SHORT).show();
 
                         } else {
@@ -129,6 +136,13 @@ public class Verify_OTP extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void updateUser() {
+        Intent intent = new Intent(getApplicationContext(),NewPassword.class);
+        intent.putExtra("phoneNo",phoneNo);
+        startActivity(intent);
+        finish();
     }
 
     public void callNextScreen(View view) {

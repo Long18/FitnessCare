@@ -50,7 +50,7 @@
     <string name="otp_description">Nhập mã số bạn vừa nhận được</string>
 
     <!-- Forget Password Screen -->
-    <string name="forget_password_detail">Nhập email của bạn vào đây</string>
+    <string name="forget_password_detail">Nhập số điện thoại của bạn vào đây</string>
 
 
     <!-- Selection Screen -->

@@ -145,6 +145,10 @@ public class Login extends AppCompatActivity {
         overridePendingTransition(R.anim.top_to_bottom,R.anim.stay);
     }
 
+    public void ResetPass(View view){
+        startActivity(new Intent(Login.this, Selection.class));
+    }
+
 
    
 }
