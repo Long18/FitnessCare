@@ -36,11 +36,9 @@ public class Register_part_two extends AppCompatActivity {
         setContentView(R.layout.activity_register_part_two);
 
         //Hooks
-        btnBack = findViewById(R.id.btn_arrow_back_register);
         next = findViewById(R.id.btnNext);
         login = findViewById(R.id.Loginbtn);
         titleText = findViewById(R.id.title_res);
-        //slideText = findViewById(R.id.slider_desc);
         radioGroup = findViewById(R.id.radio_group);
         datePicker = findViewById(R.id.age_picker);
 
@@ -78,12 +76,11 @@ public class Register_part_two extends AppCompatActivity {
         intent.putExtra("date", date);
         intent.putExtra("gender", gender);
 
-        Pair[] pairs = new Pair[5];
+        Pair[] pairs = new Pair[4];
         pairs[0] = new Pair<View, String>(findViewById(R.id.btnNext), "transition_next_btn");
         pairs[1] = new Pair<View, String>(findViewById(R.id.image_view), "transition_image");
         pairs[2] = new Pair<View, String>(findViewById(R.id.title_res), "transition_res_title");
-        pairs[3] = new Pair<View, String>(findViewById(R.id.btn_arrow_back_register), "transition_back_btn");
-        pairs[4] = new Pair<View, String>(findViewById(R.id.Loginbtn), "transition_login_btn");
+        pairs[3] = new Pair<View, String>(findViewById(R.id.Loginbtn), "transition_login_btn");
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Register_part_two.this, pairs);
         startActivity(intent, options.toBundle());
