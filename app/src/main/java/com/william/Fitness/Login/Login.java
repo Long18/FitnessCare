@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -64,6 +68,8 @@ public class Login extends AppCompatActivity {
     }
 
     public void userLogin(){
+
+
         if(!validateFields()){
             return;
         }
@@ -111,6 +117,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
 
     private boolean validateFields() {
 
