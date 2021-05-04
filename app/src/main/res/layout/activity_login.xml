@@ -54,6 +54,7 @@
                 android:paddingTop="10dp">
 
                 <com.hbb20.CountryCodePicker
+                    app:ccpDialog_searchEditTextTint="@color/colorPrimary"
                     android:id="@+id/phone_numer_log"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

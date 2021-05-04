@@ -51,7 +51,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#FFFFFF"
+                android:background="@drawable/card_categories_1"
                 android:layout_margin="20dp">
 
                 <TextView
@@ -94,7 +94,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#CDDC39"
+                android:background="@drawable/card_categories_2"
                 >
 
                 <ImageView
@@ -134,7 +134,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#FF9800"
+                android:background="@drawable/card_categories_3"
                 android:layout_margin="20dp">
 
                 <TextView
@@ -176,7 +176,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#00BCD4"
+                android:background="@drawable/card_categories_4"
                 >
 
                 <ImageView
@@ -216,7 +216,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#6A42D8"
+                android:background="@drawable/card_categories_5"
                 android:layout_margin="20dp">
 
                 <TextView
@@ -255,7 +255,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#FFFFFF"
+                android:background="@drawable/card_categories_1"
                 android:layout_margin="20dp">
 
                 <TextView
@@ -298,7 +298,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#CDDC39"
+                android:background="@drawable/card_categories_2"
                 >
 
                 <ImageView
@@ -338,7 +338,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#FF9800"
+                android:background="@drawable/card_categories_3"
                 android:layout_margin="20dp">
 
                 <TextView
@@ -380,7 +380,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#00BCD4"
+                android:background="@drawable/card_categories_4"
                 >
 
                 <ImageView
@@ -420,7 +420,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#6A42D8"
+                android:background="@drawable/card_categories_5"
                 android:layout_margin="20dp">
 
                 <TextView

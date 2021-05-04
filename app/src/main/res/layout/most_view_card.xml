@@ -15,27 +15,29 @@
             android:id="@+id/ms_img"
             android:layout_width="100dp"
             android:layout_height="150dp"
-            android:src="@drawable/ic_mobile"/>
+            android:src="@drawable/ic_arms"/>
 
         <TextView
             android:id="@+id/ms_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đây là tiêu đề"
+            android:text="Cơ Tay"
             android:layout_toRightOf="@id/ms_img"
             android:layout_marginLeft="10dp"
             android:textSize="20dp"
             android:fontFamily="@font/brandon_grotesque_black"/>
 
         <RatingBar
+
             android:id="@+id/ms_rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_below="@id/ms_title"
-            android:layout_toRightOf="@id/ms_img"
             android:layout_marginLeft="10dp"
-            android:rating="4.5"/>
+            android:layout_toRightOf="@id/ms_img"
+            android:progressTint="@color/colorPrimary"
+            android:rating="4.5" />
 
         <TextView
             android:id="@+id/ms_desc"

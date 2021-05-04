@@ -18,7 +18,7 @@
             android:id="@+id/categories_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đây là cái tiêu đề"
+            android:text="Cơ Tay"
             android:textSize="20sp"
             android:fontFamily="@font/brandon_grotesque_black"/>
 
