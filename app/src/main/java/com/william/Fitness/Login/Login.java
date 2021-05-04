@@ -102,6 +102,8 @@ public class Login extends AppCompatActivity {
                         startActivity(new Intent(Login.this, MainActivity.class));
                         overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
 
+                        Toast.makeText(Login.this,"Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+
 
                     }else {
                         Toast.makeText(Login.this,"Sai mật khẩu", Toast.LENGTH_SHORT).show();

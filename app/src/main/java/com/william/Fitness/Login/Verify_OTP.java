@@ -34,7 +34,6 @@ public class Verify_OTP extends AppCompatActivity {
     PinView pinView;
     String fullName, phoneNo, email, username, password, date, gender, ToDO;
     TextView otpDescriptionText;
-    Button btnSendCode;
     String codeSystem;
 
     FirebaseDatabase rootNode;
@@ -121,16 +120,18 @@ public class Verify_OTP extends AppCompatActivity {
 
                             if (ToDO.equals("updateData")){
                                 updateUser();
-
-
+                                Toast.makeText(Verify_OTP.this, "Xác nhận lại thành công!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), ForgetSuccess.class));
+                                overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
+                                finish();
                             }else {
-
                                 inputUser();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
+                                finish();
                             }
-                            
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
-                            finish();
+
+
                             Toast.makeText(Verify_OTP.this, "Xác thực thành công!", Toast.LENGTH_SHORT).show();
 
                         } else {
