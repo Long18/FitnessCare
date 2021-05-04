@@ -65,7 +65,7 @@
                 android:paddingTop="10dp">
 
                 <com.hbb20.CountryCodePicker
-                    android:id="@+id/phone_numer"
+                    android:id="@+id/phone_numer_log"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:ccp_autoDetectCountry="true"
@@ -75,11 +75,11 @@
                     app:ccp_autoDetectLanguage="true"
                     android:background="@drawable/black_border"
                     android:padding="5dp"/>
-                
+
             </RelativeLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputEmail"
+                android:id="@+id/textInputPhone"
                 style="@style/parentlogin"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 app:startIconDrawable="@drawable/ic_user">

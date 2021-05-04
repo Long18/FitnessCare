@@ -3,6 +3,7 @@ package com.william.Fitness.Login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.william.Fitness.MainActivity;
 import com.william.Fitness.Model.User;
 import com.william.Fitness.R;
 
@@ -130,9 +132,13 @@ public class Verify_OTP extends AppCompatActivity {
     }
 
     public void callNextScreen(View view) {
-        String code = pinView.getText().toString();
+
+        /*String code = pinView.getText().toString();
         if (code.isEmpty()) {
             verifyCode(code);
-        }
+        }*/
+
+        startActivity(new Intent(this, MainActivity.class));
+        overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
     }
 }
