@@ -16,9 +16,8 @@
         <ImageView
             android:id="@+id/featured_image"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:src="@drawable/ic_register_hero"
-            android:scaleType="centerCrop"/>
+            android:layout_height="150dp"
+            android:src="@drawable/ic_legs"/>
 
         <TextView
             android:id="@+id/featured_title"
@@ -41,7 +40,7 @@
             android:id="@+id/feartured_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chỗ này để viết cái gì đó chi tiết liên quan tới cái này"/>
+            android:text="Tập mỗi ngày từ 3-4 lần, mỗi lần 8-12 reps"/>
 
     </LinearLayout>
 

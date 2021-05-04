@@ -15,8 +15,7 @@
             android:id="@+id/ms_img"
             android:layout_width="100dp"
             android:layout_height="150dp"
-            android:src="@drawable/ic_mobile"
-            android:scaleType="centerCrop"/>
+            android:src="@drawable/ic_mobile"/>
 
         <TextView
             android:id="@+id/ms_title"

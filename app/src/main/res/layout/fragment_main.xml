@@ -123,8 +123,8 @@
                             android:elevation="8dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_chest" />
                         </RelativeLayout>
@@ -151,8 +151,8 @@
                             android:elevation="8dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_arms" />
                         </RelativeLayout>
@@ -179,8 +179,8 @@
                             android:elevation="8dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_back" />
                         </RelativeLayout>
@@ -207,8 +207,8 @@
                             android:elevation="8dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="60dp"
+                                android:layout_height="50dp"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_legs" />
                         </RelativeLayout>
@@ -235,8 +235,8 @@
                             android:elevation="8dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="60dp"
+                                android:layout_height="50dp"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_but" />
                         </RelativeLayout>
@@ -257,22 +257,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:background="#EC598B">
+                    android:background="@drawable/radius_shadow">
 
                     <LinearLayout
                         android:id="@+id/health_background"
                         android:layout_width="170dp"
                         android:layout_height="280dp"
                         android:layout_margin="10dp"
-                        android:background="#E91E63"
+                        android:background="@drawable/radius"
                         android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="20dp"
                             android:layout_marginTop="50dp"
+                            android:fontFamily="@font/brandon_grotesque_black"
                             android:text="Sức khoẻ"
                             android:textAllCaps="true"
                             android:textColor="@color/colorAccent"
@@ -282,7 +283,22 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:text="Luyện tập mỗi ngày, thử thách không ngại khó" />
+                            android:text="- Luyện tập mỗi ngày, thử thách không ngại khó" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:text="- Sức khỏe không phải là thứ chúng ta có thể mua. Tuy nhiên, nó có thể là một tài khoản tiết kiệm cực kỳ giá trị." />
+
+                        <TextView
+                            android:paddingTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="- Xem thêm các bài tập ở đây..." />
+
 
                     </LinearLayout>
 
