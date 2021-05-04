@@ -8,11 +8,14 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -41,6 +44,8 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     NavigationView navigationView;
 
 
+
+
     static final float END_SCALE = 0.7f;
 
     @Nullable
@@ -59,6 +64,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         drawerLayout = (DrawerLayout) view.findViewById(R.id.draw_layout);
         navigationView = (NavigationView) view.findViewById(R.id.ngv_view);
+
 
 
         navigationDraw();

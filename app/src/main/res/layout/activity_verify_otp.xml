@@ -71,6 +71,8 @@
             app:lineColor="@color/colorAccent"
             android:itemBackground="@color/colorPrimary"
             android:inputType="number"
+            style="@style/PinWidget.PinView"
+            app:viewType="rectangle"
             android:cursorVisible="true"
             app:cursorColor="@color/black"
             app:hideLineWhenFilled="true"

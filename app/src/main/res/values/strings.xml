@@ -18,6 +18,17 @@
     <string name="third_slide_desc">Những người nghĩ rằng họ không có thời gian để tập thể dục thì sớm muộn gì, họ cũng phải dành thời gian cho bệnh tật </string>
     <string name="fourth_slide_desc">Tham gia cùng chúng tôi </string>
 
+    <!-- Searching Tab -->
+
+    <string-array name="type_muscle_array">
+        <item>Cơ Ngực</item>
+        <item>Cơ Lưng</item>
+        <item>Cơ Bụng</item>
+        <item>Cơ Tay</item>
+        <item>Cơ Đùi</item>
+        <item>Cơ Mông</item>
+    </string-array>
+
     <!-- Button -->
     <string name="btnSkip">Skip</string>
     <string name="btnNext">Next</string>
@@ -58,5 +69,7 @@
     <string name="selection_detail">Bạn hãy lựa chọn phương thức để lấy lại mật khẩu.</string>
     <string name="selection_mobile">Sử dụng số điện thoại:</string>
     <string name="selection_email">Sử dụng địa chỉ email:</string>
+
+
 
 </resources>

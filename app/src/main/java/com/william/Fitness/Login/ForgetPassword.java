@@ -39,14 +39,14 @@ public class ForgetPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                forgetNext();
+                forgetNext(v);
 
             }
         });
 
     }
 
-    public void forgetNext(){
+    public void forgetNext(View view){
         if (!validateFields()){
             return;
         }

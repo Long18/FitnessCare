@@ -66,8 +66,7 @@ public class Verify_OTP extends AppCompatActivity {
 
         otpDescriptionText.setText("Nhập mã số bạn vừa nhận được qua số điện thoại: " + phoneNo);
 
-        inputUser();
-        //sendCode(phoneNo);
+        sendCode(phoneNo);
 
 
     }
@@ -147,13 +146,16 @@ public class Verify_OTP extends AppCompatActivity {
 
     public void callNextScreen(View view) {
 
-        /*String code = pinView.getText().toString();
+        String code = pinView.getText().toString();
         if (code.isEmpty()) {
             verifyCode(code);
-        }*/
 
-        startActivity(new Intent(this, MainActivity.class));
-        overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
+            startActivity(new Intent(this, MainActivity.class));
+            overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
+        }else {
+            Toast.makeText(Verify_OTP.this, "Không đúng, hãy thử lại!", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void backMainActivity(View view) {
