@@ -45,7 +45,8 @@ public class Verify_OTP extends AppCompatActivity {
         //Hooks
         pinView = findViewById(R.id.pin_view);
         otpDescriptionText = findViewById(R.id.otp_desc);
-        btnSendCode = findViewById(R.id.btnSendCode);
+
+        //btnSendCode = findViewById(R.id.btnSendCode);
 
         FirebaseApp.initializeApp(this);
         rootNode = FirebaseDatabase.getInstance();
@@ -63,24 +64,10 @@ public class Verify_OTP extends AppCompatActivity {
 
         otpDescriptionText.setText("Nhập mã số bạn vừa nhận được qua số điện thoại: " + phoneNo);
 
-        sendCode(phoneNo);
         inputUser();
+        //sendCode(phoneNo);
 
-        btnSendCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Toast.makeText(Verify_OTP.this,fullName + "\n"+
-                        email +"\n"+
-                        username +"\n"+
-                        password +"\n"+
-                        date +"\n"+
-                        gender +"\n"+
-                        phoneNo +"\n"+
-                        ToDO , Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
 
 
