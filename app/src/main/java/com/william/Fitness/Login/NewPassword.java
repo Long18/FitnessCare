@@ -95,4 +95,8 @@ public class NewPassword extends AppCompatActivity {
             return true;
         }
     }
+
+    public void backActivity(View view) {
+        onBackPressed();
+    }
 }

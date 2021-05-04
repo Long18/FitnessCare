@@ -86,16 +86,6 @@ public class Register_part_three extends AppCompatActivity {
 
         final String phoneNo = "+" + countryCodePicker.getFullNumber() + getUserPhoneNumber;
 
-
-        Toast.makeText(this,fullName + "\n"+
-                email +"\n"+
-                username +"\n"+
-                password +"\n"+
-                date +"\n"+
-                gender +"\n"+
-                phoneNo +"\n"
-                 , Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(getApplicationContext(), Verify_OTP.class);
 
         intent.putExtra("fullName", fullName);
@@ -130,6 +120,10 @@ public class Register_part_three extends AppCompatActivity {
             phoneNumber.setErrorEnabled(false);
             return true;
         }
+    }
+
+    public void backActivity3(View view){
+        onBackPressed();
     }
 
 }

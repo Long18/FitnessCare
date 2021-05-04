@@ -155,4 +155,8 @@ public class Verify_OTP extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
         overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
     }
+
+    public void backMainActivity(View view) {
+        startActivity(new Intent(this, MainActivity.class));
+    }
 }

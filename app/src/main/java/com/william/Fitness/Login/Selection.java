@@ -50,6 +50,6 @@ public class Selection extends AppCompatActivity {
     }
 
     public void phoneSelection(){
-        startActivity(new Intent(Selection.this, Selection.class));
+        startActivity(new Intent(Selection.this, ForgetPassword.class));
     }
 }

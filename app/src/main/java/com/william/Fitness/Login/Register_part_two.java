@@ -119,4 +119,10 @@ public class Register_part_two extends AppCompatActivity {
         } else
             return true;
     }
+
+
+
+    public void backActivity2(View view) {
+        onBackPressed();
+    }
 }

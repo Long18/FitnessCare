@@ -15,6 +15,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:onClick="backActivity3"
             android:id="@+id/btn_arrow_back_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
