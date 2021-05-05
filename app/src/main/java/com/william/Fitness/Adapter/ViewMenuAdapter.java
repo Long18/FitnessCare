@@ -9,7 +9,7 @@ import com.william.Fitness.Calendar;
 import com.william.Fitness.Daily_Training;
 import com.william.Fitness.Home;
 import com.william.Fitness.ListExercise;
-import com.william.Fitness.ProfileUser;
+import com.william.Fitness.ProfileActivity;
 
 public class ViewMenuAdapter extends FragmentPagerAdapter {
     private static final int NUM_ITEMS = 5;
@@ -30,7 +30,7 @@ public class ViewMenuAdapter extends FragmentPagerAdapter {
             case 3:
                 return new ListExercise();
             case 4:
-                return new ProfileUser();
+                return new ProfileActivity();
         }
         return null;
     }

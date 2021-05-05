@@ -1,53 +1,25 @@
 package com.william.Fitness;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class ProfileActivity extends AppCompatActivity {
-    TextView btnHome, txtName, txtNumber,txtAddress,txtBirth, txtEmail, txtNameUser,txtEmailUser;
-    String name, number,email,address,birth;
+public class ProfileActivity extends Fragment {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // btnHome = findViewById(R.id.btnHome);
-        txtName = findViewById(R.id.txtName);
-        txtNumber = findViewById(R.id.txtPhone);
-        txtAddress = findViewById(R.id.txtAddress);
-        txtBirth = findViewById(R.id.txtBirth);
-        txtEmail = findViewById(R.id.txtEmail);
-        txtNameUser = findViewById(R.id.txtNameUser);
-        txtEmailUser = findViewById(R.id.txtEmailUser);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_profile, container, false);
 
-        setSupportActionBar(toolbar);
-
-
+        return view;
     }
-    private void showAllUserData() {
-        Intent intent = getIntent();
-
-        name = intent.getStringExtra("name");
-        number = intent.getStringExtra("phone");
-        email = intent.getStringExtra("email");
-        address = intent.getStringExtra("address");
-        birth = intent.getStringExtra("birthday");
-
-        txtName.setText(MainActivity.name);
-        txtNumber.setText(MainActivity.number);
-        txtEmail.setText(MainActivity.email);
-        txtAddress.setText(MainActivity.address);
-        txtBirth.setText(MainActivity.birth);
-
-        txtNameUser.setText(MainActivity.name);
-        txtEmailUser.setText(MainActivity.email);
-
-    }
-
-
 }

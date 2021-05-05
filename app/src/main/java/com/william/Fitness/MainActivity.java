@@ -17,7 +17,10 @@ import android.widget.RelativeLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.william.Fitness.Adapter.ViewMenuAdapter;
+import com.william.Fitness.Database.SessionManager;
 import com.william.Fitness.Login.WelcomeStartUpScreen;
+
+import java.util.HashMap;
 
 public class  MainActivity extends AppCompatActivity {
 
@@ -34,6 +37,11 @@ public class  MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        SessionManager sessionManager = new SessionManager(MainActivity.this,SessionManager.SESSION_USER);
+        HashMap<String,String> userInfomation =  sessionManager.getInfomationUser();
+
+
         btnlogout = findViewById(R.id.btnLogout);
         //btnProfile = findViewById(R.id.);
         viewPager = findViewById(R.id.viewpaper);

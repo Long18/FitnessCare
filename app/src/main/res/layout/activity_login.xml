@@ -74,7 +74,7 @@
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 app:startIconDrawable="@drawable/ic_user">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtPhone"
                     android:textSize="21sp"
                     style="@style/modifiedEditTextlogin"
@@ -91,7 +91,7 @@
                 app:endIconMode="password_toggle"
                 app:startIconDrawable="@drawable/ic_lock">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtPassword"
                     android:textSize="21sp"
                     style="@style/modifiedEditTextlogin"
@@ -106,6 +106,7 @@
                 android:layout_height="match_parent">
 
                 <CheckBox
+                    android:id="@+id/ckb_remeber"
                     style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -136,6 +137,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:text="Login"
+                android:onClick="userLogin"
                 app:initialCornerAngle="27dp"
                 app:spinning_bar_color="#FFF"
                 app:spinning_bar_padding="6dp"
