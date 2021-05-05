@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar"
         tools:replace="label">
-        <activity android:name=".Login.ForgetSuccess"></activity>
+        <activity android:name=".SearchView"></activity>
+        <activity android:name=".Login.ForgetSuccess" />
         <activity android:name=".Login.NewPassword" />
         <activity android:name=".Login.Selection" />
         <activity android:name=".Login.ForgetPassword" />
@@ -40,14 +41,13 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity" />
 
-
-        <service android:name="com.google.firebase.components.ComponentDiscoveryService" >
+        <service android:name="com.google.firebase.components.ComponentDiscoveryService">
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
-                android:value="com.google.firebase.components.ComponentRegistrar"/>
+                android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
@@ -56,9 +56,8 @@
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
-                android:value="com.google.firebase.components.ComponentRegistrar"/>
+                android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
-
     </application>
 
 </manifest>

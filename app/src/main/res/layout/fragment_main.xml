@@ -5,8 +5,9 @@
     android:id="@+id/draw_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:openDrawer="start"
     >
-    //tools:openDrawer="start"
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/ngv_view"
         android:layout_width="wrap_content"
@@ -126,6 +127,7 @@
                             android:elevation="8dp">
 
                             <ImageView
+                                android:id="@+id/img_chest"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_centerInParent="true"
@@ -154,6 +156,7 @@
                             android:elevation="8dp">
 
                             <ImageView
+                                android:id="@+id/img_arms"
                                 android:layout_width="60dp"
                                 android:layout_height="60dp"
                                 android:layout_centerInParent="true"
@@ -182,6 +185,7 @@
                             android:elevation="8dp">
 
                             <ImageView
+                                android:id="@+id/img_back"
                                 android:layout_width="60dp"
                                 android:layout_height="60dp"
                                 android:layout_centerInParent="true"
@@ -210,6 +214,7 @@
                             android:elevation="8dp">
 
                             <ImageView
+                                android:id="@+id/img_legs"
                                 android:layout_width="60dp"
                                 android:layout_height="50dp"
                                 android:layout_centerInParent="true"
@@ -238,6 +243,7 @@
                             android:elevation="8dp">
 
                             <ImageView
+                                android:id="@+id/img_but"
                                 android:layout_width="60dp"
                                 android:layout_height="50dp"
                                 android:layout_centerInParent="true"

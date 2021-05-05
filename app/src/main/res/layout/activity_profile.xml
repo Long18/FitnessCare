@@ -64,7 +64,11 @@
                 android:layout_height="125dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@color/colorPrimary">
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:strokeWidth="10dp"
+                app:cardElevation="25dp"
+                app:strokeColor="@color/colorAccent"
+                app:cardCornerRadius="30dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -85,8 +89,8 @@
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/bungee"
                         android:includeFontPadding="false"
-                        android:text="ABC"
-                        android:textSize="20sp" />
+                        android:text="Achievement"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/name1"
@@ -95,7 +99,7 @@
                         android:layout_below="@id/name"
                         android:layout_centerHorizontal="true"
                         android:includeFontPadding="false"
-                        android:text="huhuhuhu"
+                        android:text="Your Achievement"
                         android:textSize="14sp" />
 
                 </RelativeLayout>
@@ -107,7 +111,11 @@
                 android:layout_height="125dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@color/colorPrimary">
+                app:strokeWidth="10dp"
+                app:strokeColor="@color/colorAccent"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="25dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -191,6 +199,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -208,6 +217,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -220,6 +230,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_phone_res"
                     android:drawablePadding="10dp"
+                    android:inputType="phone"
                     android:text="Here is your phone number" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -259,13 +270,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Password"
-                app:startIconDrawable="@drawable/ic_key"
+                app:boxBackgroundColor="@color/white"
                 app:endIconMode="password_toggle"
-                app:boxBackgroundColor="@color/white">
+                app:startIconDrawable="@drawable/ic_key">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_password"
@@ -277,6 +289,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/button_background_blue"

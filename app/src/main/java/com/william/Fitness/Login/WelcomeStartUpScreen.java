@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.william.Fitness.Database.CheckInternet;
@@ -27,11 +28,8 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
 
     ImageView btnBack, image;
     Button next, btnInf;
-    TextView title,login;
+    TextView title, login;
 
-
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +44,14 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
         title = findViewById(R.id.title_res);
 
 
-
-
     }
 
 
+    public void Logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+    }
 
-
-    public void showDialog(){
+    public void showDialog() {
         final Dialog noInternet = new Dialog(this, R.style.df_dialog);
         noInternet.setContentView(R.layout.dialog_no_internet);
         noInternet.findViewById(R.id.btnOpenInternet).setOnClickListener(new View.OnClickListener() {
@@ -65,7 +63,7 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
         noInternet.findViewById(R.id.btnCloseInternet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),WelcomeStartUpScreen.class));
+                startActivity(new Intent(getApplicationContext(), WelcomeStartUpScreen.class));
             }
         });
         noInternet.show();
@@ -74,7 +72,7 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
     public void callLoginScreen(View view) {
 
         CheckInternet checkInternet = new CheckInternet();
-        if (!checkInternet.isNotConnected(this)){
+        if (!checkInternet.isNotConnected(this)) {
             showDialog();
             return;
         }
@@ -84,23 +82,22 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
         Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(findViewById(R.id.login_wlc), "transition_login");
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(WelcomeStartUpScreen.this,pairs);
-        startActivity(intent,options.toBundle());
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(WelcomeStartUpScreen.this, pairs);
+        startActivity(intent, options.toBundle());
 
     }
 
 
-
-    public void callSigupScreen(View view){
+    public void callSigupScreen(View view) {
 
         CheckInternet checkInternet = new CheckInternet();
-        if (!checkInternet.isNotConnected(this)){
+        if (!checkInternet.isNotConnected(this)) {
             showDialog();
             return;
         }
 
 
-        Intent intent = new Intent(getApplicationContext(),Register.class);
+        Intent intent = new Intent(getApplicationContext(), Register.class);
         startActivity(intent);
     }
 }

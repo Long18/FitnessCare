@@ -1,9 +1,12 @@
 package com.william.Fitness;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +25,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.navigation.NavigationView;
 import com.william.Fitness.Adapter.HomeAdapter.CategoriesAdapter;
 import com.william.Fitness.Adapter.HomeAdapter.FeaturedAdapter;
 import com.william.Fitness.Adapter.HomeAdapter.FeaturedTutorial;
 import com.william.Fitness.Adapter.HomeAdapter.MostViewedAdapter;
+import com.william.Fitness.Login.Login;
 import com.william.Fitness.Login.WelcomeStartUpScreen;
 
 import java.util.ArrayList;
@@ -36,14 +42,12 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     RecyclerView featuredRecycler, mostViewedRecycler, categoriesRecycler;
     RecyclerView.Adapter adapter;
     private GradientDrawable gradient1, gradient2, gradient3, gradient4;
-    ImageView menu;
+    ImageView menu, btnchest, btnarms, btnback, btnlegs, btnbut;
     LinearLayout contentView;
 
     //Menu
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-
-
 
 
     static final float END_SCALE = 0.7f;
@@ -59,12 +63,16 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         mostViewedRecycler = (RecyclerView) view.findViewById(R.id.rcv_most_view);
         categoriesRecycler = (RecyclerView) view.findViewById(R.id.rcv_categories);
         menu = (ImageView) view.findViewById(R.id.btn_menu);
+        btnchest = (ImageView) view.findViewById(R.id.img_chest);
+        btnarms = (ImageView) view.findViewById(R.id.img_arms);
+        btnback = (ImageView) view.findViewById(R.id.img_back);
+        btnlegs = (ImageView) view.findViewById(R.id.img_legs);
+        btnbut = (ImageView) view.findViewById(R.id.img_but);
         contentView = (LinearLayout) view.findViewById(R.id.contentView);
 
 
         drawerLayout = (DrawerLayout) view.findViewById(R.id.draw_layout);
         navigationView = (NavigationView) view.findViewById(R.id.ngv_view);
-
 
 
         navigationDraw();
@@ -75,8 +83,51 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         mostViewedRecycler();
         categoriesRecycler();
 
+        btnchest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+        btnarms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+        btnback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+        btnlegs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+        btnbut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+
 
         return view;
+    }
+
+    public void showDialog() {
+        final Dialog noFunction = new Dialog(getActivity(), R.style.df_dialog);
+        noFunction.setContentView(R.layout.dialog_no_function);
+        noFunction.findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        });
+        noFunction.show();
     }
 
     private void navigationDraw() {
@@ -129,10 +180,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         ArrayList<FeaturedTutorial> featuredTutorialArrayList = new ArrayList<>();
 
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_login_hero, "Alo alo", "Viet vo day"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_address, "Alo alo", "Viet vo day"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_chest, "Alo alo", "Viet vo day"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_profile_user, "Alo alo", "Viet vo day"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_login_hero, "Xin chào", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_address, "Đây là", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_chest, "Bản test", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_username, "Chưa chính thức", "Test"));
 
 
         categoriesRecycler.setHasFixedSize(true);
@@ -149,10 +200,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         ArrayList<FeaturedTutorial> featuredTutorialArrayList = new ArrayList<>();
 
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_login_hero, "Alo alo", "Viet vo day"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_address, "Alo alo", "Viet vo day"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_chest, "Alo alo", "Viet vo day"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_profile_user, "Alo alo", "Viet vo day"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_login_hero, "Chức năng này", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_address, "Sẽ được", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_chest, "Phát triển thêm", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_username, "Sau này", "Test"));
 
         adapter = new MostViewedAdapter(featuredTutorialArrayList);
         mostViewedRecycler.setAdapter(adapter);
@@ -165,10 +216,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         ArrayList<FeaturedTutorial> featuredTutorialArrayList = new ArrayList<>();
 
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_login_hero, "Alo alo", "Viet vo day"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_address, "Alo alo", "Viet vo day"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_chest, "Alo alo", "Viet vo day"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_profile_user, "Alo alo", "Viet vo day"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_login_hero, "Cám ơn", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_address, "Các bạn", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_chest, "Đã ủng hộ", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_username, "Ứng dụng", "Test"));
 
         adapter = new FeaturedAdapter(featuredTutorialArrayList);
         featuredRecycler.setAdapter(adapter);
@@ -180,7 +231,6 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     }
 
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -189,7 +239,37 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
             case R.id.nav_categories:
                 startActivity(new Intent(getActivity().getApplicationContext(), AllCategories.class));
                 break;
-
+            case R.id.nav_home:
+                startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
+                break;
+            case R.id.nav_login:
+                startActivity(new Intent(getActivity().getApplicationContext(), Login.class));
+                break;
+            case R.id.nav_logout:
+                startActivity(new Intent(getActivity().getApplicationContext(), WelcomeStartUpScreen.class));
+                break;
+            case R.id.nav_chest:
+                showDialog();
+                break;
+            case R.id.nav_back:
+                showDialog();
+                break;
+            case R.id.nav_arms:
+                showDialog();
+                break;
+            case R.id.nav_but:
+                showDialog();
+                break;
+            case R.id.nav_share:
+                Uri uriFace = Uri.parse("https://www.facebook.com/William.2418/");
+                Intent intentFace = new Intent(Intent.ACTION_VIEW, uriFace);
+                startActivity(intentFace);
+                break;
+            case R.id.nav_rate:
+                Uri uriGit = Uri.parse("https://github.com/Long18");
+                Intent intentGit = new Intent(Intent.ACTION_VIEW, uriGit);
+                startActivity(intentGit);
+                break;
         }
 
         return true;

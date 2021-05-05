@@ -13,22 +13,35 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +51,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
 import com.william.Fitness.Database.SessionManager;
 import com.william.Fitness.MainActivity;
+import com.william.Fitness.ProfileActivity;
 import com.william.Fitness.R;
 
 import java.util.HashMap;
@@ -46,10 +60,25 @@ public class Login extends AppCompatActivity {
 
     CountryCodePicker countryCodePicker;
     TextInputLayout phoneNum, password;
+    ImageView btnGoogle;
     RelativeLayout progressbar;
     Button btnLogin;
     CheckBox checkBox;
     TextInputEditText phone, pass;
+    private GoogleSignInClient mGoogleSignInClient;
+    private final static int RC_SIGN_IN = 123;
+    private FirebaseAuth mAuth;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null ){
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +87,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //Hooks
+        btnGoogle = findViewById(R.id.google_login);
         countryCodePicker = findViewById(R.id.phone_numer_log);
         phoneNum = findViewById(R.id.textInputPhone);
         password = findViewById(R.id.textInputPassword);
@@ -65,7 +95,10 @@ public class Login extends AppCompatActivity {
         phone = findViewById(R.id.txtPhone);
         pass = findViewById(R.id.txtPassword);
 
+        mAuth = FirebaseAuth.getInstance();
+
         FirebaseApp.initializeApp(this);
+        createRequest();
 
         //Remember button on Click
         SessionManager sessionManager = new SessionManager(Login.this, SessionManager.KEY_REMEMBER_ME);
@@ -75,9 +108,79 @@ public class Login extends AppCompatActivity {
             pass.setText(rememberMe.get(SessionManager.REMEMBER_PASSWORD));
         }
 
-
+        btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
 
     }
+
+    /*
+    Login Authentication
+            With Google Account
+    */
+
+    private void createRequest() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(Login.this, "Đăng nhập thành công!!", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(Login.this, "Đăng nhập thất bại!!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+   /*
+    Login Normal
+            With Phone Number
+    */
 
     public void userLogin(View view) {
 
@@ -118,7 +221,7 @@ public class Login extends AppCompatActivity {
 
                         //Get Information User in Database
                         String mFullName = snapshot.child(getPhoneNumber).child("fullName").getValue(String.class);
-                        String mUserName = snapshot.child(getPhoneNumber).child("username").getValue(String.class);
+                        String mUserName = snapshot.child(getPhoneNumber).child("userName").getValue(String.class);
                         String mEmail = snapshot.child(getPhoneNumber).child("email").getValue(String.class);
                         String mPhoneNo = snapshot.child(getPhoneNumber).child("phoneNo").getValue(String.class);
                         String mPassword = snapshot.child(getPhoneNumber).child("password").getValue(String.class);
@@ -131,7 +234,7 @@ public class Login extends AppCompatActivity {
 
 
                         startActivity(new Intent(Login.this, MainActivity.class));
-                        overridePendingTransition(R.anim.top_to_bottom, R.anim.bottom_to_top);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.stay);
 
                         Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
