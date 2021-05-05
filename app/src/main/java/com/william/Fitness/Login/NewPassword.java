@@ -24,6 +24,14 @@ public class NewPassword extends AppCompatActivity {
     Button btnNext;
     Animation animation;
 
+    final String ONE_DIGIT = "^(?=.*[0-9]).{6,}$";
+    final String ONE_LOWER_CASE = "^(?=.*[a-z]).{6,}$";
+    final String ONE_UPPER_CASE = "^(?=.*[A-Z]).{6,}$";
+    final String ONE_SPECIAL_CHAR = "^(?=.*[@#$%^&+=]).{6,}$";
+    final String NO_SPACE = "^(?=\\S+$).{6,}$";
+    final String MIN_CHAR = "^[a-zA-Z0-9._-].{5,}$";
+    final String EMAIL_VALIDATE = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +58,7 @@ public class NewPassword extends AppCompatActivity {
     }
 
     public void btnSetPassword(View view) {
-        if (!validatePassword()){
+        if (!validatePassword()) {
             return;
         }
 
@@ -60,40 +68,48 @@ public class NewPassword extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.child(phoneNumber).child("password").setValue(newPassword);
 
-        startActivity(new Intent(getApplicationContext(),ForgetSuccess.class));
+        startActivity(new Intent(getApplicationContext(), ForgetSuccess.class));
         finish();
 
     }
 
+
     private boolean validatePassword() {
         String val = newPass.getEditText().getText().toString().trim();
         String val1 = rePass.getEditText().getText().toString().trim();
-        String checkPassword = "^" +
-                //"(?=.*[0-9])" +         //Phải có ít nhất 1 số
-                //"(?=.*[a-z])" +         //Phải có ít nhất 1 từ viết thường
-                //"(?=.*[A-Z])" +         //Phải có ít nhất 1 từ viết hoa
-                "(?=.*[a-zA-Z])" +      //Tất cả các từ
-                //"(?=.*[@#$%^&+=])" +    //Phải có ít nhất 1 kí tự
-                "(?=S+$)" +             //Không được có khoảng trắng
-                ".{4,}" +               //Phải có ít nhất 6 kí tự
-                "$";
+
 
         if (val.isEmpty()) {
-            newPass.setError("Mật khẩu không được để trống");
-            rePass.setError("Mật khẩu không được để trống");
+            newPass.setError("Mật khẩu không được để trống!");
             return false;
-        }
-        /*else if (!val.matches(checkPassword)) {
-            mPassword.setError("Mật khẩu phải có ít nhất 6 kí tự!");
+        } else if (val != val1) {
+            rePass.setError("Nhập lại mật khẩu phải trùng với mật khẩu mới!");
             return false;
-        }*/
-        else {
+        } else if (!val.matches(MIN_CHAR)) {
+            newPass.setError("Mật khẩu phải có ít nhất 6 kí tự!");
+            return false;
+        } else if (!val.matches(ONE_DIGIT)) {
+            newPass.setError("Mật khẩu phải có ít nhất 1 chữ số!");
+            return false;
+        } else if (!val.matches(ONE_LOWER_CASE)) {
+            newPass.setError("Mật khẩu phải có ít nhất 1 chữ thường!");
+            return false;
+        } else if (!val.matches(ONE_UPPER_CASE)) {
+            newPass.setError("Mật khẩu phải có ít nhất 1 chữ viết hoa!");
+            return false;
+        } else if (!val.matches(ONE_SPECIAL_CHAR)) {
+            newPass.setError("Mật khẩu phải có ít nhất 1 kí tự đặc biệt!");
+            return false;
+        } else if (!val.matches(NO_SPACE)) {
+            newPass.setError("Mật khẩu không được để khoảng cách!");
+            return false;
+        } else {
             newPass.setError(null);
-            rePass.setError(null);
             newPass.setErrorEnabled(false);
-            rePass.setErrorEnabled(false);
             return true;
         }
+
+
     }
 
     public void backActivity(View view) {
