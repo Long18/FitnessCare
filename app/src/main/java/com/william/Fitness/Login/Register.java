@@ -46,6 +46,7 @@ public class Register extends AppCompatActivity {
     final String ONE_SPECIAL_CHAR = "^(?=.*[@#$%^&+=]).{6,}$";
     final String NO_SPACE = "^(?=\\S+$).{6,}$";
     final String MIN_CHAR = "^[a-zA-Z0-9._-].{5,}$";
+    final String EMAIL_VALIDATE = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +138,6 @@ public class Register extends AppCompatActivity {
 
     private boolean validateUsername() {
         String val = mUsername.getEditText().getText().toString().trim();
-        String checkspaces = "[a-zA-Z0-9._-]+[a-zA-Z0-9._-]";
 
         if (val.isEmpty()) {
             mUsername.setError("Username không được để trống");
@@ -152,8 +152,8 @@ public class Register extends AppCompatActivity {
             mUsername.setError("Username quá ngắn");
             return false;
         }
-        if (!val.matches(checkspaces)) {
-            mUsername.setError("Username không được có khoảng trắng hoặc kí tự đặc biệt!");
+        if (!val.matches(NO_SPACE)) {
+            mUsername.setError("Username không được có khoảng trắng!");
             return false;
         } else {
             mUsername.setError(null);
@@ -164,13 +164,10 @@ public class Register extends AppCompatActivity {
 
     private boolean validateEmail() {
         String val = mEmail.getEditText().getText().toString().trim();
-        String checkEmail = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        //Giới hạn kí tự dành cho email
-
         if (val.isEmpty()) {
             mEmail.setError("Email không được để trống!");
             return false;
-        } else if (!val.matches(checkEmail)) {
+        } else if (!val.matches(EMAIL_VALIDATE)) {
             mEmail.setError("Hãy viết email đúng định dạng!");
             return false;
         } else {
