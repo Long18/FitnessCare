@@ -25,6 +25,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -39,6 +47,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -61,22 +70,39 @@ public class Login extends AppCompatActivity {
     CountryCodePicker countryCodePicker;
     TextInputLayout phoneNum, password;
     ImageView btnGoogle;
+    LoginButton btnFacebook;
     RelativeLayout progressbar;
     Button btnLogin;
     CheckBox checkBox;
     TextInputEditText phone, pass;
+
     private GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
+
+    private CallbackManager mCallbackManager;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private AccessTokenTracker accessTokenTracker;
 
     @Override
     protected void onStart() {
         super.onStart();
 
         FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null ){
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        if (user != null) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
+        }
+
+        mAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if(authStateListener != null){
+            mAuth.removeAuthStateListener(authStateListener);
         }
     }
 
@@ -88,6 +114,7 @@ public class Login extends AppCompatActivity {
 
         //Hooks
         btnGoogle = findViewById(R.id.google_login);
+        btnFacebook = findViewById(R.id.btnFacebook);
         countryCodePicker = findViewById(R.id.phone_numer_log);
         phoneNum = findViewById(R.id.textInputPhone);
         password = findViewById(R.id.textInputPassword);
@@ -97,13 +124,51 @@ public class Login extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        mCallbackManager = CallbackManager.Factory.create();
+        btnFacebook.setReadPermissions("email","public_profile");
+        btnFacebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Toast.makeText(Login.this, "Login Success!", Toast.LENGTH_SHORT).show();
+                handleFacebookToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(Login.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+            }
+        };
+
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+                if (currentAccessToken == null) {
+                    mAuth.signOut();
+                }
+            }
+        };
+
+
         FirebaseApp.initializeApp(this);
         createRequest();
 
         //Remember button on Click
         SessionManager sessionManager = new SessionManager(Login.this, SessionManager.KEY_REMEMBER_ME);
-        if (sessionManager.checkRemember()){
-            HashMap<String,String> rememberMe = sessionManager.rememberMeClick();
+        if (sessionManager.checkRemember()) {
+            HashMap<String, String> rememberMe = sessionManager.rememberMeClick();
             phone.setText(rememberMe.get(SessionManager.REMEMBER_PHONENUMBER));
             pass.setText(rememberMe.get(SessionManager.REMEMBER_PASSWORD));
         }
@@ -116,6 +181,37 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
+
+    /*
+    Login Authentication
+            With Facebook Account
+    */
+
+    private void handleFacebookToken(AccessToken accessToken) {
+
+        Toast.makeText(Login.this, "Token: " + accessToken, Toast.LENGTH_SHORT).show();
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        mAuth.signInWithCredential(credential).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
+                    FirebaseUser user = mAuth.getCurrentUser();
+                } else {
+                    Toast.makeText(Login.this, "Login Fail!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onActivityReenter(int resultCode, Intent data) {
+        mCallbackManager.onActivityResult(resultCode, resultCode, data);
+        super.onActivityReenter(resultCode, data);
+    }
+
 
     /*
     Login Authentication
@@ -201,7 +297,7 @@ public class Login extends AppCompatActivity {
 
         if (checkBox.isChecked()) {
             SessionManager sessionManager = new SessionManager(Login.this, SessionManager.KEY_REMEMBER_ME);
-            sessionManager.createRememberMeSession(mPhoneNumber,mPassword);
+            sessionManager.createRememberMeSession(mPhoneNumber, mPassword);
         }
 
         //Database

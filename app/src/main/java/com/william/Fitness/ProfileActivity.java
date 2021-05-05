@@ -97,6 +97,7 @@ public class ProfileActivity extends Fragment {
 
         }
 
+
         getUserInformation();
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

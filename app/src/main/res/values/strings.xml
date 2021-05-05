@@ -4,6 +4,10 @@
     <string name="login_password_hint">Password</string>
     <string name="application_name">Fitness Care</string>
 
+    <string name="facebook_app_id">473063763910281</string>
+    <string name="fb_login_protocol_scheme">fb473063763910281</string>
+
+
     <!-- Strings for Tutorial Screen -->
 
     <!-- Titles -->

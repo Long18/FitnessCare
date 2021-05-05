@@ -74,6 +74,7 @@
                         android:textSize="44sp" />
 
                     <RelativeLayout
+                        android:id="@+id/searching_RL"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_below="@+id/txtAppname"

@@ -210,6 +210,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="signIn"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/ic_google_plus" />
             </LinearLayout>
@@ -219,7 +220,6 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-44dp"
         android:onClick="onLoginClick"

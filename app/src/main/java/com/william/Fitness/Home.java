@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +45,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     private GradientDrawable gradient1, gradient2, gradient3, gradient4;
     ImageView menu, btnchest, btnarms, btnback, btnlegs, btnbut;
     LinearLayout contentView;
+    RelativeLayout searching;
 
     //Menu
     DrawerLayout drawerLayout;
@@ -69,6 +71,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         btnlegs = (ImageView) view.findViewById(R.id.img_legs);
         btnbut = (ImageView) view.findViewById(R.id.img_but);
         contentView = (LinearLayout) view.findViewById(R.id.contentView);
+        searching = (RelativeLayout) view.findViewById(R.id.searching_RL);
 
 
         drawerLayout = (DrawerLayout) view.findViewById(R.id.draw_layout);
@@ -111,6 +114,12 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
             @Override
             public void onClick(View v) {
                 showDialog();
+            }
+        });
+        searching.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SearchActivity.class));
             }
         });
 
@@ -247,6 +256,9 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 break;
             case R.id.nav_logout:
                 startActivity(new Intent(getActivity().getApplicationContext(), WelcomeStartUpScreen.class));
+                break;
+            case R.id.nav_search:
+                startActivity(new Intent(getActivity().getApplicationContext(), SearchActivity.class));
                 break;
             case R.id.nav_chest:
                 showDialog();

@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar"
         tools:replace="label">
-        <activity android:name=".SearchView"></activity>
+        <activity android:name=".SearchActivity"/>
         <activity android:name=".Login.ForgetSuccess" />
         <activity android:name=".Login.NewPassword" />
         <activity android:name=".Login.Selection" />
@@ -38,8 +38,11 @@
         </activity>
         <activity android:name=".Login.Login" />
         <activity android:name=".Login.Register" />
-        <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
 
         <service android:name="com.google.firebase.components.ComponentDiscoveryService">
             <meta-data
