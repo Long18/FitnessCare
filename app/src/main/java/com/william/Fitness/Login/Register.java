@@ -34,18 +34,18 @@ import com.william.Fitness.Model.User;
 import com.william.Fitness.R;
 
 public class Register extends AppCompatActivity {
-    public static final String TAG = "TAG";
-    TextView btnLogin;
-    FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
-    DatabaseReference reference;
-
     ImageView btnBack, image;
     Button next;
     TextView title, login;
 
     TextInputLayout mFullName, mUsername, mEmail, mPassword;
 
+    final String ONE_DIGIT = "^(?=.*[0-9]).{6,}$";
+    final String ONE_LOWER_CASE = "^(?=.*[a-z]).{6,}$";
+    final String ONE_UPPER_CASE = "^(?=.*[A-Z]).{6,}$";
+    final String ONE_SPECIAL_CHAR = "^(?=.*[@#$%^&+=]).{6,}$";
+    final String NO_SPACE = "^(?=\\S+$).{6,}$";
+    final String MIN_CHAR = "^[a-zA-Z0-9._-].{5,}$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,13 +182,13 @@ public class Register extends AppCompatActivity {
 
     private boolean validatePassword() {
         String val = mPassword.getEditText().getText().toString().trim();
-        String checkPasswordLong = "^" +
-                "(?=.*[a-zA-Z])" +                              //Tất cả các từ
-                "(?=.*[a-z])" +                                 //Phải có ít nhất 1 từ viết thường
-                //"(?=S+$)" +                                    //Không được có khoảng trắng
+        String checkPassword = "^" +
                 "(?=.*[0-9])" +                                 //Phải có ít nhất 1 số
-                "(?=.*[@#$%^&+=])" +                            //Phải có ít nhất 1 kí tự
+                "(?=.*[a-z])" +                                 //Phải có ít nhất 1 từ viết thường
                 "(?=.*[A-Z])" +                                 //Phải có ít nhất 1 từ viết hoa
+                "(?=.*[a-zA-Z])" +                              //Tất cả các từ
+                "(?=.*[@#$%^&+=])" +                            //Phải có ít nhất 1 kí tự đặc biệt
+                //"(?=S+$)" +                                    //Không được có khoảng trắng
                 ".{6,}" +                                      //Phải có ít nhất 6 kí tự
                 "$";
 
@@ -196,14 +196,30 @@ public class Register extends AppCompatActivity {
         if (val.isEmpty()) {
             mPassword.setError("Mật khẩu không được để trống!");
             return false;
-        }
-        if (!val.matches(checkPasswordLong)) {
-            mPassword.setError("Mật khẩu phải có ít nhất 6 kí tự,1 chữ số, 1 kí tự đặc biệt và 1 chữ hoa!");
+        } else if (!val.matches(MIN_CHAR)) {
+            mPassword.setError("Mật khẩu phải có ít nhất 6 kí tự!");
+            return false;
+        } else if (!val.matches(ONE_DIGIT)) {
+            mPassword.setError("Mật khẩu phải có ít nhất 1 chữ số!");
+            return false;
+        } else if (!val.matches(ONE_LOWER_CASE)) {
+            mPassword.setError("Mật khẩu phải có ít nhất 1 chữ thường!");
+            return false;
+        } else if (!val.matches(ONE_UPPER_CASE)) {
+            mPassword.setError("Mật khẩu phải có ít nhất 1 chữ viết hoa!");
+            return false;
+        } else if (!val.matches(ONE_SPECIAL_CHAR)) {
+            mPassword.setError("Mật khẩu phải có ít nhất 1 kí tự đặc biệt!");
+            return false;
+        } else if (!val.matches(NO_SPACE)) {
+            mPassword.setError("Mật khẩu không được để khoảng cách!");
             return false;
         } else {
             mPassword.setError(null);
             mPassword.setErrorEnabled(false);
             return true;
         }
+
+
     }
 }
