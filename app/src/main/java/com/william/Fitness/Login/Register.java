@@ -68,7 +68,6 @@ public class Register extends AppCompatActivity {
         mPassword = findViewById(R.id.textInputPassword);
 
 
-
     }
 
 
@@ -138,21 +137,25 @@ public class Register extends AppCompatActivity {
 
     private boolean validateUsername() {
         String val = mUsername.getEditText().getText().toString().trim();
-        String checkspaces = "\\A\\w{1,20}\\z";
-        //Giới hạn kí tự/ khoảng trắng từ 1-20
+        String checkspaces = "[a-zA-Z0-9._-]+[a-zA-Z0-9._-]";
 
         if (val.isEmpty()) {
             mUsername.setError("Username không được để trống");
             return false;
-        } else if (val.length() > 20) {
+        }
+        if (val.length() > 20) {
             mUsername.setError("Username quá dài");
             return false;
+
         }
-        /*else if (val.matches(checkspaces)) {
-            username.setError("Username không được có khoảng trắng");
+        if (val.length() <= 2) {
+            mUsername.setError("Username quá ngắn");
             return false;
-        }*/
-        else {
+        }
+        if (!val.matches(checkspaces)) {
+            mUsername.setError("Username không được có khoảng trắng hoặc kí tự đặc biệt!");
+            return false;
+        } else {
             mUsername.setError(null);
             mUsername.setErrorEnabled(false);
             return true;
@@ -161,18 +164,16 @@ public class Register extends AppCompatActivity {
 
     private boolean validateEmail() {
         String val = mEmail.getEditText().getText().toString().trim();
-        String checkEmail = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
+        String checkEmail = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         //Giới hạn kí tự dành cho email
 
         if (val.isEmpty()) {
-            mEmail.setError("Email không được để trống");
+            mEmail.setError("Email không được để trống!");
             return false;
-        }
-        /*else if (val.matches(checkEmail)) {
-            mEmail.setError("Email không được có khoảng trắng");
+        } else if (!val.matches(checkEmail)) {
+            mEmail.setError("Hãy viết email đúng định dạng!");
             return false;
-        } */
-        else {
+        } else {
             mEmail.setError(null);
             mEmail.setErrorEnabled(false);
             return true;
@@ -181,25 +182,25 @@ public class Register extends AppCompatActivity {
 
     private boolean validatePassword() {
         String val = mPassword.getEditText().getText().toString().trim();
-        String checkPassword = "^" +
-                //"(?=.*[0-9])" +         //Phải có ít nhất 1 số
-                //"(?=.*[a-z])" +         //Phải có ít nhất 1 từ viết thường
-                //"(?=.*[A-Z])" +         //Phải có ít nhất 1 từ viết hoa
-                "(?=.*[a-zA-Z])" +      //Tất cả các từ
-                //"(?=.*[@#$%^&+=])" +    //Phải có ít nhất 1 kí tự
-                "(?=S+$)" +             //Không được có khoảng trắng
-                ".{4,}" +               //Phải có ít nhất 6 kí tự
+        String checkPasswordLong = "^" +
+                "(?=.*[a-zA-Z])" +                              //Tất cả các từ
+                "(?=.*[a-z])" +                                 //Phải có ít nhất 1 từ viết thường
+                //"(?=S+$)" +                                    //Không được có khoảng trắng
+                "(?=.*[0-9])" +                                 //Phải có ít nhất 1 số
+                "(?=.*[@#$%^&+=])" +                            //Phải có ít nhất 1 kí tự
+                "(?=.*[A-Z])" +                                 //Phải có ít nhất 1 từ viết hoa
+                ".{6,}" +                                      //Phải có ít nhất 6 kí tự
                 "$";
 
+
         if (val.isEmpty()) {
-            mPassword.setError("Mật khẩu không được để trống");
+            mPassword.setError("Mật khẩu không được để trống!");
             return false;
         }
-        /*else if (!val.matches(checkPassword)) {
-            mPassword.setError("Mật khẩu phải có ít nhất 6 kí tự!");
+        if (!val.matches(checkPasswordLong)) {
+            mPassword.setError("Mật khẩu phải có ít nhất 6 kí tự,1 chữ số, 1 kí tự đặc biệt và 1 chữ hoa!");
             return false;
-        }*/
-        else {
+        } else {
             mPassword.setError(null);
             mPassword.setErrorEnabled(false);
             return true;
