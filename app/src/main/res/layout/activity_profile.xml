@@ -164,6 +164,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_fullname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_user"
@@ -180,6 +181,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_username"
@@ -196,6 +198,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_email_forget"
@@ -212,6 +215,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_phone_res"
@@ -228,6 +232,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_calendar"
@@ -244,6 +249,7 @@
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_gender"
@@ -252,13 +258,31 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="Password"
+                app:startIconDrawable="@drawable/ic_key"
+                app:endIconMode="password_toggle"
+                app:boxBackgroundColor="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:text="Here is your password" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/button_background_blue"
                 android:fontFamily="@font/bungee"
-                android:textSize="20sp"
-                android:text="Update" />
+                android:text="Update"
+                android:textSize="20sp" />
 
 
         </LinearLayout>

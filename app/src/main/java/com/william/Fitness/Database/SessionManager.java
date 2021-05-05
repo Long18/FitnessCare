@@ -19,7 +19,7 @@ public class SessionManager {
 
     //User Store Information
     public static final String KEY_FULLNAME = "fullName";
-    public static final String KEY_USERNAME = "username";
+    public static final String KEY_USERNAME = "userName";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PHONENUMBER = "phoneNumber";
     public static final String KEY_PASSWORD = "password";
