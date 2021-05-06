@@ -6,15 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -27,7 +24,7 @@ import com.william.Fitness.Database.CalendarDB;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Settings extends Fragment {
+public class Settings extends AppCompatActivity {
 
     Button btnSave;
     RadioButton rdbEasy, rdbMedium,rdbHard;
@@ -37,24 +34,24 @@ public class Settings extends Fragment {
     TimePicker timePicker;
 
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings,container,false);
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_settings);
         //Init View
-        btnSave = view.findViewById(R.id.btnSave);
+        btnSave = findViewById(R.id.btnSave);
 
-        rdbGroup = view.findViewById(R.id.rdbGroup);
-        rdbEasy = view.findViewById(R.id.rdbEasy);
-        rdbMedium = view.findViewById(R.id.rdbMedium);
-        rdbHard = view.findViewById(R.id.rdbHard);
+        rdbGroup = findViewById(R.id.rdbGroup);
+        rdbEasy = findViewById(R.id.rdbEasy);
+        rdbMedium = findViewById(R.id.rdbMedium);
+        rdbHard = findViewById(R.id.rdbHard);
 
-        switchAlarm = view.findViewById(R.id.switchAlarm);
+        switchAlarm = findViewById(R.id.switchAlarm);
 
-        timePicker = view.findViewById(R.id.timePicker);
+        timePicker = findViewById(R.id.timePicker);
 
-        calendarDB = new CalendarDB(getActivity());
+        calendarDB = new CalendarDB(Settings.this);
 
         int mode = calendarDB.getSettingMode();
         setRadioButton(mode);
@@ -68,13 +65,11 @@ public class Settings extends Fragment {
             public void onClick(View view) {
                 saveWorkOutMode();
                 saveAlarm(switchAlarm.isChecked());
-                Toast.makeText(getActivity(), "Saved !!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Saved !!!!", Toast.LENGTH_SHORT).show();
             }
         });
 
 
-
-        return view;
 
 
 
@@ -86,12 +81,12 @@ public class Settings extends Fragment {
 
     private void saveAlarm(boolean checked) {
         if (checked){
-            AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
+            AlarmManager alarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
             Intent intent;
             PendingIntent pendingIntent;
 
-            intent = new Intent(getActivity(),AlarmNotification.class);
-            pendingIntent = PendingIntent.getBroadcast(getActivity(),1,intent,0);
+            intent = new Intent(this,AlarmNotification.class);
+            pendingIntent = PendingIntent.getBroadcast(this,1,intent,0);
 
             //Set time
             Calendar calendar = Calendar.getInstance();
@@ -112,9 +107,9 @@ public class Settings extends Fragment {
 
         }else {
             // Cancel
-            Intent intent = new Intent(getActivity(),AlarmNotification.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(),0,intent,0);
-            AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(this,AlarmNotification.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
+            AlarmManager alarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
             alarmManager.cancel(pendingIntent);
 
         }

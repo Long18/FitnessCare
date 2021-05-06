@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar"
         tools:replace="label">
-        <activity android:name=".SearchActivity"/>
+        <activity android:name=".SearchActivity" />
         <activity android:name=".Login.ForgetSuccess" />
         <activity android:name=".Login.NewPassword" />
         <activity android:name=".Login.Selection" />
@@ -28,6 +28,7 @@
         <activity android:name=".Login.Register_part_two" />
         <activity android:name=".Login.WelcomeStartUpScreen" />
         <activity android:name=".AllCategories" />
+        <activity android:name=".Settings" />
         <activity android:name=".Helper.FeaturedTutorial" />
         <activity android:name=".SplashScreen">
             <intent-filter>
@@ -40,8 +41,9 @@
         <activity android:name=".Login.Register" />
         <activity android:name=".MainActivity" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
 
         <service android:name="com.google.firebase.components.ComponentDiscoveryService">

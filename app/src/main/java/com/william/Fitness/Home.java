@@ -282,6 +282,9 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 Intent intentGit = new Intent(Intent.ACTION_VIEW, uriGit);
                 startActivity(intentGit);
                 break;
+            case R.id.nav_settings:
+                startActivity(new Intent(getActivity().getApplicationContext(), Settings.class));
+                break;
         }
 
         return true;
