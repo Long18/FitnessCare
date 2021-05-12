@@ -133,11 +133,16 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         noFunction.findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                if (noFunction != null && noFunction.isShowing()) {
+                    noFunction.dismiss();
+                }
             }
         });
         noFunction.show();
+
+
     }
+
 
     private void navigationDraw() {
         navigationView.bringToFront();

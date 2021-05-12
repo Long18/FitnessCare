@@ -63,7 +63,9 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
         noInternet.findViewById(R.id.btnCloseInternet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), WelcomeStartUpScreen.class));
+                if (noInternet != null && noInternet.isShowing()) {
+                    noInternet.dismiss();
+                }
             }
         });
         noInternet.show();
