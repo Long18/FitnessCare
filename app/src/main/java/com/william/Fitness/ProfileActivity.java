@@ -6,21 +6,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.william.Fitness.Database.SessionManager;
 import com.william.Fitness.Login.Login;
 import com.william.Fitness.Model.User;
@@ -29,14 +40,18 @@ import java.util.HashMap;
 
 public class ProfileActivity extends Fragment {
 
-    TextInputLayout getEmail,  getPassword;
+    TextInputLayout getEmail, getPassword;
     TextInputEditText fullname, username, phone, email, gender, date, password;
     TextView mFullName, mUserName;
     Button btnUpdate;
+    ImageView mProfileImage;
 
     String _mFullName, _mUserName, _mPhone, _mEmail, _mGender, _mDate, _mPassword;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference mStorageReference = storage.getReferenceFromUrl("gs://fitness-ver-1.appspot.com");
 
     final String ONE_DIGIT = "^(?=.*[0-9]).{6,}$";
     final String ONE_LOWER_CASE = "^(?=.*[a-z]).{6,}$";
@@ -66,6 +81,15 @@ public class ProfileActivity extends Fragment {
         getEmail = view.findViewById(R.id.email_TextInputLayout);
         getPassword = view.findViewById(R.id.password_TextInputLayout);
         btnUpdate = view.findViewById(R.id.btnUpdate);
+        mProfileImage = view.findViewById(R.id.profile_image);
+
+        StorageReference mProfileRef = mStorageReference.child("profile.jpg");
+        mProfileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(mProfileImage);
+            }
+        });
 
         SessionManager sessionManager = new SessionManager(getActivity().getApplicationContext(), SessionManager.SESSION_USER);
         HashMap<String, String> userInformation = sessionManager.getInfomationUser();
@@ -107,9 +131,53 @@ public class ProfileActivity extends Fragment {
         });
 
 
+        mProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openGallary = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(openGallary, 1000);
+            }
+        });
 
         return view;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri image = data.getData();
+                //mProfileImage.setImageURI(image);
+
+                uploadImageToFirebase(image);
+            }
+        }
+    }
+
+    private void uploadImageToFirebase(Uri image) {
+        final StorageReference fileRef = mStorageReference.child("profile.jpg");
+        fileRef.putFile(image).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(mProfileImage);
+                    }
+                });
+                Toast.makeText(getActivity().getApplicationContext(), "Upload Image Success!", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity().getApplicationContext(), "Upload Image Failed!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
 
     private void getUserInformation() {
         Intent intent = getActivity().getIntent();
@@ -138,34 +206,34 @@ public class ProfileActivity extends Fragment {
             return;
         }
         inputUser();
-            Toast.makeText(getActivity().getApplicationContext(), "Data Updated!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(), "Data Updated!", Toast.LENGTH_SHORT).show();
 
 
     }
 
     private boolean isPassWordChanged() {
-        if (!_mPassword.equals(password.getText().toString())){
+        if (!_mPassword.equals(password.getText().toString())) {
 
             reference.child(_mPassword).child("password").setValue(password.getText().toString());
             return true;
 
-        }else {
+        } else {
             return false;
         }
     }
 
     private boolean isNameChanged() {
-        if (!_mUserName.equals(fullname.getText().toString())){
+        if (!_mUserName.equals(fullname.getText().toString())) {
 
             reference.child(_mUserName).child("userName").setValue(fullname.getText().toString());
             return true;
 
-        }else {
+        } else {
             return false;
         }
     }
 
-    public void inputUser(){
+    public void inputUser() {
 
 
         User addNewUser = new User(_mFullName, _mUserName, _mEmail, _mPhone, _mPassword, _mDate, _mGender);

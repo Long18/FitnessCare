@@ -22,7 +22,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_login_hero" />
+                android:src="@drawable/ic_picture_profile" />
 
             <TextView
                 android:id="@+id/full_name"

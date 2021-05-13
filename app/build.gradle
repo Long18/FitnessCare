@@ -40,9 +40,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:20.0.4'
     implementation 'com.google.firebase:firebase-database:19.7.0'
     implementation 'com.google.firebase:firebase-firestore:22.1.2'
+    implementation 'com.google.firebase:firebase-firestore:23.0.0'
     implementation 'com.google.android.gms:play-services-safetynet:17.0.0'
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
 
 
     testImplementation 'junit:junit:4.13.2'
@@ -58,6 +60,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0-alpha02'
     implementation 'com.hbb20:ccp:2.3.1'
     implementation 'com.chaos.view:pinview:1.4.3'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
     //Theme
     implementation 'br.com.simplepass:loading-button-android:1.14.0'
