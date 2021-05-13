@@ -48,8 +48,8 @@ public class ProfileActivity extends Fragment {
 
     String _mFullName, _mUserName, _mPhone, _mEmail, _mGender, _mDate, _mPassword;
     FirebaseDatabase rootNode;
-    DatabaseReference reference;
-    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    DatabaseReference reference, mData;
+    FirebaseAuth fAuth;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference mStorageReference = storage.getReferenceFromUrl("gs://fitness-ver-1.appspot.com");
 
@@ -65,8 +65,11 @@ public class ProfileActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_profile, container, false);
 
+        fAuth = FirebaseAuth.getInstance();
+        mData = FirebaseDatabase.getInstance().getReference();
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("Users");
+
 
         //Hooks
         fullname = view.findViewById(R.id.txt_fullname);
@@ -83,13 +86,6 @@ public class ProfileActivity extends Fragment {
         btnUpdate = view.findViewById(R.id.btnUpdate);
         mProfileImage = view.findViewById(R.id.profile_image);
 
-        StorageReference mProfileRef = mStorageReference.child("profile.jpg");
-        mProfileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(mProfileImage);
-            }
-        });
 
         SessionManager sessionManager = new SessionManager(getActivity().getApplicationContext(), SessionManager.SESSION_USER);
         HashMap<String, String> userInformation = sessionManager.getInfomationUser();
@@ -139,6 +135,15 @@ public class ProfileActivity extends Fragment {
             }
         });
 
+
+        StorageReference mProfileRef = mStorageReference.child("Users/"+_mPhone+"/avata.jpg");
+        mProfileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(mProfileImage);
+            }
+        });
+
         return view;
     }
 
@@ -156,13 +161,16 @@ public class ProfileActivity extends Fragment {
     }
 
     private void uploadImageToFirebase(Uri image) {
-        final StorageReference fileRef = mStorageReference.child("profile.jpg");
+
+        final StorageReference fileRef = mStorageReference.child("Users/"+_mPhone+"/avata.jpg");
         fileRef.putFile(image).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
+
                         Picasso.get().load(uri).into(mProfileImage);
                     }
                 });
