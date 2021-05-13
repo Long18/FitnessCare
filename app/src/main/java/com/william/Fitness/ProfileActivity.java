@@ -48,7 +48,7 @@ public class ProfileActivity extends Fragment {
 
     String _mFullName, _mUserName, _mPhone, _mEmail, _mGender, _mDate, _mPassword;
     FirebaseDatabase rootNode;
-    DatabaseReference reference, mData;
+    DatabaseReference reference;
     FirebaseAuth fAuth;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference mStorageReference = storage.getReferenceFromUrl("gs://fitness-ver-1.appspot.com");
@@ -66,7 +66,6 @@ public class ProfileActivity extends Fragment {
         View view = inflater.inflate(R.layout.activity_profile, container, false);
 
         fAuth = FirebaseAuth.getInstance();
-        mData = FirebaseDatabase.getInstance().getReference();
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("Users");
 
