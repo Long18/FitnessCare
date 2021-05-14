@@ -22,8 +22,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_picture_profile"
-                android:background="@drawable/profile_picture"/>
+                android:background="@drawable/profile_picture"
+                android:src="@drawable/ic_picture_profile" />
 
             <TextView
                 android:id="@+id/full_name"
@@ -66,10 +66,10 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/colorPrimary"
-                app:strokeWidth="1dp"
+                app:cardCornerRadius="30dp"
                 app:cardElevation="10dp"
                 app:strokeColor="@color/colorAccent"
-                app:cardCornerRadius="30dp">
+                app:strokeWidth="1dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -112,11 +112,11 @@
                 android:layout_height="125dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/colorAccent"
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="30dp"
-                app:cardElevation="10dp">
+                app:cardElevation="10dp"
+                app:strokeColor="@color/colorAccent"
+                app:strokeWidth="1dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -170,6 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Full Name"
+                android:maxLines="1"
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -178,6 +179,8 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_user"
                     android:drawablePadding="10dp"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
                     android:text="Here is your full name" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -187,6 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="User Name"
+                android:maxLines="1"
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -194,7 +198,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_username"
+                    android:inputType="textPersonName"
                     android:drawablePadding="10dp"
+                    android:maxLines="1"
                     android:text="Here is your user name" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -205,14 +211,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Email"
+                android:maxLines="1"
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
                     android:drawableLeft="@drawable/ic_email_forget"
                     android:drawablePadding="10dp"
+                    android:maxLines="1"
                     android:text="Here is your email" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -223,6 +232,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Phone Number"
+                android:maxLines="1"
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -232,6 +242,7 @@
                     android:drawableLeft="@drawable/ic_phone_res"
                     android:drawablePadding="10dp"
                     android:inputType="phone"
+                    android:maxLines="1"
                     android:text="Here is your phone number" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -241,6 +252,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Birth Day"
+                android:maxLines="1"
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -249,6 +261,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_calendar"
                     android:drawablePadding="10dp"
+                    android:maxLines="1"
                     android:text="Here is your birthday" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -258,6 +271,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Gender"
+                android:maxLines="1"
                 app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -266,6 +280,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_gender"
                     android:drawablePadding="10dp"
+                    android:maxLines="1"
                     android:text="Here is your gender" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -276,6 +291,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Password"
+                android:maxLines="1"
                 app:boxBackgroundColor="@color/white"
                 app:endIconMode="password_toggle"
                 app:startIconDrawable="@drawable/ic_key">
@@ -285,6 +301,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:maxLines="1"
                     android:text="Here is your password" />
 
             </com.google.android.material.textfield.TextInputLayout>

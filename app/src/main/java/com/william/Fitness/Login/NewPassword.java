@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.william.Fitness.R;
@@ -55,6 +56,7 @@ public class NewPassword extends AppCompatActivity {
         rePass.setAnimation(animation);
         btnNext.setAnimation(animation);
 
+        FirebaseAuth.getInstance().signOut();
     }
 
     public void btnSetPassword(View view) {
@@ -73,19 +75,18 @@ public class NewPassword extends AppCompatActivity {
 
     }
 
-
     private boolean validatePassword() {
         String val = newPass.getEditText().getText().toString().trim();
-        String val1 = rePass.getEditText().getText().toString().trim();
+       // String val1 = rePass.getEditText().getText().toString().trim();
 
 
         if (val.isEmpty()) {
             newPass.setError("Mật khẩu không được để trống!");
             return false;
-        } else if (val != val1) {
+        }/* else if (val1 != val) {
             rePass.setError("Nhập lại mật khẩu phải trùng với mật khẩu mới!");
             return false;
-        } else if (!val.matches(MIN_CHAR)) {
+        }*/ else if (!val.matches(MIN_CHAR)) {
             newPass.setError("Mật khẩu phải có ít nhất 6 kí tự!");
             return false;
         } else if (!val.matches(ONE_DIGIT)) {
@@ -105,7 +106,9 @@ public class NewPassword extends AppCompatActivity {
             return false;
         } else {
             newPass.setError(null);
+           // rePass.setError(null);
             newPass.setErrorEnabled(false);
+           // rePass.setErrorEnabled(false);
             return true;
         }
 

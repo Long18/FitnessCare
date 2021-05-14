@@ -78,6 +78,7 @@ public class ProfileActivity extends Fragment {
         gender = view.findViewById(R.id.txt_gender);
         date = view.findViewById(R.id.txt_date);
         password = view.findViewById(R.id.txt_password);
+
         mFullName = view.findViewById(R.id.full_name);
         mUserName = view.findViewById(R.id.user_name);
         getEmail = view.findViewById(R.id.email_TextInputLayout);
@@ -135,7 +136,7 @@ public class ProfileActivity extends Fragment {
         });
 
 
-        StorageReference mProfileRef = mStorageReference.child("Users/"+_mPhone+"/avata.jpg");
+        StorageReference mProfileRef = mStorageReference.child("Users/" + _mPhone + "/avata.jpg");
         mProfileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -161,7 +162,7 @@ public class ProfileActivity extends Fragment {
 
     private void uploadImageToFirebase(Uri image) {
 
-        final StorageReference fileRef = mStorageReference.child("Users/"+_mPhone+"/avata.jpg");
+        final StorageReference fileRef = mStorageReference.child("Users/" + _mPhone + "/avata.jpg");
         fileRef.putFile(image).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -212,7 +213,10 @@ public class ProfileActivity extends Fragment {
         if (!validateEmail() | !validatePassword()) {
             return;
         }
-        inputUser();
+        isNameChanged();
+        isUserNameChanged();
+        isPassWordChanged();
+        //inputUser();
         Toast.makeText(getActivity().getApplicationContext(), "Data Updated!", Toast.LENGTH_SHORT).show();
 
 
@@ -221,7 +225,21 @@ public class ProfileActivity extends Fragment {
     private boolean isPassWordChanged() {
         if (!_mPassword.equals(password.getText().toString())) {
 
-            reference.child(_mPassword).child("password").setValue(password.getText().toString());
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+            reference.child(_mPhone).child("password").setValue(password.getText().toString());
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isUserNameChanged() {
+        if (!_mUserName.equals(username.getText().toString())) {
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+            reference.child(_mPhone).child("userName").setValue(username.getText().toString());
+
             return true;
 
         } else {
@@ -230,9 +248,11 @@ public class ProfileActivity extends Fragment {
     }
 
     private boolean isNameChanged() {
-        if (!_mUserName.equals(fullname.getText().toString())) {
+        if (!_mFullName.equals(fullname.getText().toString())) {
 
-            reference.child(_mUserName).child("userName").setValue(fullname.getText().toString());
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+            reference.child(_mPhone).child("fullName").setValue(fullname.getText().toString());
+
             return true;
 
         } else {
