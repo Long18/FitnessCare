@@ -84,7 +84,10 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private AccessTokenTracker accessTokenTracker;
 
-    @Override
+
+    //Not allow user access when they login
+    // This class still have bug, when closing app, the data will disappear
+   /* @Override
     protected void onStart() {
         super.onStart();
 
@@ -95,7 +98,7 @@ public class Login extends AppCompatActivity {
         }
 
         mAuth.addAuthStateListener(authStateListener);
-    }
+    }*/
 
     @Override
     protected void onStop() {

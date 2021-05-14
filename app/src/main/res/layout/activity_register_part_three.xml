@@ -79,6 +79,7 @@
                         app:ccp_autoDetectLanguage="true"
                         android:background="@drawable/black_border"
                         android:padding="5dp"/>
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputMobile"
                         style="@style/parentlogin"
@@ -86,15 +87,14 @@
                         app:startIconDrawable="@drawable/ic_phone_res">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:fontFamily="@font/brandon_grotesque_regular_italic"
                             android:id="@+id/txtPhone"
                             style="@style/modifiedEditTextlogin"
+                            android:fontFamily="@font/brandon_grotesque_regular_italic"
                             android:hint="Mobile Number"
-                            android:textSize="18sp"
                             android:inputType="phone"
-                            android:maxLines="1" />
+                            android:maxLines="1"
+                            android:textSize="18sp" />
                     </com.google.android.material.textfield.TextInputLayout>
-
 
 
                     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton

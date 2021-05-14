@@ -133,4 +133,8 @@ public class Settings extends AppCompatActivity {
         else if ( mode == 2)
             rdbGroup.check(R.id.rdbHard);
     }
+
+    public void backMainActivity(View view) {
+        startActivity(new Intent(Settings.this, MainActivity.class));
+    }
 }

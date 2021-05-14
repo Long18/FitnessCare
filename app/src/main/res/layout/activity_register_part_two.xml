@@ -116,6 +116,7 @@
                         android:text="Chọn tuổi"
                         android:textSize="18sp" />
 
+
                     <DatePicker
                         android:id="@+id/age_picker"
                         android:layout_width="match_parent"
@@ -123,7 +124,6 @@
                         android:calendarViewShown="false"
                         android:datePickerMode="spinner"
                         android:spinnersShown="true" />
-
 
                     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                         android:id="@+id/btnNext"

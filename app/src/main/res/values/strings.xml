@@ -65,11 +65,11 @@
     <string name="otp_description">Nhập mã số bạn vừa nhận được</string>
 
     <!-- Forget Password Screen -->
-    <string name="forget_password_detail">Nhập số điện thoại của bạn vào đây</string>
+    <string name="forget_password_detail">Input Your Phone Number</string>
 
 
     <!-- Selection Screen -->
-    <string name="selection">Chọn phương thức</string>
+    <string name="selection">Select Your Method</string>
     <string name="selection_detail">Bạn hãy lựa chọn phương thức để lấy lại mật khẩu.</string>
     <string name="selection_mobile">Sử dụng số điện thoại:</string>
     <string name="selection_email">Sử dụng địa chỉ email:</string>

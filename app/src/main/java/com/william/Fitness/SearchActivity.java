@@ -1,56 +1,50 @@
 package com.william.Fitness;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 public class SearchActivity extends AppCompatActivity {
 
-    ArrayAdapter<String> arrayAdapter;
+    ImageView btnUpload;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_view);
 
-        ListView listView = findViewById(R.id.list);
-        List<String> mylist = new ArrayList<>();
-        mylist.add("Chest"); mylist.add("Arms");
-        mylist.add("Legs"); mylist.add("Back");
-        mylist.add("Legs"); mylist.add("But");
+        //Hook
+        btnUpload = findViewById(R.id.btnAdd);
 
-        arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
-        listView.setAdapter(arrayAdapter);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        MenuItem menuItem = menu.findItem(R.id.nav_search);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setQueryHint("Search...");
-
-        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+        btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                arrayAdapter.getFilter().filter(newText);
-                return true;
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), updateImageExcercise.class);
+                startActivity(intent);
             }
         });
-        return super.onCreateOptionsMenu(menu);
+
     }
+
+
+
+
 }

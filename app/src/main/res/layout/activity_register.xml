@@ -162,6 +162,7 @@
                         android:textStyle="bold"
                         android:transitionName="transition_login_btn" />
                 </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
             <LinearLayout

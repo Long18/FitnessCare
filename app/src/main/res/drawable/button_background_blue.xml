@@ -5,7 +5,13 @@
 
     <solid
         android:color="#0C4492"/>
-
+    <gradient
+        android:angle="0"
+        android:centerX="35%"
+        android:startColor="#0C4492"
+        android:endColor="#81ACE8"
+        android:type="linear"
+        />
     <padding
         android:left="10dp"
         android:top="0dp"

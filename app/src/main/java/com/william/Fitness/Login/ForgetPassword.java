@@ -3,6 +3,7 @@ package com.william.Fitness.Login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -96,4 +97,6 @@ public class ForgetPassword extends AppCompatActivity {
     public void backActivity(View view) {
         onBackPressed();
     }
+
+
 }

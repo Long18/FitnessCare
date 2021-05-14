@@ -20,7 +20,7 @@ import com.william.Fitness.R;
 
 public class NewPassword extends AppCompatActivity {
     ImageView imageView;
-    TextView title, decs;
+    TextView decs;
     TextInputLayout newPass, rePass;
     Button btnNext;
     Animation animation;
@@ -41,7 +41,6 @@ public class NewPassword extends AppCompatActivity {
 
         //Hooks
         imageView = findViewById(R.id.picture_new_pass);
-        title = findViewById(R.id.title_new_pass);
         decs = findViewById(R.id.desc_new_pass);
         newPass = findViewById(R.id.new_pass);
         rePass = findViewById(R.id.re_pass);
@@ -50,7 +49,6 @@ public class NewPassword extends AppCompatActivity {
         animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
 
         imageView.setAnimation(animation);
-        title.setAnimation(animation);
         decs.setAnimation(animation);
         newPass.setAnimation(animation);
         rePass.setAnimation(animation);

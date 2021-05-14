@@ -12,7 +12,6 @@
     tools:context=".Login.Login">
 
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,10 +33,10 @@
 
                 <TextView
                     style="@style/viewParent.headerText.NoMode"
-                    android:textSize="40sp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="Fitness Care" />
+                    android:text="Fitness Care"
+                    android:textSize="40sp" />
 
                 <ImageView
                     android:layout_width="200dp"
@@ -54,17 +53,17 @@
                 android:paddingTop="10dp">
 
                 <com.hbb20.CountryCodePicker
-                    app:ccpDialog_searchEditTextTint="@color/colorPrimary"
                     android:id="@+id/phone_numer_log"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ccp_autoDetectCountry="true"
-                    app:ccp_showFlag="true"
-                    app:ccp_showNameCode="true"
-                    app:ccp_showFullName="true"
-                    app:ccp_autoDetectLanguage="true"
                     android:background="@drawable/black_border"
-                    android:padding="5dp"/>
+                    android:padding="5dp"
+                    app:ccpDialog_searchEditTextTint="@color/colorPrimary"
+                    app:ccp_autoDetectCountry="true"
+                    app:ccp_autoDetectLanguage="true"
+                    app:ccp_showFlag="true"
+                    app:ccp_showFullName="true"
+                    app:ccp_showNameCode="true" />
 
             </RelativeLayout>
 
@@ -76,12 +75,12 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtPhone"
-                    android:textSize="21sp"
                     style="@style/modifiedEditTextlogin"
-                    android:fontFamily="@font/brandon_grotesque_regular_italic"
                     android:hint="Phone Number"
+
                     android:inputType="phone"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textSize="21sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -93,12 +92,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtPassword"
-                    android:textSize="21sp"
                     style="@style/modifiedEditTextlogin"
-                    android:fontFamily="@font/brandon_grotesque_regular_italic"
                     android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textSize="21sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
@@ -136,8 +134,8 @@
                 style="@style/loginButton"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:text="Login"
                 android:onClick="userLogin"
+                android:text="Login"
                 app:initialCornerAngle="27dp"
                 app:spinning_bar_color="#FFF"
                 app:spinning_bar_padding="6dp"
@@ -147,7 +145,6 @@
 
                 style="@style/parentlogin"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:fontFamily="@font/brandon_grotesque_regular_italic"
                 android:onClick="Register"
                 android:text="New user? Register Now"
                 android:textAlignment="center"
