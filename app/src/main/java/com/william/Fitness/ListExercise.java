@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.william.Fitness.Adapter.RecyclerViewAdapter;
 import com.william.Fitness.Model.Exercise;
+import com.william.Fitness.Model.ExerciseSearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,20 @@ public class ListExercise extends Fragment {
     }
 
     private void initData() {
+
+        exerciseList.add(new Exercise(R.drawable.ex_hit_dat,  "Hít đất"));
+        exerciseList.add(new Exercise(R.drawable.ex_hit_dat_1,  "Hít đất"));
+        exerciseList.add(new Exercise(R.drawable.ex_hit_dat_3,  "Hít đất"));
+        exerciseList.add(new Exercise(R.drawable.ex_bung,  "Gập bụng"));
+        exerciseList.add(new Exercise(R.drawable.ex_bung_1,  "Gập bụng"));
+        exerciseList.add(new Exercise(R.drawable.ex_bung_2,  "Gập bụng"));
+        exerciseList.add(new Exercise(R.drawable.ex_bung_3,  "Gập bụng"));
+        exerciseList.add(new Exercise(R.drawable.ex_bung_red,  "Gập bụng"));
+        exerciseList.add(new Exercise(R.drawable.ex_bung_white,  "Gập bụng"));
+        exerciseList.add(new Exercise(R.drawable.ex_chay,  "Chạy"));
+        exerciseList.add(new Exercise(R.drawable.ex_chay_bo,  "Chạy"));
+        exerciseList.add(new Exercise(R.drawable.ex_mong,  "Squat"));
+        exerciseList.add(new Exercise(R.drawable.ex_nguc_2,  "Tập Ngực"));
         exerciseList.add(new Exercise(R.drawable.low_lunge_pose, "Low Lunge Pose"));
         exerciseList.add(new Exercise(R.drawable.king_pigeon_pose, "King pigeon Pose"));
         exerciseList.add(new Exercise(R.drawable.facing_dog_pose, "Facing Dog Pose"));

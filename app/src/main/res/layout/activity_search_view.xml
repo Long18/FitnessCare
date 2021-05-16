@@ -7,12 +7,16 @@
     android:orientation="vertical"
     tools:context=".SearchActivity">
 
-
-    <SearchView
-        android:id="@+id/search"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:scrollbars="vertical" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:menu="@menu/menu_search"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        />
 
 
     <HorizontalScrollView
