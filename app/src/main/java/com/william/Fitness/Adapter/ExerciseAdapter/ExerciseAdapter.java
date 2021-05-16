@@ -31,7 +31,7 @@ import java.util.List;
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseHolder> implements Filterable {
 
     private List<ExerciseSearch> exerciseList;
-    private final List<ExerciseSearch> exerciseListSearch;
+    private  List<ExerciseSearch> exerciseListSearch;
 
 
     public ExerciseAdapter(List<ExerciseSearch> exerciseList) {
@@ -44,7 +44,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseHolder> implem
     public ExerciseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.item_exercise_view, parent, false);
-
         return new ExerciseHolder(itemView);
     }
 
@@ -65,8 +64,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseHolder> implem
             @Override
             public void onClick(View view, int position) {
                 //Call to new Activity
-
-
             }
         });
     }

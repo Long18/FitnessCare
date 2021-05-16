@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,8 +32,8 @@ public class SearchActivity extends AppCompatActivity {
 
     ImageView btnUpload;
     SearchView searchView;
-
-    private List<ExerciseSearch> exerciseList = new ArrayList<ExerciseSearch>();
+    Toolbar toolbar;
+    private List<ExerciseSearch> exerciseList = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private ExerciseAdapter adapter;
@@ -42,22 +42,19 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_search_view);
-
         //initData();
 
         //Hook
         btnUpload = findViewById(R.id.btnAdd);
-        searchView = findViewById(R.id.search_title);
-
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
         recyclerView = findViewById(R.id.list_view);
         layoutManager = new LinearLayoutManager(getApplicationContext());
-
         adapter = new ExerciseAdapter(data());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
         RecyclerView.ItemDecoration itemDecoration  = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
 
@@ -100,17 +97,17 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search,menu);
-
-        MenuItem searchItem = menu.findItem(R.id.search_bar);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.search_bar).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
         //SearchView searchView = (SearchView) searchItem.getActionView();
 
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
         //searchView = (SearchView) menu.findItem(R.id.search_bar).getActionView();
 
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
+       // searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -128,6 +125,13 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        if(!searchView.isIconified()){
+            searchView.setIconified(true);
+        }
+        super.onBackPressed();
+    }
     /*@Override
     public void onBackPressed() {
         if (!searchView.isIconified()){

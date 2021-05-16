@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fab_Bottom_app_bar"
         tools:replace="label">
-        <activity android:name=".updateImageExcercise"></activity>
+        <activity android:name=".updateImageExcercise"/>
         <activity android:name=".SearchActivity" />
         <activity android:name=".Login.ForgetSuccess" />
         <activity android:name=".Login.NewPassword" />
