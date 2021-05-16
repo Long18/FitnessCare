@@ -16,6 +16,11 @@
     <string name="third_slide_title">Vì một tương lai tốt đẹp </string>
     <string name="fourth_slide_title">Tham gia cùng chúng tôi </string>
 
+
+    <string name="channel_name">Channel 1</string>
+    <string name="channel_description">Channel 1</string>
+
+
     <!-- Descriptions -->
     <string name="first_slide_desc">Tôi tin rằng món quà lớn nhất mà bạn có thể trao cho gia đình mình và thế giới là chính mình khỏe khoắn </string>
     <string name="second_slide_desc">Chăm sóc sức khỏe ngày hôm nay cho tôi hy vọng tươi sáng hơn vào ngày mai. </string>

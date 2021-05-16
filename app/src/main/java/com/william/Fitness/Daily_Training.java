@@ -280,11 +280,11 @@ public class Daily_Training extends Fragment {
 
 
     private void initData() {
-        list.add(new Exercise(R.drawable.low_lunge_pose, "Low Lunge Pose"));
-        list.add(new Exercise(R.drawable.king_pigeon_pose, "King pigeon Pose"));
-        list.add(new Exercise(R.drawable.facing_dog_pose, "Facing Dog Pose"));
-        list.add(new Exercise(R.drawable.cobra_pose, "Cobra Pose"));
-        list.add(new Exercise(R.drawable.camel_pose, "Camel Pose"));
+        list.add(new Exercise(R.drawable.ex_hit_dat,  "Hít đất"));
+        list.add(new Exercise(R.drawable.ex_bung_red,  "Gập bụng"));
+        list.add(new Exercise(R.drawable.ex_chay,  "Chạy"));
+        list.add(new Exercise(R.drawable.ex_mong,  "Squat"));
+        list.add(new Exercise(R.drawable.ex_nguc_2,  "Tập Ngực"));
 
 
     }

@@ -63,6 +63,9 @@ public class Settings extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                AlarmNotification alarmNotification = new AlarmNotification();
+                alarmNotification.onReceive(getApplicationContext(),getIntent());
                 saveWorkOutMode();
                 saveAlarm(switchAlarm.isChecked());
                 Toast.makeText(getApplicationContext(), "Saved !!!!", Toast.LENGTH_SHORT).show();

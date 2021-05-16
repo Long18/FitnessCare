@@ -6,13 +6,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +49,7 @@ public class SearchActivity extends AppCompatActivity {
 
         //Hook
         btnUpload = findViewById(R.id.btnAdd);
+        searchView = findViewById(R.id.search_title);
 
         recyclerView = findViewById(R.id.list_view);
         layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -92,11 +98,17 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_search, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search,menu);
+
+        MenuItem searchItem = menu.findItem(R.id.search_bar);
+        //SearchView searchView = (SearchView) searchItem.getActionView();
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
-        searchView = (SearchView) menu.findItem(R.id.search_bar).getActionView();
+        //searchView = (SearchView) menu.findItem(R.id.search_bar).getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
@@ -116,14 +128,14 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         if (!searchView.isIconified()){
             searchView.setIconified(true);
             return;
         }
         super.onBackPressed();
-    }
+    }*/
 
     /*private void  initData() {
         exerciseList.add(new ExerciseSearch(R.drawable.ex_hit_dat,  "Hít đất","Bài tập giúp lên cơ tay", "0:30"));
