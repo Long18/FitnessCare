@@ -4,6 +4,10 @@ public class Exercise {
     private int image_id;
     private String name;
 
+    public Exercise() {
+
+    }
+
     public Exercise(int image_id, String name) {
         this.image_id = image_id;
         this.name = name;

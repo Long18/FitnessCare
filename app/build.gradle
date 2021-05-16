@@ -60,8 +60,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0-alpha02'
     implementation 'com.hbb20:ccp:2.3.1'
     implementation 'com.chaos.view:pinview:1.4.3'
+    //implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
-
 
     //Theme
     implementation 'br.com.simplepass:loading-button-android:1.14.0'

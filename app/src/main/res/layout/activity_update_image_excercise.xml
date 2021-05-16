@@ -11,11 +11,11 @@
     tools:context=".updateImageExcercise">
 
     <ImageView
-        android:onClick="backMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_close"
+        android:onClick="backMainActivity"
         android:padding="5dp"
+        android:src="@drawable/ic_close"
         app:tint="@color/black" />
 
     <ScrollView
@@ -35,10 +35,10 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:gravity="center"
-                    android:layout_centerHorizontal="true"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:fontFamily="@font/bungee"
+                    android:gravity="center"
                     android:text="Upload Image Exercise"
                     android:textColor="@color/white"
                     android:textSize="26sp" />
@@ -101,10 +101,24 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:fontFamily="@font/bungee"
+                        android:text="Pick Type: "
+                        android:textSize="15sp" />
+                    <Spinner
+                        android:id="@+id/cbb_Type"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/bungee"
                         android:text="Pick Time: "
                         android:textSize="15sp" />
 
                     <TimePicker
+                        android:id="@+id/clock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:timePickerMode="spinner" />
