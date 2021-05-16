@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
-    
+
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="150dp"
@@ -14,18 +14,18 @@
         <ImageView
             android:id="@+id/ms_img"
             android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:src="@drawable/ic_arms"/>
+            android:layout_height="220dp"
+            android:src="@drawable/ic_arms" />
 
         <TextView
             android:id="@+id/ms_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cơ Tay"
-            android:layout_toRightOf="@id/ms_img"
             android:layout_marginLeft="10dp"
-            android:textSize="20dp"
-            android:fontFamily="@font/brandon_grotesque_black"/>
+            android:layout_toRightOf="@id/ms_img"
+            android:fontFamily="@font/brandon_grotesque_black"
+            android:text="Cơ Tay"
+            android:textSize="20dp" />
 
         <RatingBar
 
@@ -36,18 +36,16 @@
             android:layout_below="@id/ms_title"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/ms_img"
-            android:progressTint="@color/colorPrimary"
+            android:progressTint="#FF9800"
             android:rating="4.5" />
 
         <TextView
             android:id="@+id/ms_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đây là nơi để viết cái gì đó để thêm vô sau"
             android:layout_below="@id/ms_rating"
             android:layout_toRightOf="@id/ms_img"
-            android:padding="10dp"/>
-
+            android:padding="10dp" />
 
 
     </RelativeLayout>

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +46,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     ImageView menu, btnchest, btnarms, btnback, btnlegs, btnbut;
     LinearLayout contentView;
     RelativeLayout searching;
+    TextView seemore, seemoree;
 
     //Menu
     DrawerLayout drawerLayout;
@@ -71,6 +73,9 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         btnbut = (ImageView) view.findViewById(R.id.img_but);
         contentView = (LinearLayout) view.findViewById(R.id.contentView);
         searching = (RelativeLayout) view.findViewById(R.id.searching_RL);
+
+        seemore = (TextView) view.findViewById(R.id.see_more);
+        seemoree = (TextView) view.findViewById(R.id.seee_more);
 
 
         drawerLayout = (DrawerLayout) view.findViewById(R.id.draw_layout);
@@ -122,6 +127,19 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
             }
         });
 
+        seemore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchTurn();
+            }
+        });
+
+        seemoree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchTurn();
+            }
+        });
 
         return view;
     }
@@ -193,10 +211,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         ArrayList<FeaturedTutorial> featuredTutorialArrayList = new ArrayList<>();
 
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_login_hero, "Xin chào", "Test"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_address, "Đây là", "Test"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_chest, "Bản test", "Test"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_username, "Chưa chính thức", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_mong, "Tập Mông", "Bài tập này giúp bạn \nlàm đẹp vóc dáng"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_chay_bo, "Chạy Bộ", "Bài tập này giúp bạn \nnâng cao sức bền"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_bung_1, "Tập Bụng", "Không ai không thích \nbản thân mình đẹp"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_hit_dat_3, "Hít Đất", "Nỗ lực mọi thứ \nđể thành công"));
 
 
         categoriesRecycler.setHasFixedSize(true);
@@ -213,10 +231,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         ArrayList<FeaturedTutorial> featuredTutorialArrayList = new ArrayList<>();
 
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_login_hero, "Chức năng này", "Test"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_address, "Sẽ được", "Test"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_chest, "Phát triển thêm", "Test"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_username, "Sau này", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_hit_dat, "Hít Đất", "Bài tập giúp lên cơ tay"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_bung_red, "Gập Bụng", "Bài tập giúp săn chắc cơ bụng"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.king_pigeon_pose, "King Pieon Pose", "Bài tập dãn cơ lưng"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_nguc_2, "Tập Ngực", "Bài tập săn chắc ngực"));
 
         adapter = new MostViewedAdapter(featuredTutorialArrayList);
         mostViewedRecycler.setAdapter(adapter);
@@ -229,10 +247,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         ArrayList<FeaturedTutorial> featuredTutorialArrayList = new ArrayList<>();
 
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_login_hero, "Cám ơn", "Test"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_address, "Các bạn", "Test"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_chest, "Đã ủng hộ", "Test"));
-        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ic_username, "Ứng dụng", "Test"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_chay_bo, "Bài tập sức khoẻ", "Dành ra 15 phút mỗi ngày để chạy bộ để cải thiện sức khoẻ của bản thân"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_bung_red, "Bài Tập Bụng", "Chỉ cần mỗi ngày 50 cái, không cần liên tục sau 1 tháng bạn sẽ thấy sự khác biệt"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_hit_dat, "Hít đất", "Cải thiện sức bền của bản thân chỉ với 50 lần mỗi ngày"));
+        featuredTutorialArrayList.add(new FeaturedTutorial(R.drawable.ex_mong, "Squat", "Cải thiện vóc dáng bằng cách tập mông đều đặn"));
 
         adapter = new FeaturedAdapter(featuredTutorialArrayList);
         featuredRecycler.setAdapter(adapter);
@@ -292,5 +310,9 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         }
 
         return true;
+    }
+
+    public void searchTurn() {
+        startActivity(new Intent(getActivity().getApplicationContext(), SearchActivity.class));
     }
 }

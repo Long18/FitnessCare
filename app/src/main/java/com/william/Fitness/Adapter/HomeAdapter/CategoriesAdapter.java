@@ -36,6 +36,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ad
         FeaturedTutorial FeaturedTutorial = mostViewedLocations.get(position);
         holder.imageView.setImageResource(FeaturedTutorial.getImage());
         holder.textView.setText(FeaturedTutorial.getTitle());
+        holder.des.setText(FeaturedTutorial.getDescription());
         //holder.relativeLayout.setBackground(FeaturedTutorial.getGradient());
     }
 
@@ -48,7 +49,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ad
 
         RelativeLayout relativeLayout;
         ImageView imageView;
-        TextView textView;
+        TextView textView, des;
 
         public AdapterAllCategoriesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,6 +57,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ad
             relativeLayout = itemView.findViewById(R.id.background_gradient);
             imageView = itemView.findViewById(R.id.categories_img);
             textView = itemView.findViewById(R.id.categories_title);
+            des = itemView.findViewById(R.id.categories_des);
         }
     }
 }

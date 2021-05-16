@@ -283,7 +283,7 @@
                             android:layout_margin="10dp"
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="50dp"
-                            android:fontFamily="@font/brandon_grotesque_black"
+                            android:fontFamily="@font/bungee"
                             android:text="Sức khoẻ"
                             android:textAllCaps="true"
                             android:textColor="@color/colorAccent"
@@ -347,6 +347,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:id="@+id/seee_more"
                             android:text="Xem thêm" />
 
 
@@ -384,6 +385,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
+                            android:id="@+id/see_more"
                             android:text="Xem thêm" />
 
 

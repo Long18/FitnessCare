@@ -35,6 +35,7 @@ public class MostViewedAdapter extends RecyclerView.Adapter<MostViewedAdapter.Mo
 
         holder.imageView.setImageResource(FeaturedTutorial.getImage());
         holder.textView.setText(FeaturedTutorial.getTitle());
+        holder.des.setText(FeaturedTutorial.getDescription());
     }
 
     @Override
@@ -45,13 +46,14 @@ public class MostViewedAdapter extends RecyclerView.Adapter<MostViewedAdapter.Mo
     public static class MostViewedViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView textView;
+        TextView textView, des;
 
         public MostViewedViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.ms_img);
             textView = itemView.findViewById(R.id.ms_title);
+            des = itemView.findViewById(R.id.ms_desc);
         }
     }
 }
