@@ -11,18 +11,25 @@
     <SearchView
         android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:scrollbars="vertical" />
 
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="80dp"
+        android:animateLayoutChanges="true"
+        android:clickable="true"
+        android:fadeScrollbars="true"
+        android:fillViewport="true"
+        android:hapticFeedbackEnabled="true"
+        android:isScrollContainer="true"
+        android:keepScreenOn="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical">
 
             <Button
                 android:id="@+id/btnChest"
