@@ -104,7 +104,7 @@ public class Login extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        if(authStateListener != null){
+        if (authStateListener != null) {
             mAuth.removeAuthStateListener(authStateListener);
         }
     }
@@ -129,7 +129,7 @@ public class Login extends AppCompatActivity {
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         mCallbackManager = CallbackManager.Factory.create();
-        btnFacebook.setReadPermissions("email","public_profile");
+        btnFacebook.setReadPermissions("email", "public_profile");
         btnFacebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {

@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.william.Fitness.Database.CheckInternet;
+import com.william.Fitness.Database.SessionManager;
+import com.william.Fitness.MainActivity;
 import com.william.Fitness.R;
 
 public class WelcomeStartUpScreen extends AppCompatActivity {
@@ -29,6 +31,8 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
     ImageView btnBack, image;
     Button next, btnInf;
     TextView title, login;
+
+
 
 
     @Override
@@ -48,7 +52,12 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
 
 
     public void Logout(View view) {
+        SessionManager sessionManager = new SessionManager(WelcomeStartUpScreen.this,SessionManager.SESSION_USER);
         FirebaseAuth.getInstance().signOut();
+        sessionManager.checkUserLogout();
+        Toast.makeText(WelcomeStartUpScreen.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 
     public void showDialog() {
