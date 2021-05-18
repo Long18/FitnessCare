@@ -294,6 +294,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
             case R.id.nav_but:
                 showDialog();
                 break;
+            /*case R.id.nav_profile:
+
+
+                break;*/
             case R.id.nav_share:
                 Uri uriFace = Uri.parse("https://www.facebook.com/William.2418/");
                 Intent intentFace = new Intent(Intent.ACTION_VIEW, uriFace);

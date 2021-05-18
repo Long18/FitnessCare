@@ -2,6 +2,7 @@ package com.william.Fitness;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,5 +27,9 @@ public class AllCategories extends AppCompatActivity {
                 AllCategories.super.onBackPressed();
             }
         });
+    }
+
+    public void seeCategories(View view){
+        startActivity(new Intent(AllCategories.this, SearchActivity.class));
     }
 }

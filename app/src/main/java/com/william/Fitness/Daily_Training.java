@@ -30,7 +30,7 @@ public class Daily_Training extends Fragment {
 
     Button btnStart;
     ImageView ex_image;
-    TextView txtGetReady,txtCountDown,txtTimer,ex_name;
+    TextView txtGetReady, txtCountDown, txtTimer, ex_name;
     ProgressBar progressBar;
     LinearLayout layoutGetReady;
 
@@ -41,14 +41,12 @@ public class Daily_Training extends Fragment {
     CalendarDB calendarDB;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_daily__training,container,false);
+        View view = inflater.inflate(R.layout.fragment_daily__training, container, false);
         initData();
         calendarDB = new CalendarDB(getActivity());
-
 
 
         btnStart = view.findViewById(R.id.btnStart);
@@ -71,36 +69,33 @@ public class Daily_Training extends Fragment {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (btnStart.getText().toString().toLowerCase().equals("start")){
+                if (btnStart.getText().toString().toLowerCase().equals("start")) {
                     showGetReady();
                     btnStart.setText("done");
 
-                }else if(btnStart.getText().toString().toLowerCase().equals("done")){
+                } else if (btnStart.getText().toString().toLowerCase().equals("done")) {
 
-                    if(calendarDB.getSettingMode() == 0)
+                    if (calendarDB.getSettingMode() == 0)
                         exercisesEasyModeCountDown.cancel();
-                    else if(calendarDB.getSettingMode() == 1)
+                    else if (calendarDB.getSettingMode() == 1)
                         exercisesMediumModeCountDown.cancel();
-                    else if(calendarDB.getSettingMode() == 2)
+                    else if (calendarDB.getSettingMode() == 2)
                         exercisesHardModeCountDown.cancel();
-
 
                     restTimeCountDown.cancel();
 
-
-                    if (ex_id < list.size()){
+                    if (ex_id < list.size()) {
                         showRestTime();
                         ex_id++;
                         progressBar.setProgress(ex_id);
                         txtTimer.setText("");
-                    }else showFinished();
+                    } else showFinished();
 
-                }else
-                if(calendarDB.getSettingMode() == 0)
+                } else if (calendarDB.getSettingMode() == 0)
                     exercisesEasyModeCountDown.cancel();
-                else if(calendarDB.getSettingMode() == 1)
+                else if (calendarDB.getSettingMode() == 1)
                     exercisesMediumModeCountDown.cancel();
-                else if(calendarDB.getSettingMode() == 2)
+                else if (calendarDB.getSettingMode() == 2)
                     exercisesHardModeCountDown.cancel();
 
                 restTimeCountDown.cancel();
@@ -134,11 +129,11 @@ public class Daily_Training extends Fragment {
         layoutGetReady.setVisibility(View.VISIBLE);
 
         txtGetReady.setText("GET READY");
-        new CountDownTimer(6000,1000){
+        new CountDownTimer(6000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                txtCountDown.setText(""+(millisUntilFinished-1000)/1000 );
+                txtCountDown.setText("" + (millisUntilFinished - 1000) / 1000);
             }
 
             @Override
@@ -149,24 +144,23 @@ public class Daily_Training extends Fragment {
     }
 
     private void showExercises() {
-        if (ex_id < list.size()){
+        if (ex_id < list.size()) {
             ex_image.setVisibility(View.VISIBLE);
             btnStart.setVisibility(View.VISIBLE);
             layoutGetReady.setVisibility(View.INVISIBLE);
 
-            if(calendarDB.getSettingMode() == 0)
-            exercisesEasyModeCountDown.start();
-            else if(calendarDB.getSettingMode() == 1)
-            exercisesMediumModeCountDown.start();
-            else if(calendarDB.getSettingMode() == 2)
-            exercisesHardModeCountDown.start();
+            if (calendarDB.getSettingMode() == 0)
+                exercisesEasyModeCountDown.start();
+            else if (calendarDB.getSettingMode() == 1)
+                exercisesMediumModeCountDown.start();
+            else if (calendarDB.getSettingMode() == 2)
+                exercisesHardModeCountDown.start();
 
             //Set data
             ex_image.setImageResource(list.get(ex_id).getImage_id());
             ex_name.setText(list.get(ex_id).getName());
 
-        }
-        else
+        } else
             showFinished();
     }
 
@@ -182,85 +176,82 @@ public class Daily_Training extends Fragment {
         txtCountDown.setText("Congratulation!! \n You're done today.");
         txtCountDown.setTextSize(20);
 
-        calendarDB.saveDay(""+ Calendar.getInstance().getTimeInMillis());
+        calendarDB.saveDay("" + Calendar.getInstance().getTimeInMillis());
 
     }
 
     //Countdown
-    CountDownTimer exercisesEasyModeCountDown = new CountDownTimer(Common.TIME_LIMIT_EASY,1000) {
+    CountDownTimer exercisesEasyModeCountDown = new CountDownTimer(Common.TIME_LIMIT_EASY, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-            txtTimer.setText("" +(millisUntilFinished/1000));
+            txtTimer.setText("" + (millisUntilFinished / 1000));
         }
 
         @Override
         public void onFinish() {
-            if (ex_id < list.size() - 1){
+            if (ex_id < list.size() - 1) {
                 ex_id++;
                 progressBar.setProgress(ex_id);
                 txtTimer.setText("");
 
                 setExerciseInformation(ex_id);
                 btnStart.setText("Start");
-            }
-            else {
+            } else {
                 showFinished();
             }
         }
     };
-    CountDownTimer exercisesMediumModeCountDown = new CountDownTimer(Common.TIME_LIMIT_MEDIUM,1000) {
+    CountDownTimer exercisesMediumModeCountDown = new CountDownTimer(Common.TIME_LIMIT_MEDIUM, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-            txtTimer.setText("" +(millisUntilFinished/1000));
+            txtTimer.setText("" + (millisUntilFinished / 1000));
         }
 
         @Override
         public void onFinish() {
-            if (ex_id < list.size() - 1){
+            if (ex_id < list.size() - 1) {
                 ex_id++;
                 progressBar.setProgress(ex_id);
                 txtTimer.setText("");
 
                 setExerciseInformation(ex_id);
                 btnStart.setText("Start");
-            }
-            else {
+            } else {
                 showFinished();
             }
         }
     };
-    CountDownTimer exercisesHardModeCountDown = new CountDownTimer(Common.TIME_LIMIT_HARD,1000) {
+    CountDownTimer exercisesHardModeCountDown = new CountDownTimer(Common.TIME_LIMIT_HARD, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-            txtTimer.setText("" +(millisUntilFinished/1000));
+            txtTimer.setText("" + (millisUntilFinished / 1000));
         }
 
         @Override
         public void onFinish() {
-            if (ex_id < list.size() - 1){
+            if (ex_id < list.size() - 1) {
                 ex_id++;
                 progressBar.setProgress(ex_id);
                 txtTimer.setText("");
 
                 setExerciseInformation(ex_id);
                 btnStart.setText("Start");
-            }
-            else {
+            } else {
                 showFinished();
             }
         }
     };
 
-    CountDownTimer restTimeCountDown = new CountDownTimer(10000,1000) {
+    CountDownTimer restTimeCountDown = new CountDownTimer(10000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-            txtCountDown.setText("" +millisUntilFinished/1000);
+            txtCountDown.setText("" + millisUntilFinished / 1000);
         }
 
         @Override
         public void onFinish() {
-           setExerciseInformation(ex_id);
-           showExercises();
+            setExerciseInformation(ex_id);
+            showExercises();
         }
     };
 
@@ -280,11 +271,11 @@ public class Daily_Training extends Fragment {
 
 
     private void initData() {
-        list.add(new Exercise(R.drawable.ex_hit_dat,  "Hít đất"));
-        list.add(new Exercise(R.drawable.ex_bung_red,  "Gập bụng"));
-        list.add(new Exercise(R.drawable.ex_chay,  "Chạy"));
-        list.add(new Exercise(R.drawable.ex_mong,  "Squat"));
-        list.add(new Exercise(R.drawable.ex_nguc_2,  "Tập Ngực"));
+        list.add(new Exercise(R.drawable.ex_hit_dat, "Hít đất"));
+        list.add(new Exercise(R.drawable.ex_bung_red, "Gập bụng"));
+        list.add(new Exercise(R.drawable.ex_chay, "Chạy"));
+        list.add(new Exercise(R.drawable.ex_mong, "Squat"));
+        list.add(new Exercise(R.drawable.ex_nguc_2, "Tập Ngực"));
 
 
     }

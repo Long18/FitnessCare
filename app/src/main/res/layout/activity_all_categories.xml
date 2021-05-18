@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AllCategories"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    tools:context=".AllCategories">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,11 +38,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Works"
-            android:textSize="30sp"
             android:fontFamily="@font/brandon_grotesque_black"
             android:padding="10dp"
-            android:textAllCaps="true"/>
+            android:text="Your Works"
+            android:textAllCaps="true"
+            android:textSize="30sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -51,27 +51,27 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/card_categories_1"
-                android:layout_margin="20dp">
+                android:layout_margin="20dp"
+                android:background="@drawable/card_categories_1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Chest"
-                    android:textSize="30sp"
                     android:fontFamily="@font/brandon_grotesque_black"
                     android:padding="25dp"
-                    android:textColor="@color/black"/>
+                    android:text="@string/Chest"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See More"
-                    android:padding="20dp"
                     android:layout_alignParentBottom="true"
                     android:background="#00000000"
-                    android:textColor="@color/black"/>
-
+                    android:onClick="seeCategories"
+                    android:padding="20dp"
+                    android:text="See More"
+                    android:textColor="@color/black" />
 
 
             </RelativeLayout>
@@ -79,49 +79,49 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/ic_chest"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="-40dp"/>
+                android:layout_marginTop="-40dp"
+                android:src="@drawable/ic_chest" />
         </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             app:cardBackgroundColor="#00000000"
-            app:cardElevation="8dp"
-            android:layout_margin="20dp">
+            app:cardElevation="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/card_categories_2"
-                >
+                android:background="@drawable/card_categories_2">
 
                 <ImageView
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_back"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_back" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Back"
-                    android:textSize="30sp"
+                    android:layout_alignParentRight="true"
                     android:fontFamily="@font/brandon_grotesque_black"
                     android:padding="25dp"
+                    android:text="@string/Back"
                     android:textColor="@color/purple_500"
-                    android:layout_alignParentRight="true"/>
+                    android:textSize="30sp" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See More"
-                    android:padding="20dp"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:background="#00000000"
-                    android:textColor="@color/purple_500"
-                    android:layout_alignParentRight="true"/>
+                    android:onClick="seeCategories"
+                    android:padding="20dp"
+                    android:text="See More"
+                    android:textColor="@color/purple_500" />
 
             </RelativeLayout>
 
@@ -134,8 +134,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/card_categories_3"
-                android:layout_margin="20dp">
+                android:layout_margin="20dp"
+                android:background="@drawable/card_categories_3">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -151,6 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:background="#00000000"
+                    android:onClick="seeCategories"
                     android:padding="20dp"
                     android:text="See More"
                     android:textColor="@color/black" />
@@ -161,49 +162,49 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/ic_arms"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="-50dp"/>
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_arms" />
         </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             app:cardBackgroundColor="#00000000"
-            app:cardElevation="8dp"
-            android:layout_margin="20dp">
+            app:cardElevation="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/card_categories_4"
-                >
+                android:background="@drawable/card_categories_4">
 
                 <ImageView
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_legs"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_legs" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Legs"
-                    android:textSize="30sp"
+                    android:layout_alignParentRight="true"
                     android:fontFamily="@font/brandon_grotesque_black"
                     android:padding="25dp"
+                    android:text="@string/Legs"
                     android:textColor="@color/purple_500"
-                    android:layout_alignParentRight="true"/>
+                    android:textSize="30sp" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See More"
-                    android:padding="20dp"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:background="#00000000"
-                    android:textColor="@color/purple_500"
-                    android:layout_alignParentRight="true"/>
+                    android:onClick="seeCategories"
+                    android:padding="20dp"
+                    android:text="See More"
+                    android:textColor="@color/purple_500" />
 
             </RelativeLayout>
 
@@ -216,8 +217,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/card_categories_5"
-                android:layout_margin="20dp">
+                android:layout_margin="20dp"
+                android:background="@drawable/card_categories_5">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -233,6 +234,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:background="#00000000"
+                    android:onClick="seeCategories"
                     android:padding="20dp"
                     android:text="See More"
                     android:textColor="@color/white" />
@@ -243,9 +245,9 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/ic_but"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="-50dp"/>
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_but" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -255,27 +257,27 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/card_categories_1"
-                android:layout_margin="20dp">
+                android:layout_margin="20dp"
+                android:background="@drawable/card_categories_1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Chest"
-                    android:textSize="30sp"
                     android:fontFamily="@font/brandon_grotesque_black"
                     android:padding="25dp"
-                    android:textColor="@color/black"/>
+                    android:text="@string/Chest"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See More"
-                    android:padding="20dp"
                     android:layout_alignParentBottom="true"
                     android:background="#00000000"
-                    android:textColor="@color/black"/>
-
+                    android:onClick="seeCategories"
+                    android:padding="20dp"
+                    android:text="See More"
+                    android:textColor="@color/black" />
 
 
             </RelativeLayout>
@@ -283,49 +285,49 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/ic_chest"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="-40dp"/>
+                android:layout_marginTop="-40dp"
+                android:src="@drawable/ic_chest" />
         </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             app:cardBackgroundColor="#00000000"
-            app:cardElevation="8dp"
-            android:layout_margin="20dp">
+            app:cardElevation="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/card_categories_2"
-                >
+                android:background="@drawable/card_categories_2">
 
                 <ImageView
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_back"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_back" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Back"
-                    android:textSize="30sp"
+                    android:layout_alignParentRight="true"
                     android:fontFamily="@font/brandon_grotesque_black"
                     android:padding="25dp"
+                    android:text="@string/Back"
                     android:textColor="@color/purple_500"
-                    android:layout_alignParentRight="true"/>
+                    android:textSize="30sp" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See More"
-                    android:padding="20dp"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:background="#00000000"
-                    android:textColor="@color/purple_500"
-                    android:layout_alignParentRight="true"/>
+                    android:onClick="seeCategories"
+                    android:padding="20dp"
+                    android:text="See More"
+                    android:textColor="@color/purple_500" />
 
             </RelativeLayout>
 
@@ -338,8 +340,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/card_categories_3"
-                android:layout_margin="20dp">
+                android:layout_margin="20dp"
+                android:background="@drawable/card_categories_3">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -355,6 +357,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:background="#00000000"
+                    android:onClick="seeCategories"
                     android:padding="20dp"
                     android:text="See More"
                     android:textColor="@color/black" />
@@ -365,49 +368,49 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/ic_arms"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="-50dp"/>
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_arms" />
         </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             app:cardBackgroundColor="#00000000"
-            app:cardElevation="8dp"
-            android:layout_margin="20dp">
+            app:cardElevation="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/card_categories_4"
-                >
+                android:background="@drawable/card_categories_4">
 
                 <ImageView
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_legs"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_legs" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Legs"
-                    android:textSize="30sp"
+                    android:layout_alignParentRight="true"
                     android:fontFamily="@font/brandon_grotesque_black"
                     android:padding="25dp"
+                    android:text="@string/Legs"
                     android:textColor="@color/purple_500"
-                    android:layout_alignParentRight="true"/>
+                    android:textSize="30sp" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See More"
-                    android:padding="20dp"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:background="#00000000"
-                    android:textColor="@color/purple_500"
-                    android:layout_alignParentRight="true"/>
+                    android:onClick="seeCategories"
+                    android:padding="20dp"
+                    android:text="See More"
+                    android:textColor="@color/purple_500" />
 
             </RelativeLayout>
 
@@ -420,8 +423,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/card_categories_5"
-                android:layout_margin="20dp">
+                android:layout_margin="20dp"
+                android:background="@drawable/card_categories_5">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -437,6 +440,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:background="#00000000"
+                    android:onClick="seeCategories"
                     android:padding="20dp"
                     android:text="See More"
                     android:textColor="@color/white" />
@@ -447,9 +451,9 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/ic_but"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="-50dp"/>
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_but" />
         </RelativeLayout>
 
     </LinearLayout>

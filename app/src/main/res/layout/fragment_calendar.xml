@@ -11,6 +11,7 @@
         app:mcv_showOtherDates="all"
         app:mcv_selectionColor="@color/colorPrimaryDark"
         android:id="@+id/calendar_view"
+        app:mcv_firstDayOfWeek="monday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

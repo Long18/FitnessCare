@@ -30,7 +30,7 @@ public class Calendar extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_calendar,container,false);
+        View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         calendarDB = new CalendarDB(getActivity());
         materialCalendarView = view.findViewById(R.id.calendar_view);
@@ -38,9 +38,10 @@ public class Calendar extends Fragment {
         List<String> workoutDay = calendarDB.getWorkoutDays();
 
         HashSet<CalendarDay> convertedList = new HashSet<>();
-        for (String value:workoutDay)
+        for (String value : workoutDay)
             convertedList.add(CalendarDay.from(new Date(Long.parseLong(value))));
         materialCalendarView.addDecorator(new WorkoutDone(convertedList));
+
 
         return view;
     }
