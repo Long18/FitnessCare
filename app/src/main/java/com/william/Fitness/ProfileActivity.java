@@ -11,11 +11,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,8 +46,10 @@ public class ProfileActivity extends Fragment {
     TextInputLayout getEmail, getPassword;
     TextInputEditText fullname, username, phone, email, gender, date, password;
     TextView mFullName, mUserName;
-    Button btnUpdate;
+    Button btnUpdate, btnBackLogin;
     ImageView mProfileImage;
+    RelativeLayout turnLogin;
+    LinearLayout turnLogin2;
 
     String _mFullName, _mUserName, _mPhone, _mEmail, _mGender, _mDate, _mPassword;
     FirebaseDatabase rootNode;
@@ -84,7 +89,10 @@ public class ProfileActivity extends Fragment {
         getEmail = view.findViewById(R.id.email_TextInputLayout);
         getPassword = view.findViewById(R.id.password_TextInputLayout);
         btnUpdate = view.findViewById(R.id.btnUpdate);
+        btnBackLogin = view.findViewById(R.id.btnBackLogin);
         mProfileImage = view.findViewById(R.id.profile_image);
+        turnLogin = view.findViewById(R.id.rll_login);
+        turnLogin2 = view.findViewById(R.id.lnl_login);
 
 
         SessionManager sessionManager = new SessionManager(getActivity().getApplicationContext(), SessionManager.SESSION_USER);
@@ -127,10 +135,28 @@ public class ProfileActivity extends Fragment {
         });
 
 
+        //User's must loggin to see this page
+        if (sessionManager.checkUserLogin()) {
+            turnLogin.setVisibility(View.GONE);
+
+
+        } else {
+            turnLogin2.setVisibility(View.GONE);
+        }
+
+        btnBackLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), Login.class);
+                startActivity(intent);
+            }
+        });
+
+
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openGallary = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent openGallary = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(openGallary, 1000);
             }
         });
