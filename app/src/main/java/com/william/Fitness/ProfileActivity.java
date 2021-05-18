@@ -135,12 +135,11 @@ public class ProfileActivity extends Fragment {
         });
 
 
-        //User's must loggin to see this page
+        //User's must login to see this page
         if (sessionManager.checkUserLogin()) {
             turnLogin.setVisibility(View.GONE);
-
-
         } else {
+            //if user's not login, they can't see profile settings
             turnLogin2.setVisibility(View.GONE);
         }
 
