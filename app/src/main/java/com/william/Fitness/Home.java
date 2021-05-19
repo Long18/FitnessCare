@@ -73,7 +73,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-
+        m_SumCount = m_stepCount + m_runCount;
 
         //Hooks
         featuredRecycler = (RecyclerView) view.findViewById(R.id.rcv_featured);
@@ -112,34 +112,33 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                     //Nhận dữ liệu Gia tốc kế:
                     //
                     //Tăng tốc dọc theo trục X
+                    //Đi sang trái, phải
                     //Tăng tốc dọc theo trục Y
+                    //Đi bộ tới lui
                     //Tăng tốc dọc theo trục Z
+                    //Leo cầu thang, bay
 
-                    float x_acceleration = sensorEvent.values[0];
-                    float y_acceleration = sensorEvent.values[1];
-                    float z_acceleration = sensorEvent.values[2];
+                    float x = sensorEvent.values[0];
+                    float y = sensorEvent.values[1];
+                    float z = sensorEvent.values[2];
 
-                    double Magnitude = Math.sqrt(
-                              x_acceleration*x_acceleration
-                            + y_acceleration*y_acceleration
-                            + z_acceleration*z_acceleration
-                    );
+                    //Phương trình tính gia tốc
+                    double Magnitude = Math.sqrt(x*x+y*y+z*z);
                     double MagnitudeDelta = Magnitude - MagnitudePrevious;
                     MagnitudePrevious = Magnitude;
 
                     //khác biệt về độ lớn này so với giá trị trước đó
                     //Nếu giá trị này lớn hơn một giá trị ngưỡng cụ thể thì tăng số bước.
-                    //Ngưỡng đi bộ = 6
-                    //Ngưỡng để chạy = 7~10
+                    //Ngưỡng đi bộ >10
+                    //Ngưỡng để chạy < 10
 
-                    if (MagnitudeDelta > 6){
+                    if (MagnitudeDelta > 6 && MagnitudeDelta < 10){
                         m_stepCount++;
                         txtcountnumberwalk.setText("Walk: " + m_stepCount.toString());
-                    }else if (MagnitudeDelta > 7){
+                    }if (MagnitudeDelta > 10){
                         m_runCount++;
                         txtcountnumberrun.setText("Run: " + m_runCount.toString());
                     }
-                    m_SumCount = m_stepCount + m_runCount;
                 }
             }
 
@@ -224,7 +223,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 .build();*/
 
         SeriesItem seriesItem = new SeriesItem.Builder(Color.argb(255, 64, 196, 84))
-                .setRange(0, 100, m_SumCount)
+                .setRange(0, 25, m_stepCount)
                 .addEdgeDetail(new EdgeDetail(EdgeDetail.EdgeType.EDGE_OUTER, Color.parseColor("#FF0000"), 0.2f))
                 .setInset(new PointF(20f, 20f))
                 .build();
@@ -233,9 +232,8 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         int backIndex = decoView.addSeries(seriesItem);
 
-        decoView.addEvent(new DecoEvent.Builder(10.135791912f)
+        decoView.addEvent(new DecoEvent.Builder(80f)
                 .setIndex(backIndex)
-                .setDelay(500)
                 .build());
 
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
