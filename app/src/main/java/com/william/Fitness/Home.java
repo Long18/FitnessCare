@@ -1,34 +1,41 @@
 package com.william.Fitness;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PointF;
 import android.graphics.drawable.GradientDrawable;
+import android.hardware.SensorManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.navigation.NavigationView;
+import com.hookedonplay.decoviewlib.DecoView;
+import com.hookedonplay.decoviewlib.charts.EdgeDetail;
+import com.hookedonplay.decoviewlib.charts.SeriesItem;
+import com.hookedonplay.decoviewlib.charts.SeriesLabel;
+import com.hookedonplay.decoviewlib.events.DecoEvent;
 import com.william.Fitness.Adapter.HomeAdapter.CategoriesAdapter;
 import com.william.Fitness.Adapter.HomeAdapter.FeaturedAdapter;
 import com.william.Fitness.Adapter.HomeAdapter.FeaturedTutorial;
@@ -37,7 +44,6 @@ import com.william.Fitness.Login.Login;
 import com.william.Fitness.Login.WelcomeStartUpScreen;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Home extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView featuredRecycler, mostViewedRecycler, categoriesRecycler;
@@ -46,11 +52,19 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     ImageView menu, btnchest, btnarms, btnback, btnlegs, btnbut;
     LinearLayout contentView;
     RelativeLayout searching;
-    TextView seemore, seemoree;
+    TextView seemore, seemoree,textPercentage, txtcountnumberwalk, txtcountnumberrun;
+
 
     //Menu
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+
+    //Count Steps
+    DecoView decoView;
+    private double MagnitudePrevious = 0;
+    private Integer m_stepCount = 0;
+    private Integer m_runCount = 0;
+    private int m_SumCount = 0;
 
 
     static final float END_SCALE = 0.7f;
@@ -81,6 +95,62 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         drawerLayout = (DrawerLayout) view.findViewById(R.id.draw_layout);
         navigationView = (NavigationView) view.findViewById(R.id.ngv_view);
 
+
+
+        textPercentage = (TextView) view.findViewById(R.id.txtCount);
+        txtcountnumberwalk = (TextView) view.findViewById(R.id.txtCountNumberWalk);
+        txtcountnumberrun = (TextView) view.findViewById(R.id.txtCountNumberRun);
+        decoView = (DecoView) view.findViewById(R.id.countSteps);
+        SensorManager sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        SensorEventListener stepDetector = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                if (sensorEvent != null){
+
+                    //Nhận dữ liệu Gia tốc kế:
+                    //
+                    //Tăng tốc dọc theo trục X
+                    //Tăng tốc dọc theo trục Y
+                    //Tăng tốc dọc theo trục Z
+
+                    float x_acceleration = sensorEvent.values[0];
+                    float y_acceleration = sensorEvent.values[1];
+                    float z_acceleration = sensorEvent.values[2];
+
+                    double Magnitude = Math.sqrt(
+                              x_acceleration*x_acceleration
+                            + y_acceleration*y_acceleration
+                            + z_acceleration*z_acceleration
+                    );
+                    double MagnitudeDelta = Magnitude - MagnitudePrevious;
+                    MagnitudePrevious = Magnitude;
+
+                    //khác biệt về độ lớn này so với giá trị trước đó
+                    //Nếu giá trị này lớn hơn một giá trị ngưỡng cụ thể thì tăng số bước.
+                    //Ngưỡng đi bộ = 6
+                    //Ngưỡng để chạy = 7~10
+
+                    if (MagnitudeDelta > 6){
+                        m_stepCount++;
+                        txtcountnumberwalk.setText("Walk: " + m_stepCount.toString());
+                    }else if (MagnitudeDelta > 7){
+                        m_runCount++;
+                        txtcountnumberrun.setText("Run: " + m_runCount.toString());
+                    }
+                    m_SumCount = m_stepCount + m_runCount;
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+        sensorManager.registerListener(stepDetector,sensor,SensorManager.SENSOR_DELAY_NORMAL);
+
+        //==========================================================================
 
         navigationDraw();
 
@@ -140,6 +210,50 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 searchTurn();
             }
         });
+
+
+        //Count Steps
+        //
+        //
+        //
+        //
+        //Make circle progress
+
+       /* SeriesItem seriesItem = new SeriesItem.Builder(Color.parseColor("#FF0000"))
+                .setRange(0, 100, 20)
+                .build();*/
+
+        SeriesItem seriesItem = new SeriesItem.Builder(Color.argb(255, 64, 196, 84))
+                .setRange(0, 100, m_SumCount)
+                .addEdgeDetail(new EdgeDetail(EdgeDetail.EdgeType.EDGE_OUTER, Color.parseColor("#FF0000"), 0.2f))
+                .setInset(new PointF(20f, 20f))
+                .build();
+
+
+
+        int backIndex = decoView.addSeries(seriesItem);
+
+        decoView.addEvent(new DecoEvent.Builder(10.135791912f)
+                .setIndex(backIndex)
+                .setDelay(500)
+                .build());
+
+        seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
+            @Override
+            public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
+
+                float percentFilled = ((currentPosition - seriesItem.getMinValue()) / (seriesItem.getMaxValue() - seriesItem.getMinValue()));
+                textPercentage.setText(String.format("%.0f%%", percentFilled * 100f));
+
+
+            }
+
+            @Override
+            public void onSeriesItemDisplayProgress(float percentComplete) {
+
+            }
+        });
+
 
         return view;
     }
@@ -318,5 +432,40 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
     public void searchTurn() {
         startActivity(new Intent(getActivity().getApplicationContext(), SearchActivity.class));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.putInt("stepCount", m_stepCount);
+        editor.putInt("runCount", m_runCount);
+        editor.apply();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.putInt("stepCount", m_stepCount);
+        editor.putInt("runCount", m_runCount);
+        editor.apply();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        m_stepCount = sharedPreferences.getInt("stepCount", 0);
+        m_runCount = sharedPreferences.getInt("runCount", 0);
+
+        m_SumCount = m_stepCount + m_runCount;
     }
 }

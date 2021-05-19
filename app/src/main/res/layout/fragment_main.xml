@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/draw_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+    //
     tools:openDrawer="start"
-    >
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/ngv_view"
@@ -91,8 +91,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
-                            android:text="Search...">
-                        </TextView>
+                            android:text="Search..."></TextView>
 
 
                         <ImageView
@@ -265,6 +264,70 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/radius_white">
+
+                    <com.hookedonplay.decoviewlib.DecoView
+                        android:id="@+id/countSteps"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp" />
+
+                    <ImageView
+                        android:id="@+id/human_walk"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/human_walk" />
+
+                    <ImageView
+                        android:id="@+id/human_run"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/human_run" />
+
+                    <TextView
+                        android:id="@+id/txtCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_alignStart="@+id/countSteps"
+                        android:layout_alignEnd="@+id/countSteps"
+                        android:gravity="center"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/txtCountNumberWalk"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/human_walk"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
+                        android:text="Walk"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/txtCountNumberRun"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/human_run"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="Run"
+                        android:textColor="@color/black" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/radius_shadow">
@@ -303,10 +366,10 @@
                             android:text="- Sức khỏe không phải là thứ chúng ta có thể mua. Tuy nhiên, nó có thể là một tài khoản tiết kiệm cực kỳ giá trị." />
 
                         <TextView
-                            android:paddingTop="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:paddingTop="10dp"
                             android:text="- Xem thêm các bài tập ở đây..." />
 
 
@@ -343,11 +406,11 @@
                             android:textSize="20sp" />
 
                         <TextView
+                            android:id="@+id/seee_more"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:id="@+id/seee_more"
                             android:text="Xem thêm" />
 
 
@@ -381,11 +444,11 @@
                             android:textSize="20sp" />
 
                         <TextView
+                            android:id="@+id/see_more"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:id="@+id/see_more"
                             android:text="Xem thêm" />
 
 
