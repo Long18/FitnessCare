@@ -44,6 +44,7 @@ import com.william.Fitness.Login.Login;
 import com.william.Fitness.Login.WelcomeStartUpScreen;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Home extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView featuredRecycler, mostViewedRecycler, categoriesRecycler;
@@ -62,9 +63,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     //Count Steps
     DecoView decoView;
     private double MagnitudePrevious = 0;
-    private Integer m_stepCount = 0;
-    private Integer m_runCount = 0;
-    private int m_SumCount = 0;
+    public Integer m_stepCount = 0;
+    public Integer m_runCount = 0;
+    public int m_SumCount = 0;
+    float mSeriesMax = 50f;
 
 
     static final float END_SCALE = 0.7f;
@@ -101,6 +103,12 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         txtcountnumberwalk = (TextView) view.findViewById(R.id.txtCountNumberWalk);
         txtcountnumberrun = (TextView) view.findViewById(R.id.txtCountNumberRun);
         decoView = (DecoView) view.findViewById(R.id.countSteps);
+
+        SharedPreferences shared = getActivity().getPreferences(Context.MODE_PRIVATE);
+        m_stepCount = shared.getInt("stepCount", 0);
+        m_runCount = shared.getInt("runCount", 0);
+
+
         SensorManager sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
@@ -222,25 +230,50 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 .setRange(0, 100, 20)
                 .build();*/
 
-        SeriesItem seriesItem = new SeriesItem.Builder(Color.argb(255, 64, 196, 84))
-                .setRange(0, 25, m_stepCount)
-                .addEdgeDetail(new EdgeDetail(EdgeDetail.EdgeType.EDGE_OUTER, Color.parseColor("#FF0000"), 0.2f))
-                .setInset(new PointF(20f, 20f))
+        SeriesItem bordenView = new SeriesItem.Builder(Color.parseColor("#FFE2E2E2"))
+                .setRange(0, 100, 0)
                 .build();
 
+        int borden = decoView.addSeries(bordenView);
 
-
-        int backIndex = decoView.addSeries(seriesItem);
-
-        decoView.addEvent(new DecoEvent.Builder(80f)
-                .setIndex(backIndex)
+        decoView.addEvent(new DecoEvent.Builder(100)
+                .setIndex(borden)
                 .build());
 
-        seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
+        /*SeriesItem stepCount = new SeriesItem.Builder(Color.argb(255, 64, 196, 84))
+                .setRange(0, 100, 0)
+                .addEdgeDetail(new EdgeDetail(EdgeDetail.EdgeType.EDGE_OUTER, Color.parseColor("#FF0000"), 0.2f))
+                .setInset(new PointF(20f, 20f))
+                .build();*/
+
+
+        SeriesItem stepCount = new SeriesItem.Builder(Color.parseColor("#FFFF8800"))
+                .setRange(0, 13, 0)
+                .setInitialVisibility(false)
+                .build();
+
+        int stepC = decoView.addSeries(stepCount);
+
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        m_stepCount = sharedPreferences.getInt("stepCount", 0);
+        m_runCount = sharedPreferences.getInt("runCount", 0);
+        m_SumCount = sharedPreferences.getInt("sumCount", 0);
+        m_SumCount = m_runCount + m_stepCount;
+        int point = m_SumCount
+                ;
+        decoView.addEvent(new DecoEvent.Builder(point)
+                .setIndex(stepC)
+                .setDuration(1000)
+                .setDelay(5000)
+                .build());
+
+
+
+        stepCount.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
 
-                float percentFilled = ((currentPosition - seriesItem.getMinValue()) / (seriesItem.getMaxValue() - seriesItem.getMinValue()));
+                float percentFilled = ((currentPosition - stepCount.getMinValue()) / (stepCount.getMaxValue() - stepCount.getMinValue()));
                 textPercentage.setText(String.format("%.0f%%", percentFilled * 100f));
 
 
@@ -441,6 +474,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         editor.clear();
         editor.putInt("stepCount", m_stepCount);
         editor.putInt("runCount", m_runCount);
+        editor.putInt("sumCount", m_SumCount);
         editor.apply();
     }
 
@@ -453,6 +487,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         editor.clear();
         editor.putInt("stepCount", m_stepCount);
         editor.putInt("runCount", m_runCount);
+        editor.putInt("sumCount", m_SumCount);
         editor.apply();
     }
 
@@ -463,7 +498,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         m_stepCount = sharedPreferences.getInt("stepCount", 0);
         m_runCount = sharedPreferences.getInt("runCount", 0);
+        m_SumCount = sharedPreferences.getInt("sumCount", 0);
 
-        m_SumCount = m_stepCount + m_runCount;
     }
 }
