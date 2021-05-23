@@ -43,6 +43,11 @@
         <activity android:name=".Login.Register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ViewExercise" />
+        <receiver android:name=".AlarmNotification">
+            <intent-filter>
+                <action android:name="fitness.william.action.DISPLAY_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

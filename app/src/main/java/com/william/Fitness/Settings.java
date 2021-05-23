@@ -69,6 +69,7 @@ public class Settings extends AppCompatActivity {
                 saveWorkOutMode();
                 saveAlarm(switchAlarm.isChecked());
                 Toast.makeText(getApplicationContext(), "Saved !!!!", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -84,12 +85,19 @@ public class Settings extends AppCompatActivity {
 
     private void saveAlarm(boolean checked) {
         if (checked){
-            AlarmManager alarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+            AlarmManager alarmManager; //= (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+
+            alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             Intent intent;
             PendingIntent pendingIntent;
 
-            intent = new Intent(this,AlarmNotification.class);
-            pendingIntent = PendingIntent.getBroadcast(this,1,intent,0);
+            //intent = new Intent(this,AlarmNotification.class);
+
+            intent = new Intent("fitness.william.action.DISPLAY_NOTIFICATION");
+            //pendingIntent = PendingIntent.getBroadcast(this,1,intent,0);
+
+            PendingIntent broadcast = PendingIntent.getBroadcast(Settings.this,100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
 
             //Set time
             Calendar calendar = Calendar.getInstance();
@@ -104,16 +112,32 @@ public class Settings extends AppCompatActivity {
                         timePicker.getHour()+":"+timePicker.getMinute());
 
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                        AlarmManager.INTERVAL_DAY, pendingIntent);
+                        AlarmManager.INTERVAL_DAY, broadcast);
+
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), broadcast);
             }
+
+
 
 
         }else {
             // Cancel
-            Intent intent = new Intent(this,AlarmNotification.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
-            AlarmManager alarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
-            alarmManager.cancel(pendingIntent);
+            //Intent intent = new Intent(this,AlarmNotification.class);
+            //PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
+            AlarmManager alarmManager; //= (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+
+            alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            Intent intent;
+
+            //intent = new Intent(this,AlarmNotification.class);
+
+            intent = new Intent("fitness.william.action.DISPLAY_NOTIFICATION");
+            //pendingIntent = PendingIntent.getBroadcast(this,1,intent,0);
+
+            PendingIntent broadcast = PendingIntent.getBroadcast(Settings.this,100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+            //AlarmManager alarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.cancel(broadcast);
 
         }
     }
