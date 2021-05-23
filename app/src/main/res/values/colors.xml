@@ -30,4 +30,9 @@
     <color name="df_transparent_black_background">#80000000</color>
     <color name="whiteCardColor">#fff</color>
 
+    <!--colors for no internet-->
+    <color name="progessCenter">#11000000</color>
+    <color name="progessStart">#33000000</color>
+    <color name="progessEnd">#11000000</color>
+
 </resources>

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -24,6 +25,7 @@ import android.hardware.SensorEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -31,6 +33,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.EdgeDetail;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
@@ -52,7 +55,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     private GradientDrawable gradient1, gradient2, gradient3, gradient4;
     ImageView menu, btnchest, btnarms, btnback, btnlegs, btnbut;
     LinearLayout contentView;
-    RelativeLayout searching;
+    RelativeLayout searching, btnCount;
     TextView seemore, seemoree,textPercentage, txtcountnumberwalk, txtcountnumberrun;
 
 
@@ -66,7 +69,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     public Integer m_stepCount = 0;
     public Integer m_runCount = 0;
     public int m_SumCount = 0;
-    float mSeriesMax = 50f;
+    float m_GoalReach;
 
 
     static final float END_SCALE = 0.7f;
@@ -87,6 +90,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         btnback = (ImageView) view.findViewById(R.id.img_back);
         btnlegs = (ImageView) view.findViewById(R.id.img_legs);
         btnbut = (ImageView) view.findViewById(R.id.img_but);
+        btnCount = (RelativeLayout) view.findViewById(R.id.btn_Count);
         contentView = (LinearLayout) view.findViewById(R.id.contentView);
         searching = (RelativeLayout) view.findViewById(R.id.searching_RL);
 
@@ -218,7 +222,15 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
             }
         });
 
+        btnCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                showCount();
+
+
+            }
+        });
         //Count Steps
         //
         //
@@ -248,7 +260,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
 
         SeriesItem stepCount = new SeriesItem.Builder(Color.parseColor("#FFFF8800"))
-                .setRange(0, 13, 0)
+                .setRange(0, 100, 0)
                 .setInitialVisibility(false)
                 .build();
 
@@ -292,6 +304,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     public void showDialog() {
         final Dialog noFunction = new Dialog(getActivity(), R.style.df_dialog);
         noFunction.setContentView(R.layout.dialog_no_function);
+
         noFunction.findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -300,9 +313,52 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 }
             }
         });
+
+
         noFunction.show();
 
 
+
+    }
+
+    public void showCount() {
+
+        final Dialog countWalking = new Dialog(getActivity(), R.style.df_dialog);
+
+        countWalking.setContentView(R.layout.dialog_count_step);
+        countWalking.findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (countWalking != null && countWalking.isShowing()) {
+                    countWalking.dismiss();
+                }
+            }
+        });
+        AppCompatSeekBar skbCount  = (AppCompatSeekBar)countWalking.findViewById(R.id.skbCount);
+        TextInputEditText txtCount = (TextInputEditText)countWalking .findViewById(R.id.txtNumberCount);
+
+        skbCount.setProgress(0);
+        skbCount.setMax(50000);
+        txtCount.setText("0");
+
+        SeekBar.OnSeekBarChangeListener skbCountNumber = new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                txtCount.setText("" + progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        };
+        skbCount.setOnSeekBarChangeListener(skbCountNumber);
+        countWalking.show();
     }
 
 

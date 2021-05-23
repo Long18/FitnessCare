@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialogCountStep"
+    style="@style/df_dialog_layout">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:gravity="center"
+        app:cardBackgroundColor="@color/whiteCardColor"
+        app:cardCornerRadius="16dp">
+
+        <LinearLayout
+            android:id="@+id/topNoFunction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="350dp"
+                android:layout_gravity="center"
+                android:src="@drawable/walking_count_background" />
+
+            <TextView
+                style="@style/homeHeading"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/bungee"
+                android:text="Target Steps"
+                android:textColor="@color/blackTextColor"
+                android:textSize="@dimen/headerTextSize" />
+
+            <TextView
+                android:id="@+id/desc_no_function"
+                style="@style/learnhubTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Hãy chọn mục tiêu của bạn"
+                android:textSize="14dp"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/skbCount"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:progressDrawable="@drawable/seekbar_style"
+                android:thumb="@drawable/custome_thumb" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputNumberCount"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:background="@drawable/corner_edit_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtNumberCount"
+                    style="@style/modifiedEditTextlogin"
+                    android:background="@drawable/corner_edit_text"
+                    android:fontFamily="@font/bungee"
+                    android:gravity="center"
+                    android:hint="Số bước chân"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:maxLines="1"
+                    android:textSize="21sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_background_red"
+                android:gravity="center"
+                android:text="Close"
+                android:textColor="@color/whiteTextColor" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
