@@ -69,7 +69,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     public Integer m_stepCount = 0;
     public Integer m_runCount = 0;
     public int m_SumCount = 0;
-    float m_GoalReach;
+    int m_GoalReach = 3000;
 
 
     static final float END_SCALE = 0.7f;
@@ -260,7 +260,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
 
         SeriesItem stepCount = new SeriesItem.Builder(Color.parseColor("#FFFF8800"))
-                .setRange(0, 100, 0)
+                .setRange(0, m_GoalReach, 0)
                 .setInitialVisibility(false)
                 .build();
 
@@ -345,6 +345,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 txtCount.setText("" + progress);
+                m_GoalReach = progress;
             }
 
             @Override
