@@ -141,13 +141,13 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
                     //khác biệt về độ lớn này so với giá trị trước đó
                     //Nếu giá trị này lớn hơn một giá trị ngưỡng cụ thể thì tăng số bước.
-                    //Ngưỡng đi bộ >10
-                    //Ngưỡng để chạy < 10
+                    //Ngưỡng đi bộ 4< x <10
+                    //Ngưỡng để chạy < 20
 
-                    if (MagnitudeDelta > 6 && MagnitudeDelta < 10){
+                    if (MagnitudeDelta > 4 && MagnitudeDelta < 10){
                         m_stepCount++;
                         txtcountnumberwalk.setText("Walk: " + m_stepCount.toString());
-                    }if (MagnitudeDelta > 10){
+                    }if (MagnitudeDelta > 20){
                         m_runCount++;
                         txtcountnumberrun.setText("Run: " + m_runCount.toString());
                     }
