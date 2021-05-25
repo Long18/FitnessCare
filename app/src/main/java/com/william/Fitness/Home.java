@@ -9,6 +9,9 @@ import android.graphics.drawable.GradientDrawable;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,7 +59,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     ImageView menu, btnchest, btnarms, btnback, btnlegs, btnbut;
     LinearLayout contentView;
     RelativeLayout searching, btnCount;
-    TextView seemore, seemoree,textPercentage, txtcountnumberwalk, txtcountnumberrun;
+    TextView seemore, seemoree, textPercentage, txtcountnumberwalk, txtcountnumberrun, txtGoal;
 
 
     //Menu
@@ -69,10 +72,12 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     public Integer m_stepCount = 0;
     public Integer m_runCount = 0;
     public int m_SumCount = 0;
-    int m_GoalReach = 3000;
+    int m_GoalReach = 5000;
+    boolean m_changeMode;
 
 
     static final float END_SCALE = 0.7f;
+
 
     @Nullable
     @Override
@@ -102,10 +107,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         navigationView = (NavigationView) view.findViewById(R.id.ngv_view);
 
 
-
         textPercentage = (TextView) view.findViewById(R.id.txtCount);
         txtcountnumberwalk = (TextView) view.findViewById(R.id.txtCountNumberWalk);
         txtcountnumberrun = (TextView) view.findViewById(R.id.txtCountNumberRun);
+        txtGoal = (TextView) view.findViewById(R.id.txtGoal);
         decoView = (DecoView) view.findViewById(R.id.countSteps);
 
         SharedPreferences shared = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -116,10 +121,11 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         SensorManager sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+
         SensorEventListener stepDetector = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
-                if (sensorEvent != null){
+                if (sensorEvent != null) {
 
                     //Nhận dữ liệu Gia tốc kế:
                     //
@@ -135,7 +141,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                     float z = sensorEvent.values[2];
 
                     //Phương trình tính gia tốc
-                    double Magnitude = Math.sqrt(x*x+y*y+z*z);
+                    double Magnitude = Math.sqrt(x * x + y * y + z * z);
                     double MagnitudeDelta = Magnitude - MagnitudePrevious;
                     MagnitudePrevious = Magnitude;
 
@@ -144,10 +150,11 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                     //Ngưỡng đi bộ 4< x <10
                     //Ngưỡng để chạy < 20
 
-                    if (MagnitudeDelta > 4 && MagnitudeDelta < 10){
+                    if (MagnitudeDelta > 4 && MagnitudeDelta < 10) {
                         m_stepCount++;
                         txtcountnumberwalk.setText("Walk: " + m_stepCount.toString());
-                    }if (MagnitudeDelta > 20){
+                    }
+                    if (MagnitudeDelta > 20) {
                         m_runCount++;
                         txtcountnumberrun.setText("Run: " + m_runCount.toString());
                     }
@@ -159,7 +166,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
             }
         };
-        sensorManager.registerListener(stepDetector,sensor,SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(stepDetector, sensor, SensorManager.SENSOR_DELAY_NORMAL);
 
         //==========================================================================
 
@@ -231,12 +238,20 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
             }
         });
+
+
         //Count Steps
         //
         //
         //
         //
+
         //Make circle progress
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        m_stepCount = sharedPreferences.getInt("stepCount", 0);
+        m_runCount = sharedPreferences.getInt("runCount", 0);
+        m_SumCount = sharedPreferences.getInt("sumCount", 0);
+        m_GoalReach = sharedPreferences.getInt("goalReach", 5000);
 
        /* SeriesItem seriesItem = new SeriesItem.Builder(Color.parseColor("#FF0000"))
                 .setRange(0, 100, 20)
@@ -259,35 +274,58 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 .build();*/
 
 
-        SeriesItem stepCount = new SeriesItem.Builder(Color.parseColor("#FFFF8800"))
+        SeriesItem SumCount = new SeriesItem.Builder(Color.parseColor("#FFFF8800"))
                 .setRange(0, m_GoalReach, 0)
                 .setInitialVisibility(false)
                 .build();
 
-        int stepC = decoView.addSeries(stepCount);
+        int stepC = decoView.addSeries(SumCount);
 
-        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        m_stepCount = sharedPreferences.getInt("stepCount", 0);
-        m_runCount = sharedPreferences.getInt("runCount", 0);
-        m_SumCount = sharedPreferences.getInt("sumCount", 0);
+
         m_SumCount = m_runCount + m_stepCount;
-        int point = m_SumCount
-                ;
+
+        txtGoal.setText("Goal \n" + m_SumCount + "/" + m_GoalReach);
+
+        int point = m_SumCount;
         decoView.addEvent(new DecoEvent.Builder(point)
                 .setIndex(stepC)
                 .setDuration(1000)
                 .setDelay(5000)
                 .build());
 
+        SeriesItem walkView = new SeriesItem.Builder(Color.parseColor("#00CCFF"))
+                .setRange(0, m_GoalReach, 0)
+                .setInitialVisibility(false)
+                .build();
+
+        int walk = decoView.addSeries(walkView);
+        int pointWalk = m_stepCount;
+        decoView.addEvent(new DecoEvent.Builder(pointWalk)
+                .setIndex(walk)
+                .setDuration(1000)
+                .setDelay(7000)
+                .build());
+
+        SeriesItem runView = new SeriesItem.Builder(Color.parseColor("#00FF0C"))
+                .setRange(0, m_GoalReach, 0)
+                .setInitialVisibility(false)
+                .build();
+
+        int run = decoView.addSeries(runView);
+        int pointRun = m_runCount;
+        decoView.addEvent(new DecoEvent.Builder(pointRun)
+                .setIndex(run)
+                .setDuration(1000)
+                .setDelay(8000)
+                .build());
 
 
-        stepCount.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
+        SumCount.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
 
-                float percentFilled = ((currentPosition - stepCount.getMinValue()) / (stepCount.getMaxValue() - stepCount.getMinValue()));
+                float percentFilled = ((currentPosition - SumCount.getMinValue()) / (SumCount.getMaxValue() - SumCount.getMinValue()));
                 textPercentage.setText(String.format("%.0f%%", percentFilled * 100f));
-
 
             }
 
@@ -313,12 +351,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 }
             }
         });
-
-
         noFunction.show();
-
-
-
     }
 
     public void showCount() {
@@ -334,18 +367,53 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 }
             }
         });
-        AppCompatSeekBar skbCount  = (AppCompatSeekBar)countWalking.findViewById(R.id.skbCount);
-        TextInputEditText txtCount = (TextInputEditText)countWalking .findViewById(R.id.txtNumberCount);
 
-        skbCount.setProgress(0);
+        countWalking.findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
+                getActivity().finish();
+            }
+        });
+        AppCompatSeekBar skbCount = (AppCompatSeekBar) countWalking.findViewById(R.id.skbCount);
+        TextInputEditText txtCount = (TextInputEditText) countWalking.findViewById(R.id.txtNumberCount);
+
+
+        skbCount.setProgress(m_GoalReach);
         skbCount.setMax(50000);
-        txtCount.setText("0");
+        txtCount.setText("" + m_GoalReach);
+
+
+        txtCount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().isEmpty()) {
+                    skbCount.setProgress(0);
+                    txtCount.setText("0");
+                    return;
+                }
+
+                skbCount.setProgress(Integer.parseInt(s.toString()));
+
+            }
+        });
 
         SeekBar.OnSeekBarChangeListener skbCountNumber = new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 txtCount.setText("" + progress);
                 m_GoalReach = progress;
+
+
             }
 
             @Override
@@ -532,6 +600,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         editor.putInt("stepCount", m_stepCount);
         editor.putInt("runCount", m_runCount);
         editor.putInt("sumCount", m_SumCount);
+        editor.putInt("goalReach", m_GoalReach);
         editor.apply();
     }
 
@@ -545,17 +614,20 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         editor.putInt("stepCount", m_stepCount);
         editor.putInt("runCount", m_runCount);
         editor.putInt("sumCount", m_SumCount);
+        editor.putInt("goalReach", m_GoalReach);
         editor.apply();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        m_changeMode = false;
+
 
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         m_stepCount = sharedPreferences.getInt("stepCount", 0);
         m_runCount = sharedPreferences.getInt("runCount", 0);
         m_SumCount = sharedPreferences.getInt("sumCount", 0);
-
+        m_GoalReach = sharedPreferences.getInt("goalReach", 5000);
     }
 }

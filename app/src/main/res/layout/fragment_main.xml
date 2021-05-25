@@ -5,7 +5,9 @@
     android:id="@+id/draw_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    >
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/ngv_view"
         android:layout_width="wrap_content"
@@ -272,11 +274,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="100dp" />
 
+                    <TextView
+                        android:id="@+id/txtGoal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/countSteps"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/bungee"
+                        android:gravity="center" />
+
                     <ImageView
                         android:id="@+id/human_walk"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
                         android:src="@drawable/human_walk" />
@@ -286,6 +298,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="20dp"
                         android:src="@drawable/human_run" />
@@ -299,6 +312,13 @@
                         android:gravity="center"
                         android:textColor="@color/black" />
 
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_below="@id/human_walk"
+                        android:layout_marginTop="30dp"
+                        android:src="@drawable/point_walk" />
+
                     <TextView
                         android:id="@+id/txtCountNumberWalk"
                         android:layout_width="70dp"
@@ -306,6 +326,7 @@
                         android:layout_below="@+id/human_walk"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
                         android:gravity="center"
                         android:text="Walk"
                         android:textColor="@color/black" />
@@ -316,10 +337,19 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/human_run"
                         android:layout_alignParentRight="true"
+                        android:layout_marginTop="30dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center"
                         android:text="Run"
                         android:textColor="@color/black" />
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_below="@id/human_run"
+                        android:layout_marginTop="30dp"
+                        android:layout_toLeftOf="@id/txtCountNumberRun"
+                        android:src="@drawable/point_run" />
 
 
                 </RelativeLayout>

@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
         android:allowBackup="true"
@@ -43,7 +44,8 @@
         <activity android:name=".Login.Register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ViewExercise" />
-        <receiver android:name=".AlarmNotification">
+        <receiver android:name=".AlarmNotification"
+            android:permission="TODO">
             <intent-filter>
                 <action android:name="fitness.william.action.DISPLAY_NOTIFICATION"/>
             </intent-filter>
