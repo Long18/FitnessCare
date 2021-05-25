@@ -27,7 +27,7 @@ public class AlarmNotification extends BroadcastReceiver {
 
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(100,PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        Notification.Builder builder = new Notification.Builder(context);
 
         Notification notification = builder.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)

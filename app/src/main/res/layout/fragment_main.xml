@@ -5,8 +5,7 @@
     android:id="@+id/draw_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:openDrawer="start"
-    >
+    tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/ngv_view"
@@ -40,14 +39,15 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_menu" />
 
-            <ImageView
+            <Button
                 android:id="@+id/btn_profile"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:onClick="btnWelcome"
-                android:src="@drawable/ic_profile" />
+                android:text="Login Here"
+                style="@style/loginButton"
+                android:onClick="btnWelcome"/>
 
         </RelativeLayout>
 

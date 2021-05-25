@@ -9,14 +9,6 @@
     android:gravity="center"
     tools:context=".Settings">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:onClick="backMainActivity"
-        android:padding="5dp"
-        android:src="@drawable/ic_close"
-        app:tint="@color/black" />
 
     <ScrollView
         android:layout_width="match_parent"

@@ -46,10 +46,12 @@ import com.william.Fitness.Adapter.HomeAdapter.CategoriesAdapter;
 import com.william.Fitness.Adapter.HomeAdapter.FeaturedAdapter;
 import com.william.Fitness.Adapter.HomeAdapter.FeaturedTutorial;
 import com.william.Fitness.Adapter.HomeAdapter.MostViewedAdapter;
+import com.william.Fitness.Database.SessionManager;
 import com.william.Fitness.Login.Login;
 import com.william.Fitness.Login.WelcomeStartUpScreen;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Home extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,7 +61,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     ImageView menu, btnchest, btnarms, btnback, btnlegs, btnbut;
     LinearLayout contentView;
     RelativeLayout searching, btnCount;
-    TextView seemore, seemoree, textPercentage, txtcountnumberwalk, txtcountnumberrun, txtGoal;
+    TextView seemore, seemoree, textPercentage, txtcountnumberwalk, txtcountnumberrun, txtGoal, txtName;
 
 
     //Menu
@@ -111,6 +113,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         txtcountnumberwalk = (TextView) view.findViewById(R.id.txtCountNumberWalk);
         txtcountnumberrun = (TextView) view.findViewById(R.id.txtCountNumberRun);
         txtGoal = (TextView) view.findViewById(R.id.txtGoal);
+        txtName = (TextView) view.findViewById(R.id.menu_title);
         decoView = (DecoView) view.findViewById(R.id.countSteps);
 
         SharedPreferences shared = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -148,13 +151,13 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                     //khác biệt về độ lớn này so với giá trị trước đó
                     //Nếu giá trị này lớn hơn một giá trị ngưỡng cụ thể thì tăng số bước.
                     //Ngưỡng đi bộ 4< x <10
-                    //Ngưỡng để chạy < 20
+                    //Ngưỡng để chạy < 10
 
                     if (MagnitudeDelta > 4 && MagnitudeDelta < 10) {
                         m_stepCount++;
                         txtcountnumberwalk.setText("Walk: " + m_stepCount.toString());
                     }
-                    if (MagnitudeDelta > 20) {
+                    if (MagnitudeDelta > 10) {
                         m_runCount++;
                         txtcountnumberrun.setText("Run: " + m_runCount.toString());
                     }
@@ -169,14 +172,13 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         sensorManager.registerListener(stepDetector, sensor, SensorManager.SENSOR_DELAY_NORMAL);
 
         //==========================================================================
-
-        navigationDraw();
-
-
+        //
+        //
         //Functions
         featuredRecycler();
         mostViewedRecycler();
         categoriesRecycler();
+        navigationDraw();
 
         btnchest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -232,26 +234,31 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         btnCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 showCount();
-
-
             }
         });
 
 
         //Count Steps
         //
+        //TODO: Save information in  SharedPreferences ===========================================
         //
-        //
-        //
-
-        //Make circle progress
+        //=======================================================================================
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         m_stepCount = sharedPreferences.getInt("stepCount", 0);
         m_runCount = sharedPreferences.getInt("runCount", 0);
         m_SumCount = sharedPreferences.getInt("sumCount", 0);
         m_GoalReach = sharedPreferences.getInt("goalReach", 5000);
+
+        m_SumCount = m_runCount + m_stepCount;
+        txtGoal.setText("Goal \n" + m_SumCount + "/" + m_GoalReach);
+        //TODO: ==================================================================================
+        //
+        //
+        //
+        //
+        //=======================================================================================
+        //Make circle progress
 
        /* SeriesItem seriesItem = new SeriesItem.Builder(Color.parseColor("#FF0000"))
                 .setRange(0, 100, 20)
@@ -273,19 +280,13 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 .setInset(new PointF(20f, 20f))
                 .build();*/
 
-
+        //Progess All of Count Steps
+        //=======================================================================================
         SeriesItem SumCount = new SeriesItem.Builder(Color.parseColor("#FFFF8800"))
                 .setRange(0, m_GoalReach, 0)
                 .setInitialVisibility(false)
                 .build();
-
         int stepC = decoView.addSeries(SumCount);
-
-
-        m_SumCount = m_runCount + m_stepCount;
-
-        txtGoal.setText("Goal \n" + m_SumCount + "/" + m_GoalReach);
-
         int point = m_SumCount;
         decoView.addEvent(new DecoEvent.Builder(point)
                 .setIndex(stepC)
@@ -293,11 +294,13 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 .setDelay(5000)
                 .build());
 
+
+        //Progess of walk count
+        //=======================================================================================
         SeriesItem walkView = new SeriesItem.Builder(Color.parseColor("#00CCFF"))
                 .setRange(0, m_GoalReach, 0)
                 .setInitialVisibility(false)
                 .build();
-
         int walk = decoView.addSeries(walkView);
         int pointWalk = m_stepCount;
         decoView.addEvent(new DecoEvent.Builder(pointWalk)
@@ -306,11 +309,13 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 .setDelay(7000)
                 .build());
 
+
+        //Progess of run count
+        //=======================================================================================
         SeriesItem runView = new SeriesItem.Builder(Color.parseColor("#00FF0C"))
                 .setRange(0, m_GoalReach, 0)
                 .setInitialVisibility(false)
                 .build();
-
         int run = decoView.addSeries(runView);
         int pointRun = m_runCount;
         decoView.addEvent(new DecoEvent.Builder(pointRun)
@@ -319,7 +324,8 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 .setDelay(8000)
                 .build());
 
-
+        //Progess All percent of Count
+        //=======================================================================================
         SumCount.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
@@ -352,6 +358,29 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
             }
         });
         noFunction.show();
+    }
+
+    public void showDialogLogin() {
+        final Dialog mustLogin = new Dialog(getActivity(), R.style.df_dialog);
+        mustLogin.setContentView(R.layout.dialog_must_login);
+
+        mustLogin.findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mustLogin != null && mustLogin.isShowing()) {
+                    mustLogin.dismiss();
+                }
+            }
+        });
+
+        mustLogin.findViewById(R.id.btnLogin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity().getApplicationContext(), Login.class));
+                getActivity().finish();
+            }
+        });
+        mustLogin.show();
     }
 
     public void showCount() {
@@ -412,8 +441,6 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 txtCount.setText("" + progress);
                 m_GoalReach = progress;
-
-
             }
 
             @Override
@@ -429,7 +456,6 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         skbCount.setOnSeekBarChangeListener(skbCountNumber);
         countWalking.show();
     }
-
 
     private void navigationDraw() {
         navigationView.bringToFront();
@@ -470,7 +496,6 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
             }
         });
     }
-
 
     private void categoriesRecycler() {
         //All Gradients
@@ -531,9 +556,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        SessionManager sessionManager = new SessionManager(getActivity().getApplicationContext(), SessionManager.SESSION_USER);
 
         switch (item.getItemId()) {
 
@@ -542,12 +568,19 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 break;
             case R.id.nav_home:
                 startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
+                getActivity().finish();
                 break;
             case R.id.nav_login:
                 startActivity(new Intent(getActivity().getApplicationContext(), Login.class));
                 break;
             case R.id.nav_logout:
-                startActivity(new Intent(getActivity().getApplicationContext(), WelcomeStartUpScreen.class));
+                if (sessionManager.checkUserLogin()) {
+                    startActivity(new Intent(getActivity().getApplicationContext(), WelcomeStartUpScreen.class));
+                    getActivity().finish();
+                } else {
+                    //if user's not login, they will see dialog login
+                    showDialogLogin();
+                }
                 break;
             case R.id.nav_search:
                 startActivity(new Intent(getActivity().getApplicationContext(), SearchActivity.class));
@@ -565,8 +598,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 showDialog();
                 break;
             /*case R.id.nav_profile:
-
-
+            //Không biết chuyển từ Activity qua Fragment như thế nào T_T
                 break;*/
             case R.id.nav_share:
                 Uri uriFace = Uri.parse("https://www.facebook.com/William.2418/");

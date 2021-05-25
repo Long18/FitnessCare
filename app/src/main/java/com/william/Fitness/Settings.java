@@ -27,7 +27,7 @@ import java.util.Date;
 public class Settings extends AppCompatActivity {
 
     Button btnSave;
-    RadioButton rdbEasy, rdbMedium,rdbHard;
+    RadioButton rdbEasy, rdbMedium, rdbHard;
     RadioGroup rdbGroup;
     CalendarDB calendarDB;
     ToggleButton switchAlarm;
@@ -57,7 +57,6 @@ public class Settings extends AppCompatActivity {
         setRadioButton(mode);
 
 
-
         //Event call
 
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -65,26 +64,21 @@ public class Settings extends AppCompatActivity {
             public void onClick(View view) {
 
                 AlarmNotification alarmNotification = new AlarmNotification();
-                alarmNotification.onReceive(getApplicationContext(),getIntent());
+                alarmNotification.onReceive(getApplicationContext(), getIntent());
                 saveWorkOutMode();
                 saveAlarm(switchAlarm.isChecked());
                 Toast.makeText(getApplicationContext(), "Saved !!!!", Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(Settings.this, MainActivity.class));
+                finish();
             }
         });
-
-
-
 
 
     }
 
 
-
-
-
     private void saveAlarm(boolean checked) {
-        if (checked){
+        if (checked) {
             AlarmManager alarmManager; //= (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
 
             alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -96,7 +90,7 @@ public class Settings extends AppCompatActivity {
             intent = new Intent("fitness.william.action.DISPLAY_NOTIFICATION");
             //pendingIntent = PendingIntent.getBroadcast(this,1,intent,0);
 
-            PendingIntent broadcast = PendingIntent.getBroadcast(Settings.this,100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent broadcast = PendingIntent.getBroadcast(Settings.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
             //Set time
@@ -108,19 +102,19 @@ public class Settings extends AppCompatActivity {
                 calendar.set(toDay.getYear(), toDay.getMonth(), toDay.getDay(),
                         timePicker.getHour(), timePicker.getMinute());
 
-                Log.d("DEBUG","The time will be started at: " +
-                        timePicker.getHour()+":"+timePicker.getMinute());
+                Log.d("DEBUG", "The time will be started at: " +
+                        timePicker.getHour() + ":" + timePicker.getMinute());
 
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                         AlarmManager.INTERVAL_DAY, broadcast);
 
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), broadcast);
+
             }
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), broadcast);
 
 
-
-
-        }else {
+        } else {
             // Cancel
             //Intent intent = new Intent(this,AlarmNotification.class);
             //PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
@@ -134,7 +128,7 @@ public class Settings extends AppCompatActivity {
             intent = new Intent("fitness.william.action.DISPLAY_NOTIFICATION");
             //pendingIntent = PendingIntent.getBroadcast(this,1,intent,0);
 
-            PendingIntent broadcast = PendingIntent.getBroadcast(Settings.this,100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent broadcast = PendingIntent.getBroadcast(Settings.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             //AlarmManager alarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
             alarmManager.cancel(broadcast);
@@ -155,9 +149,9 @@ public class Settings extends AppCompatActivity {
     private void setRadioButton(int mode) {
         if (mode == 0)
             rdbGroup.check(R.id.rdbEasy);
-        else if ( mode == 1 )
+        else if (mode == 1)
             rdbGroup.check(R.id.rdbMedium);
-        else if ( mode == 2)
+        else if (mode == 2)
             rdbGroup.check(R.id.rdbHard);
     }
 

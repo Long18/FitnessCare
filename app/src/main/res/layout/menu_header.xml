@@ -9,7 +9,7 @@
         android:id="@+id/menu_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Đây là dòng đầu tiên"
+        android:text="Welcome!"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"/>
     <TextView
@@ -28,8 +28,8 @@
         android:layout_above="@id/app_name"/>
 
     <ImageView
-        android:layout_width="160dp"
-        android:layout_height="175dp"
+        android:layout_width="120dp"
+        android:layout_height="145dp"
         android:src="@drawable/icon_app"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"/>

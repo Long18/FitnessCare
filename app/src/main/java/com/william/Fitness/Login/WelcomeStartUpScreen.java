@@ -29,10 +29,8 @@ import com.william.Fitness.R;
 public class WelcomeStartUpScreen extends AppCompatActivity {
 
     ImageView btnBack, image;
-    Button next, btnInf;
+    Button next, btnLogout;
     TextView title, login;
-
-
 
 
     @Override
@@ -44,20 +42,30 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
         btnBack = findViewById(R.id.btn_back_pressed);
         next = findViewById(R.id.btn_next);
         login = findViewById(R.id.Loginbtn);
+        btnLogout = findViewById(R.id.btnLogout);
         image = findViewById(R.id.image_view);
         title = findViewById(R.id.title_res);
 
+        SessionManager sessionManager = new SessionManager(WelcomeStartUpScreen.this, SessionManager.SESSION_USER);
+
+        if (sessionManager.checkUserLogin()) {
+            btnLogout.setVisibility(View.VISIBLE);
+        } else {
+            //if user's not login, they can't see profile settings
+            btnLogout.setVisibility(View.GONE);
+        }
 
     }
 
 
     public void Logout(View view) {
-        SessionManager sessionManager = new SessionManager(WelcomeStartUpScreen.this,SessionManager.SESSION_USER);
+        SessionManager sessionManager = new SessionManager(WelcomeStartUpScreen.this, SessionManager.SESSION_USER);
         FirebaseAuth.getInstance().signOut();
         sessionManager.checkUserLogout();
         Toast.makeText(WelcomeStartUpScreen.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void showDialog() {
@@ -95,6 +103,7 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(WelcomeStartUpScreen.this, pairs);
         startActivity(intent, options.toBundle());
+        finish();
 
     }
 
@@ -110,5 +119,6 @@ public class WelcomeStartUpScreen extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Register.class);
         startActivity(intent);
+        finish();
     }
 }
