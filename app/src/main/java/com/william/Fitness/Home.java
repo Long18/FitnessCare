@@ -151,7 +151,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                     //khác biệt về độ lớn này so với giá trị trước đó
                     //Nếu giá trị này lớn hơn một giá trị ngưỡng cụ thể thì tăng số bước.
                     //Ngưỡng đi bộ 4< x <10
-                    //Ngưỡng để chạy < 10
+                    //Ngưỡng để chạy > 10
 
                     if (MagnitudeDelta > 4 && MagnitudeDelta < 10) {
                         m_stepCount++;
