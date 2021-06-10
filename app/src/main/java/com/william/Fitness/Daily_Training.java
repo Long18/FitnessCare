@@ -129,7 +129,7 @@ public class Daily_Training extends Fragment {
         layoutGetReady.setVisibility(View.VISIBLE);
 
         txtGetReady.setText("GET READY");
-        new CountDownTimer(6000, 1000) {
+        new CountDownTimer(500, 500) {
 
             @Override
             public void onTick(long millisUntilFinished) {
